@@ -50,4 +50,6 @@ public class StatusReader : MonoBehaviour
             PlayableCharacters[i].maxSpeed = int.Parse(data[9 * (i + 1) + 8]);
         }
     }
+
+
 }
