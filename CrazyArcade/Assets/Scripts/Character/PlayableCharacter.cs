@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -58,7 +59,8 @@ public class PlayableCharacter : Character
     {
         base.Attack();
         Bubble newBubble = _bubblePool.bubblePool.Get();
-        newBubble.transform.position = transform.position;
+        Vector3Int bubblePosition = Vector3Int.RoundToInt(transform.position);
+        newBubble.transform.position = bubblePosition;
     }
 
     public override void Die()

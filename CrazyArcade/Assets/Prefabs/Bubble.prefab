@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c08afdb3c4e6824eada1ca6d2560912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BubbleEffect: {fileID: 296424570344349911, guid: 72f5e4d5efc95544fabae2478cc5d117, type: 3}
 --- !u!1 &2619578479225703541
 GameObject:
   m_ObjectHideFlags: 0
