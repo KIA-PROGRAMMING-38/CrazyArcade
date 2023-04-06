@@ -44,7 +44,7 @@ public class Bubble : MonoBehaviour
     }
 
     int power = 4;
-    bool[,] visitedNode = new bool[13, 15];
+    bool[,] visitedNode = new bool[14, 16];
     private void GenerateBubbleEffect()
     {
         for(int y = 0; y < 13; ++y)
@@ -55,7 +55,7 @@ public class Bubble : MonoBehaviour
             }
         }
 
-        int count = 0;
+        int count = -1;
         Vector2Int startPos = Vector2Int.RoundToInt(transform.position);
         // 시작 위치
         _bubbleEffectQueue.Enqueue(startPos);
@@ -63,11 +63,7 @@ public class Bubble : MonoBehaviour
         while(_bubbleEffectQueue.Count > 0)
         {
             int len = _bubbleEffectQueue.Count;
-            ++count;
-
-            if (count >= power)
-                break;
-
+            
             for(int i = 0; i < len; ++i)
             {
                 Vector2Int effectPos = _bubbleEffectQueue.Dequeue();
@@ -87,6 +83,11 @@ public class Bubble : MonoBehaviour
                         continue;
                     }
 
+                    if(ny < 0 || nx < 0 || ny > 13 || nx > 15)
+                    {
+                        continue;
+                    }
+                    
                     if (visitedNode[ny, nx] == true)
                     {
                         continue;
@@ -96,6 +97,11 @@ public class Bubble : MonoBehaviour
                     _bubbleEffectQueue.Enqueue(new Vector2Int(nx, ny));
                 }
             }
+
+            ++count;
+
+            if (count >= power)
+                break;
         }
     }
 
