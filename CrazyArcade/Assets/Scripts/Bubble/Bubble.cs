@@ -14,6 +14,8 @@ public class Bubble : MonoBehaviour
 
     public GameObject BubbleEffect;
 
+    public GameObject _player;
+    public int _playerPower;
     struct BubbleEffectData
     {
         Vector2 pos;
@@ -39,17 +41,16 @@ public class Bubble : MonoBehaviour
     private void Boom()
     {
         Debug.Log("Boom »£√‚");
-        GenerateBubbleEffect();
+        GenerateBubbleEffect(_playerPower);
         bubblePool.Release(this);
     }
 
-    int power = 4;
     bool[,] visitedNode = new bool[14, 16];
-    private void GenerateBubbleEffect()
+    private void GenerateBubbleEffect(int playerPower)
     {
-        for(int y = 0; y < 13; ++y)
+        for(int y = 0; y < 14; ++y)
         {
-            for(int x = 0; x < 15; ++x)
+            for(int x = 0; x < 16; ++x)
             {
                 visitedNode[y, x] = false;
             }
@@ -69,8 +70,10 @@ public class Bubble : MonoBehaviour
                 Vector2Int effectPos = _bubbleEffectQueue.Dequeue();
                 if(effectPos != startPos)
                 {
-                    Instantiate(BubbleEffect);
-                    BubbleEffect.transform.position = new Vector3(effectPos.x, effectPos.y, 0f);
+                    //Instantiate(BubbleEffect);
+                    GameObject newEffect = Instantiate(BubbleEffect);
+                    //BubbleEffect.transform.position = new Vector3(effectPos.x, effectPos.y, 0f);
+                    newEffect.transform.position = new Vector3(effectPos.x, effectPos.y, 0f);
                 }
 
                 for(int j = 0; j < 4; ++j)
@@ -83,11 +86,11 @@ public class Bubble : MonoBehaviour
                         continue;
                     }
 
-                    if(ny < 0 || nx < 0 || ny > 13 || nx > 15)
+                    if (ny < 0 || nx < 0 || ny > 13 || nx > 15)
                     {
                         continue;
                     }
-                    
+
                     if (visitedNode[ny, nx] == true)
                     {
                         continue;
@@ -100,14 +103,22 @@ public class Bubble : MonoBehaviour
 
             ++count;
 
-            if (count >= power)
+            if (count >= playerPower)
                 break;
         }
     }
 
     private IObjectPool<Bubble> bubblePool;
-    public void SetPool(IObjectPool<Bubble> pool)
+    private BubblePool bubblePoolInstance;
+
+    public void SetBubble(Vector3Int position, int power)
+    {
+        transform.position = position;
+        _playerPower = power;
+    }
+    public void SetPool(IObjectPool<Bubble> pool, BubblePool instance)
     {
         bubblePool = pool;
+        bubblePoolInstance = instance;
     }
 }

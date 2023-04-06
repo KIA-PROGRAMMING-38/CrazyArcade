@@ -18,6 +18,9 @@ public class PlayableCharacter : Character
     private float _maxSpeed;
     private Vector2 _moveDirection;
 
+    private int _power;
+    private int _maxPower;
+
     private BubblePool _bubblePool;
 
     private void Awake()
@@ -60,7 +63,7 @@ public class PlayableCharacter : Character
         base.Attack();
         Bubble newBubble = _bubblePool.bubblePool.Get();
         Vector3Int bubblePosition = Vector3Int.RoundToInt(transform.position);
-        newBubble.transform.position = bubblePosition;
+        newBubble.SetBubble(bubblePosition, _power);
     }
 
     public override void Die()
@@ -72,5 +75,7 @@ public class PlayableCharacter : Character
     {
         _speed = _statusReader.PlayableCharacters[id].speed / 2;
         _maxSpeed = _statusReader.PlayableCharacters[id].maxSpeed / 2;
+        _power = _statusReader.PlayableCharacters[id].power;
+        _maxPower = _statusReader.PlayableCharacters[id].maxPower;
     }
 }
