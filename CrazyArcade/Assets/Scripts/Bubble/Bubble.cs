@@ -5,21 +5,22 @@ using UnityEngine.Pool;
 
 public class Bubble : MonoBehaviour
 {
-    private WaitForSeconds _boomReadyTime = new WaitForSeconds(3f);
-    private Coroutine _boomReadyCoroutine;
+    private float _boomReadyTime = 3f;
+    private float _elapsedTime;
 
     private void OnEnable()
     {
-        _boomReadyCoroutine = StartCoroutine(BoomReady());
+        _elapsedTime = 0f;
     }
 
-    private IEnumerator BoomReady()
+    private void Update()
     {
-        Debug.Log("BoomReady");
+        _elapsedTime += Time.deltaTime;
 
-        yield return _boomReadyTime;
-
-        Boom();
+        if(_elapsedTime >= _boomReadyTime)
+        {
+            Boom();
+        }
     }
 
     private void Boom()
