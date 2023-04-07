@@ -13,7 +13,6 @@ public class PlayableCharacter : Character
     
     private float deltaTime;
 
-    private StatusReader _statusReader;
     [SerializeField]private float _speed;
     private float _maxSpeed;
     private Vector2 _moveDirection;
@@ -28,7 +27,6 @@ public class PlayableCharacter : Character
         _animator = GetComponent<Animator>();
         _input = transform.root.GetComponent<PlayerInput>();
         _playerTransform = transform.root.GetComponent<Transform>();
-        _statusReader = GameObject.Find("CharacterStatus").GetComponent<StatusReader>();
         _bubblePool = GetComponent<BubblePool>();
     }
 
@@ -73,9 +71,9 @@ public class PlayableCharacter : Character
 
     private void GetStatus(int id)
     {
-        _speed = _statusReader.PlayableCharacters[id].speed / 2;
-        _maxSpeed = _statusReader.PlayableCharacters[id].maxSpeed / 2;
-        _power = _statusReader.PlayableCharacters[id].power;
-        _maxPower = _statusReader.PlayableCharacters[id].maxPower;
+        _speed = DataReader.PlayableCharacters[id].speed / 2;
+        _maxSpeed = DataReader.PlayableCharacters[id].maxSpeed / 2;
+        _power = DataReader.PlayableCharacters[id].power;
+        _maxPower = DataReader.PlayableCharacters[id].maxPower;
     }
 }

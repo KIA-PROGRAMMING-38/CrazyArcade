@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class StatusReader : MonoBehaviour
+public static class DataReader
 {
-    private TextAsset textAssetData;
+    private static TextAsset characterStatusTextAsset;
 
-    [System.Serializable]
+    [Serializable]
     public struct PlayableCharacterStatus
     {
         public int id;
@@ -20,19 +20,19 @@ public class StatusReader : MonoBehaviour
         public int maxSpeed;
     }
 
-    public PlayableCharacterStatus[] PlayableCharacters;
+    public static PlayableCharacterStatus[] PlayableCharacters;
 
-    void Awake()
+    public static void ReadData()
     {
-        textAssetData = Resources.Load<TextAsset>("CharacterData/Status");
-        Debug.Assert(textAssetData != null, "PlayableCharacter Status 파일을 불러오지 못했습니다.");
+        characterStatusTextAsset = Resources.Load<TextAsset>("CharacterData/Status");
+        Debug.Assert(characterStatusTextAsset != null, "PlayableCharacter Status 파일을 불러오지 못했습니다.");
 
-        ReadCSVData();
+        ReadCharacterStatusData();
     }
 
-    void ReadCSVData()
+    static void ReadCharacterStatusData()
     {
-        string[] data = textAssetData.text.Split(new char[] {',', '\n'});
+        string[] data = characterStatusTextAsset.text.Split(new char[] {',', '\n'});
 
         int tableSize = data.Length / 9 - 1;  // 가장 윗 행은 데이터가 아니므로 -1
         PlayableCharacters = new PlayableCharacterStatus[tableSize];
@@ -50,6 +50,4 @@ public class StatusReader : MonoBehaviour
             PlayableCharacters[i].maxSpeed = int.Parse(data[9 * (i + 1) + 8]);
         }
     }
-
-
 }
