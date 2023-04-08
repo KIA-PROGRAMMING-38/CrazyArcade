@@ -45,7 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c08afdb3c4e6824eada1ca6d2560912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BubbleEffect: {fileID: 296424570344349911, guid: 72f5e4d5efc95544fabae2478cc5d117, type: 3}
+  BubbleEffect:
+  - {fileID: 7298634287385227375, guid: b5fff7b763961734db1a822f84fdda73, type: 3}
+  - {fileID: 6886818840814190876, guid: 3b0bda7698c7b8646834bbbe3542ed30, type: 3}
+  - {fileID: 3141295343433534073, guid: 9f897e0309d42444ea943577c655baea, type: 3}
+  - {fileID: 1570603563482302793, guid: cfbae0dce3531f246990ca2316427ca0, type: 3}
+  EndEffect:
+  - {fileID: 5891718373788637940, guid: 35b80dd3546deef48948f49bca422374, type: 3}
+  - {fileID: 9092749565240224876, guid: f512c1ea152ef2849bc53292e574c2e9, type: 3}
+  - {fileID: 3790695581116422272, guid: 59694c98d5a87f34888ccc124efae20c, type: 3}
+  - {fileID: 6910797211217848221, guid: b68feeb9ace6e6545a4da1712b530041, type: 3}
+  RootEffect: {fileID: 4331271187334490830, guid: 1d8b27cd981220b4581899af5beb7caf, type: 3}
+  _player: {fileID: 0}
+  _playerPower: 0
 --- !u!1 &2619578479225703541
 GameObject:
   m_ObjectHideFlags: 0

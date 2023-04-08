@@ -8,19 +8,21 @@ public class Bubble : MonoBehaviour
     private float _boomReadyTime = 3f;
     private float _elapsedTime;
 
-    private Queue<Vector2Int> _bubbleEffectQueue = new Queue<Vector2Int>();
+    // private Queue<Vector2Int> _bubbleEffectQueue = new Queue<Vector2Int>();
+    private Queue<BubbleEffectData> _bubbleEffectQueueTest = new Queue<BubbleEffectData>();
     static int[] s_dy = { -1, 1, 0, 0 };
     static int[] s_dx = { 0, 0, -1, 1 };
 
-    public GameObject BubbleEffect;
+    public GameObject[] BubbleEffect;
+    public GameObject[] EndEffect;
+    public GameObject RootEffect;
 
     public GameObject _player;
     public int _playerPower;
     struct BubbleEffectData
     {
-        Vector2 pos;
-        Sprite effect;
-        bool isLast;
+        public Vector2Int pos;
+        public GameObject effect;
     }
 
     private void OnEnable()
@@ -59,24 +61,23 @@ public class Bubble : MonoBehaviour
         int count = -1;
         Vector2Int startPos = Vector2Int.RoundToInt(transform.position);
         // 시작 위치
-        _bubbleEffectQueue.Enqueue(startPos);
+        _bubbleEffectQueueTest.Enqueue(new BubbleEffectData { pos = startPos, effect = RootEffect });
+        visitedNode[startPos.y, startPos.x] = true;
 
-        while(_bubbleEffectQueue.Count > 0)
+        while (_bubbleEffectQueueTest.Count > 0)
         {
-            int len = _bubbleEffectQueue.Count;
-            
-            for(int i = 0; i < len; ++i)
-            {
-                Vector2Int effectPos = _bubbleEffectQueue.Dequeue();
-                if(effectPos != startPos)
-                {
-                    //Instantiate(BubbleEffect);
-                    GameObject newEffect = Instantiate(BubbleEffect);
-                    //BubbleEffect.transform.position = new Vector3(effectPos.x, effectPos.y, 0f);
-                    newEffect.transform.position = new Vector3(effectPos.x, effectPos.y, 0f);
-                }
+            int len = _bubbleEffectQueueTest.Count;
+            ++count;
 
-                for(int j = 0; j < 4; ++j)
+            for (int i = 0; i < len; ++i)
+            {                                                  
+                BubbleEffectData effectData = _bubbleEffectQueueTest.Dequeue();
+                Vector2Int effectPos = effectData.pos;
+
+                GameObject newEffect = Instantiate(effectData.effect);
+                newEffect.transform.position = new Vector3(effectPos.x, effectPos.y, 0f);
+
+                for (int j = 0; j < 4; ++j)
                 {
                     int ny = effectPos.y + s_dy[j];
                     int nx = effectPos.x + s_dx[j];
@@ -97,11 +98,17 @@ public class Bubble : MonoBehaviour
                     }
 
                     visitedNode[ny, nx] = true;
-                    _bubbleEffectQueue.Enqueue(new Vector2Int(nx, ny));
+
+                    // 범위의 마지막인 경우
+                    if(count + 1 == playerPower)
+                    {
+                        _bubbleEffectQueueTest.Enqueue(new BubbleEffectData { pos = new Vector2Int(nx, ny), effect = EndEffect[j] });
+                        continue;
+                    }
+
+                    _bubbleEffectQueueTest.Enqueue(new BubbleEffectData { pos = new Vector2Int(nx, ny), effect = BubbleEffect[j] });
                 }
             }
-
-            ++count;
 
             if (count >= playerPower)
                 break;
@@ -109,16 +116,14 @@ public class Bubble : MonoBehaviour
     }
 
     private IObjectPool<Bubble> bubblePool;
-    private BubblePool bubblePoolInstance;
 
     public void SetBubble(Vector3Int position, int power)
     {
         transform.position = position;
         _playerPower = power;
     }
-    public void SetPool(IObjectPool<Bubble> pool, BubblePool instance)
+    public void SetPool(IObjectPool<Bubble> pool)
     {
         bubblePool = pool;
-        bubblePoolInstance = instance;
     }
 }

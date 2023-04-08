@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Pool;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BubblePool : MonoBehaviour
 {
@@ -23,9 +22,8 @@ public class BubblePool : MonoBehaviour
 
     private Bubble CreateBubble()
     {
-        Debug.Log("CreateBubble");
         Bubble bubble = Instantiate(bubblePrefab);
-        bubble.SetPool(bubblePool, this);
+        bubble.SetPool(bubblePool);
         return bubble;
     }
 

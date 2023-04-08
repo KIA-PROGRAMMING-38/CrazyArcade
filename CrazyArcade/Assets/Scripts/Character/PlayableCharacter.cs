@@ -17,7 +17,7 @@ public class PlayableCharacter : Character
     private float _maxSpeed;
     private Vector2 _moveDirection;
 
-    private int _power;
+    [SerializeField] private int _power;
     private int _maxPower;
 
     private BubblePool _bubblePool;
