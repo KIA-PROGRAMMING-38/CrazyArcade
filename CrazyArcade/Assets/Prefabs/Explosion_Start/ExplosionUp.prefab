@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5714067362983907526}
   - component: {fileID: 5277293855811433623}
   - component: {fileID: 2203017471640881795}
+  - component: {fileID: -165996446279004347}
   m_Layer: 0
   m_Name: ExplosionUp
   m_TagString: Untagged
@@ -95,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 6886818840814190876}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 651124999fac9664d83c5eb6b1c3f9fe, type: 2}
+  m_Controller: {fileID: 22100000, guid: 37a9df75e0a44e9429c5b7e27112ec74, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -106,3 +107,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-165996446279004347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6886818840814190876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d36a489976835408a7f775ae3d7b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class Bubble : MonoBehaviour
 {
-    private float _boomReadyTime = 1f;
+    private float _boomReadyTime = 0.5f;
     private float _elapsedTime;
     private WaitForSeconds _explosionInterval;
 
@@ -73,10 +73,6 @@ public class Bubble : MonoBehaviour
 
         while (_bubbleEffectQueueTest.Count > 0)
         {
-            Debug.Log("yield return 직전");
-           yield return _explosionInterval;
-            Debug.Log("yield return 직후");
-
             int len = _bubbleEffectQueueTest.Count;
             ++count;
 
@@ -124,6 +120,7 @@ public class Bubble : MonoBehaviour
             if (count >= playerPower)
                 break;
 
+            yield return _explosionInterval;
         }
 
         bubblePool.Release(this);
