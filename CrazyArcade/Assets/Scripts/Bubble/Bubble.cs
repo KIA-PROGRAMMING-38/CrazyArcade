@@ -5,8 +5,9 @@ using UnityEngine.Pool;
 
 public class Bubble : MonoBehaviour
 {
-    private float _boomReadyTime = 3f;
+    private float _boomReadyTime = 1f;
     private float _elapsedTime;
+    private WaitForSeconds _explosionInterval;
 
     // private Queue<Vector2Int> _bubbleEffectQueue = new Queue<Vector2Int>();
     private Queue<BubbleEffectData> _bubbleEffectQueueTest = new Queue<BubbleEffectData>();
@@ -25,6 +26,11 @@ public class Bubble : MonoBehaviour
         public GameObject effect;
     }
 
+    private void Start()
+    {
+        _explosionInterval = new WaitForSeconds(GameManager.Instance.ExplosionInterval);
+    }
+
     private void OnEnable()
     {
         _elapsedTime = 0f;
@@ -36,6 +42,7 @@ public class Bubble : MonoBehaviour
 
         if(_elapsedTime >= _boomReadyTime)
         {
+            _elapsedTime = 0f;
             Boom();
         }
     }
@@ -43,12 +50,12 @@ public class Bubble : MonoBehaviour
     private void Boom()
     {
         Debug.Log("Boom 호출");
-        GenerateBubbleEffect(_playerPower);
-        bubblePool.Release(this);
+        StartCoroutine(GenerateBubbleEffect(_playerPower));
+        gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
 
     bool[,] visitedNode = new bool[14, 16];
-    private void GenerateBubbleEffect(int playerPower)
+    private IEnumerator GenerateBubbleEffect(int playerPower)
     {
         for(int y = 0; y < 14; ++y)
         {
@@ -66,6 +73,10 @@ public class Bubble : MonoBehaviour
 
         while (_bubbleEffectQueueTest.Count > 0)
         {
+            Debug.Log("yield return 직전");
+           yield return _explosionInterval;
+            Debug.Log("yield return 직후");
+
             int len = _bubbleEffectQueueTest.Count;
             ++count;
 
@@ -112,7 +123,10 @@ public class Bubble : MonoBehaviour
 
             if (count >= playerPower)
                 break;
+
         }
+
+        bubblePool.Release(this);
     }
 
     private IObjectPool<Bubble> bubblePool;

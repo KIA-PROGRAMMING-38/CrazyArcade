@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class GameManager : SingletoneBehaviour<GameManager>
 {
-    private void Awake()
+    public float ExplosionInterval = 0.1f;
+    protected override void Awake()
     {
+        base.Awake();
+        Time.timeScale = 0.1f;
         DataReader.ReadData();
     }
 }
