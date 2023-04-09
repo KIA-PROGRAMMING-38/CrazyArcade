@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
-public class ExplosionEffect : MonoBehaviour
+public class ExplosionEffect : Explosion
 {
     private Animator _animator;
     private float _explosionInterval;
@@ -23,5 +24,10 @@ public class ExplosionEffect : MonoBehaviour
             _elapsedTime = 0;
             _animator.SetTrigger("Advance");
         }
+    }
+
+    public override void SetPool(IObjectPool<Explosion> pool)
+    {
+        base.SetPool(pool);
     }
 }
