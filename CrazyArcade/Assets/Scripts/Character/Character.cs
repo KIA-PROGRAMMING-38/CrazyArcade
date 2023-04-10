@@ -16,6 +16,6 @@ public class Character : MonoBehaviour
 
     public virtual void Die()
     {
-        Debug.Log($"{name}: Die »£√‚");
+        
     }
 }
