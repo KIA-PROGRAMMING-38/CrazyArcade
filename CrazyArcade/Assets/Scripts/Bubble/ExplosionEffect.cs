@@ -6,13 +6,13 @@ using UnityEngine.Pool;
 
 public class ExplosionEffect : Explosion
 {
-    private Animator _animator;
     private float _explosionInterval;
     private float _elapsedTime;
-    void Start()
+    
+    public override void Start()
     {
+        base.Start();
         _explosionInterval = GameManager.Instance.ExplosionInterval;
-        _animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -22,8 +22,18 @@ public class ExplosionEffect : Explosion
         if(_elapsedTime >= _explosionInterval)
         {
             _elapsedTime = 0;
-            _animator.SetTrigger("Advance");
+            Animator.SetTrigger("Advance");
         }
+    }
+
+    public override void ReleaseReady()
+    {
+        base.ReleaseReady();
+    }
+
+    public override void Release()
+    {
+        base.Release();
     }
 
     public override void SetPool(IObjectPool<Explosion> pool)

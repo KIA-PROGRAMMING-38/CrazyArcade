@@ -13,54 +13,21 @@ public class Bubble : MonoBehaviour
     static int[] s_dy = { -1, 1, 0, 0 };
     static int[] s_dx = { 0, 0, -1, 1 };
 
-    private ExplosionRootPool _explosionRootPool;
-    private ExplosionLeftPool _explosionLeftPool;
-    private ExplosionRightPool _explosionRightPool;
-    private ExplosionUpPool _explosionUpPool;
-    private ExplosionDownPool _explosionDownPool;
-    private ExplosionEndDownPool _explosionEndDownPool;
-    private ExplosionEndUpPool _explosionEndUpPool;
-    private ExplosionEndLeftPool _explosionEndLeftPool;
-    private ExplosionEndRightPool _explosionEndRightPool;
-    private IObjectPool<Explosion>[] _effectPools = new IObjectPool<Explosion>[9];
+    private IObjectPool<BubbleEffect> _bubbleEffectPool;
 
     struct BubbleEffectData
     {
         public Vector2Int pos;
-        public int effectIndex;
-        public Explosion parentEffect;
+        public int type;
+        public int direction;
     }
 
-    public GameObject _player;
     public int _playerPower;
 
     private void Start()
     {
         _explosionInterval = new WaitForSeconds(GameManager.Instance.ExplosionInterval);
-
-        _explosionDownPool = GetComponent<ExplosionDownPool>();
-        _explosionUpPool = GetComponent<ExplosionUpPool>();
-        _explosionLeftPool = GetComponent<ExplosionLeftPool>();
-        _explosionRightPool = GetComponent<ExplosionRightPool>();
-        // --------------------------------------------------------------------------
-        _explosionEndDownPool = GetComponent<ExplosionEndDownPool>();
-        _explosionEndUpPool = GetComponent<ExplosionEndUpPool>();
-        _explosionEndLeftPool = GetComponent<ExplosionEndLeftPool>();
-        _explosionEndRightPool = GetComponent<ExplosionEndRightPool>();
-        // --------------------------------------------------------------------------
-        _explosionRootPool = GetComponent<ExplosionRootPool>();
-
-        _effectPools[0] = _explosionDownPool.effectPool;
-        _effectPools[1] = _explosionUpPool.effectPool;
-        _effectPools[2] = _explosionLeftPool.effectPool;
-        _effectPools[3] = _explosionRightPool.effectPool;
-        // --------------------------------------------------------------------------
-        _effectPools[4] = _explosionEndDownPool.effectPool;
-        _effectPools[5] = _explosionEndUpPool.effectPool;
-        _effectPools[6] = _explosionEndLeftPool.effectPool;
-        _effectPools[7] = _explosionEndRightPool.effectPool;
-        // --------------------------------------------------------------------------
-        _effectPools[8] = _explosionRootPool.rootPool;
+        _bubbleEffectPool = GetComponent<BubbleEffectPool>().EffectPool;
     }
 
     private void OnEnable()
@@ -90,7 +57,7 @@ public class Bubble : MonoBehaviour
         StartCoroutine(GenerateBubbleEffect(_playerPower));
         gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
-
+    
     bool[,] visitedNode = new bool[14, 16];
     private IEnumerator GenerateBubbleEffect(int playerPower)
     {
@@ -104,10 +71,10 @@ public class Bubble : MonoBehaviour
             }
         }
 
+        // 시작 위치
         int count = -1;
         Vector2Int startPos = Vector2Int.RoundToInt(transform.position);
-        // 시작 위치
-        _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = startPos, effectIndex = 8, parentEffect = null });
+        _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = startPos, type = 0, direction = 4 });
         visitedNode[startPos.y, startPos.x] = true;
 
         while (_bubbleEffectQueue.Count > 0)
@@ -119,12 +86,12 @@ public class Bubble : MonoBehaviour
             {
                 BubbleEffectData effectData = _bubbleEffectQueue.Dequeue();
                 Vector2Int effectPos = effectData.pos;
-                int poolIndex = effectData.effectIndex;
+                int effectType = effectData.type;
+                int effectDirection = effectData.direction;
 
-                Explosion newEffect = _effectPools[poolIndex].Get();
+                BubbleEffect newEffect = _bubbleEffectPool.Get();
                 newEffect.transform.position = new Vector3(effectPos.x, effectPos.y, 0f);
-                newEffect.ParentNode = effectData.parentEffect;
-                newEffect.EventSubscribe();
+                newEffect.SetEffectInfo(effectType, effectDirection);
 
                 for (int j = 0; j < 4; ++j)
                 {
@@ -152,11 +119,11 @@ public class Bubble : MonoBehaviour
                     if (count + 1 == playerPower)
                     {
                         
-                        _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = new Vector2Int(nx, ny), effectIndex = j + 4, parentEffect = newEffect });
+                        _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = new Vector2Int(nx, ny), type = 2, direction = j });
                         continue;
                     }
 
-                    _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = new Vector2Int(nx, ny), effectIndex = j, parentEffect = newEffect });
+                    _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = new Vector2Int(nx, ny), type = 1, direction = j });
                 }
             }
 
@@ -169,13 +136,13 @@ public class Bubble : MonoBehaviour
         bubblePool.Release(this);
     }
 
-    private IObjectPool<Bubble> bubblePool;
-
     public void SetBubble(Vector3Int position, int power)
     {
         transform.position = position;
         _playerPower = power;
     }
+
+    private IObjectPool<Bubble> bubblePool;
     public void SetPool(IObjectPool<Bubble> pool)
     {
         bubblePool = pool;

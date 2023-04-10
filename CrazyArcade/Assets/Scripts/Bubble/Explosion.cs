@@ -8,6 +8,14 @@ public class Explosion : MonoBehaviour
     public event Action OnDisappear;
     public Explosion ParentNode;
     public IObjectPool<Explosion> EffectPool;
+
+    public Animator Animator;
+
+    public virtual void Start()
+    {
+        Animator = GetComponent<Animator>();
+    }
+
     public virtual void SetPool(IObjectPool<Explosion> pool)
     {
         EffectPool = pool;
@@ -17,20 +25,18 @@ public class Explosion : MonoBehaviour
     {
         if (ParentNode != null)
         {
-            ParentNode.OnDisappear -= HelpCoroutine;
-            ParentNode.OnDisappear += HelpCoroutine;
+            ParentNode.OnDisappear -= ReleaseReady;
+            ParentNode.OnDisappear += ReleaseReady;
         }
     }
 
-    public void HelpCoroutine()
+    public virtual void ReleaseReady()
     {
-        StartCoroutine(ReleaseReady());
-    }    
+        Animator.SetTrigger("Disappear");
+    }
 
-    public virtual IEnumerator ReleaseReady()
+    public virtual void Release()
     {
-        // TODO: 코루틴 없애고 애니메이션 재생 후 Release 구문있는 메소드 호출할 수 있도록 변경
-        yield return new WaitForSeconds(1f);
         EffectPool.Release(this);
     }
 
@@ -40,7 +46,7 @@ public class Explosion : MonoBehaviour
 
         if (ParentNode != null)
         {
-            ParentNode.OnDisappear -= HelpCoroutine;
+            ParentNode.OnDisappear -= ReleaseReady;
         }
 
         ParentNode = null;
