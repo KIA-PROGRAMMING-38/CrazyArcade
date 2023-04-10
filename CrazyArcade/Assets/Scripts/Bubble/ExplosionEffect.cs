@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,6 @@ public class ExplosionEffect : Explosion
         _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         _elapsedTime += Time.deltaTime;
@@ -29,5 +29,15 @@ public class ExplosionEffect : Explosion
     public override void SetPool(IObjectPool<Explosion> pool)
     {
         base.SetPool(pool);
+    }
+
+    public override void EventSubscribe()
+    {
+        base.EventSubscribe();
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
     }
 }

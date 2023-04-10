@@ -28,6 +28,7 @@ public class Bubble : MonoBehaviour
     {
         public Vector2Int pos;
         public int effectIndex;
+        public Explosion parentEffect;
     }
 
     public GameObject _player;
@@ -65,9 +66,10 @@ public class Bubble : MonoBehaviour
     private void OnEnable()
     {
         _elapsedTime = 0f;
+        gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
         isBoom = true;
     }
-    bool isBoom = false;
+    bool isBoom;
     private void Update()
     {
         if (isBoom == true)
@@ -92,6 +94,8 @@ public class Bubble : MonoBehaviour
     bool[,] visitedNode = new bool[14, 16];
     private IEnumerator GenerateBubbleEffect(int playerPower)
     {
+        _bubbleEffectQueue.Clear();
+
         for (int y = 0; y < 14; ++y)
         {
             for (int x = 0; x < 16; ++x)
@@ -103,7 +107,7 @@ public class Bubble : MonoBehaviour
         int count = -1;
         Vector2Int startPos = Vector2Int.RoundToInt(transform.position);
         // 시작 위치
-        _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = startPos, effectIndex = 8 });
+        _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = startPos, effectIndex = 8, parentEffect = null });
         visitedNode[startPos.y, startPos.x] = true;
 
         while (_bubbleEffectQueue.Count > 0)
@@ -115,9 +119,12 @@ public class Bubble : MonoBehaviour
             {
                 BubbleEffectData effectData = _bubbleEffectQueue.Dequeue();
                 Vector2Int effectPos = effectData.pos;
+                int poolIndex = effectData.effectIndex;
 
-                Explosion newEffect = _effectPools[effectData.effectIndex].Get();
+                Explosion newEffect = _effectPools[poolIndex].Get();
                 newEffect.transform.position = new Vector3(effectPos.x, effectPos.y, 0f);
+                newEffect.ParentNode = effectData.parentEffect;
+                newEffect.EventSubscribe();
 
                 for (int j = 0; j < 4; ++j)
                 {
@@ -144,11 +151,12 @@ public class Bubble : MonoBehaviour
                     // 범위의 마지막인 경우
                     if (count + 1 == playerPower)
                     {
-                        _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = new Vector2Int(nx, ny), effectIndex = j + 4 });
+                        
+                        _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = new Vector2Int(nx, ny), effectIndex = j + 4, parentEffect = newEffect });
                         continue;
                     }
 
-                    _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = new Vector2Int(nx, ny), effectIndex = j });
+                    _bubbleEffectQueue.Enqueue(new BubbleEffectData { pos = new Vector2Int(nx, ny), effectIndex = j, parentEffect = newEffect });
                 }
             }
 
