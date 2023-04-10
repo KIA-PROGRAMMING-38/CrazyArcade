@@ -19,11 +19,9 @@ public class BubbleEffect : MonoBehaviour
         None
     }
 
-    public EffectType Type;
+    private EffectType Type;
     private EffectDirection Direction;
     private Animator _animator;
-
-    private float _elapsedTime;
 
     private void Awake()
     {
