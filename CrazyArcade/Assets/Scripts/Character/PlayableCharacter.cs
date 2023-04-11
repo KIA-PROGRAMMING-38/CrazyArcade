@@ -61,15 +61,24 @@ public class PlayableCharacter : Character
         base.Attack();
 
         ++_currentCount;
+        Vector3Int bubblePosition = Vector3Int.RoundToInt(transform.position);
 
+        // 물풍선이 맵에 존재할 수 있는 개수를 넘어서지 않도록 제한
         if (_currentCount > _count)
         {
             _currentCount -= 1;
             return;
         }
 
+        // 맵 정보를 받아와 놓으려는 위치에 물풍선이 있는 경우 놓을 수 없도록 제한
+        GameManager.Instance.MapManager.GetMapInfo();
+        if (GameManager.Instance.MapManager.mapInfo[bubblePosition.y, bubblePosition.x].isBubble == true)
+        {
+            _currentCount -= 1;
+            return;
+        }
+
         Bubble newBubble = _bubblePool.bubblePool.Get();
-        Vector3Int bubblePosition = Vector3Int.RoundToInt(transform.position);
         newBubble.SetBubble(bubblePosition, _power);
     }
 
