@@ -3723,6 +3723,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0
   _power: 0
+  _count: 0
+  _currentCount: 0
 --- !u!114 &2036080249
 MonoBehaviour:
   m_ObjectHideFlags: 0

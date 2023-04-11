@@ -35,6 +35,7 @@ public class BubblePool : MonoBehaviour
     private void OnRelease(Bubble bubble)
     {
         bubble.gameObject.SetActive(false);
+        gameObject.GetComponent<PlayableCharacter>().DecreaseCount();
     }
 
     private void ActionOnDestroy(Bubble bubble)
