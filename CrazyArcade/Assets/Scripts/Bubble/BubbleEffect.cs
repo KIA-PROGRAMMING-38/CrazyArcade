@@ -28,6 +28,13 @@ public class BubbleEffect : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayableCharacter>().ReadyDie();
+        }
+    }
 
     public void SetEffectInfo(int type, int direction)
     {
