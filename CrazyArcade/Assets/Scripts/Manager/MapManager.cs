@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MapManager
 {
-    [System.Serializable]
     public class MapInfo
     {
         public bool isBubble;
@@ -19,10 +18,13 @@ public class MapManager
         }
     }
 
-    // TODO: 추후 맵 정보에 대한 내용 static 등으로 관리할 수 있도록 수정 필요 (14, 16 은 맵 사이즈 + 1)
+    // TODO: 추후 맵 정보에 대한 내용 static 등으로 관리할 수 있도록 수정 필요
     public MapInfo[,] mapInfo = new MapInfo[14, 16];
 
-    public void GetMapInfo()
+    /// <summary>
+    /// 맵 전체 좌표에 대해 블록, 벽, 물풍선 배치 여부를 mapInfo에 저장
+    /// </summary>
+    public void GetTotalMapInfo()
     {
         for (int y = 0; y < 14; ++y)
         {
@@ -53,5 +55,40 @@ public class MapManager
                 mapInfo[y, x] = new MapInfo(isBubble, isWall, isBlock);
             }
         }
+    }
+
+    /// <summary>
+    /// 맵의 특정 좌표에 대한 정보를 MapInfo 타입으로 반환
+    /// </summary>
+    /// <param name="x">x좌표</param>
+    /// <param name="y">y좌표</param>
+    /// <returns></returns>
+    public MapInfo GetCoordinateInfo(int x, int y)
+    {
+        bool isBubble = false;
+        bool isWall = false;
+        bool isBlock = false;
+
+        foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(x, y), 0.4f))
+        {
+            if (col.gameObject.layer == LayerMask.NameToLayer("Bubble"))
+            {
+                isBubble = true;
+            }
+
+            if (col.gameObject.layer == LayerMask.NameToLayer("Block"))
+            {
+                isBlock = true;
+            }
+
+            if (col.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            {
+                isWall = true;
+            }
+        }
+
+        MapInfo mapInfo = new MapInfo(isBubble, isWall, isBlock);
+
+        return mapInfo;
     }
 }

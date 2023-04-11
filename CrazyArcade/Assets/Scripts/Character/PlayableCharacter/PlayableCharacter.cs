@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayableCharacter : Character
@@ -6,10 +7,20 @@ public class PlayableCharacter : Character
     private PlayerInput _input;
     private Transform _playerTransform;
     private Animator _animator;
+    public static class PlayerAnimID
+    {
+        public static readonly int HORIZONTAL = Animator.StringToHash("horizontal");
+        public static readonly int VERTICAL = Animator.StringToHash("vertical");
+        public static readonly int IS_MOVING = Animator.StringToHash("isMoving");
+        public static readonly int IS_DYING = Animator.StringToHash("isDying");
+    }
+
+    private bool _isMoving;
 
     private float deltaTime;
 
-    [SerializeField] private float _speed;
+    public float _speed {get; set;}
+    public float _savedSpeed {get; set;}
     private float _maxSpeed;
     private Vector2 _moveDirection;
 
@@ -49,11 +60,23 @@ public class PlayableCharacter : Character
     public override void Move()
     {
         base.Move();
+        _isMoving = _input._horizontal != 0 || _input._vertical != 0;
+        _animator.SetBool(PlayerAnimID.IS_MOVING, _isMoving);
+
+        if (_isMoving == false)
+        {
+            return;
+        }
+
+        if(_input._horizontal != 0)
+        {
+            _input._vertical = 0;
+        }
+
         _moveDirection = new Vector2(_input._horizontal, _input._vertical);
         _playerTransform.Translate(_moveDirection * (_speed * deltaTime));
-
-        _animator.SetFloat("horizontal", _input._horizontal);
-        _animator.SetFloat("vertical", _input._vertical);
+        _animator.SetFloat(PlayerAnimID.HORIZONTAL, _input._horizontal);
+        _animator.SetFloat(PlayerAnimID.VERTICAL, _input._vertical);
     }
 
     public override void Attack()
@@ -71,8 +94,8 @@ public class PlayableCharacter : Character
         }
 
         // 맵 정보를 받아와 놓으려는 위치에 물풍선이 있는 경우 놓을 수 없도록 제한
-        GameManager.Instance.MapManager.GetMapInfo();
-        if (GameManager.Instance.MapManager.mapInfo[bubblePosition.y, bubblePosition.x].isBubble == true)
+        MapManager.MapInfo mapInfo = GameManager.Instance.MapManager.GetCoordinateInfo(bubblePosition.x, bubblePosition.y);
+        if(mapInfo.isBubble)
         {
             _currentCount -= 1;
             return;
@@ -86,6 +109,11 @@ public class PlayableCharacter : Character
     {
         --_currentCount;
     }
+
+    public void ReadyDie()
+    {
+        _animator.SetTrigger(PlayerAnimID.IS_DYING);
+    }    
 
     public override void Die()
     {
