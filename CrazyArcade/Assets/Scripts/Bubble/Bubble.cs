@@ -22,7 +22,7 @@ public class Bubble : MonoBehaviour
         public int direction;
     }
 
-    public int _playerPower;
+    private int _playerPower;
 
     private void Start()
     {

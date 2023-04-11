@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class PlayableCharacter : Character
 {
@@ -10,15 +6,19 @@ public class PlayableCharacter : Character
     private PlayerInput _input;
     private Transform _playerTransform;
     private Animator _animator;
-    
+
     private float deltaTime;
 
-    [SerializeField]private float _speed;
+    [SerializeField] private float _speed;
     private float _maxSpeed;
     private Vector2 _moveDirection;
 
     [SerializeField] private int _power;
     private int _maxPower;
+
+    [SerializeField] private int _count;
+    [SerializeField] private int _currentCount;
+    private int _maxCount;
 
     private BubblePool _bubblePool;
 
@@ -59,9 +59,32 @@ public class PlayableCharacter : Character
     public override void Attack()
     {
         base.Attack();
-        Bubble newBubble = _bubblePool.bubblePool.Get();
+
+        ++_currentCount;
         Vector3Int bubblePosition = Vector3Int.RoundToInt(transform.position);
+
+        // 물풍선이 맵에 존재할 수 있는 개수를 넘어서지 않도록 제한
+        if (_currentCount > _count)
+        {
+            _currentCount -= 1;
+            return;
+        }
+
+        // 맵 정보를 받아와 놓으려는 위치에 물풍선이 있는 경우 놓을 수 없도록 제한
+        GameManager.Instance.MapManager.GetMapInfo();
+        if (GameManager.Instance.MapManager.mapInfo[bubblePosition.y, bubblePosition.x].isBubble == true)
+        {
+            _currentCount -= 1;
+            return;
+        }
+
+        Bubble newBubble = _bubblePool.bubblePool.Get();
         newBubble.SetBubble(bubblePosition, _power);
+    }
+
+    public void DecreaseCount()
+    {
+        --_currentCount;
     }
 
     public override void Die()
@@ -75,5 +98,7 @@ public class PlayableCharacter : Character
         _maxSpeed = DataReader.PlayableCharacters[id].maxSpeed / 2;
         _power = DataReader.PlayableCharacters[id].power;
         _maxPower = DataReader.PlayableCharacters[id].maxPower;
+        _count = DataReader.PlayableCharacters[id].count;
+        _maxCount = DataReader.PlayableCharacters[id].maxCount;
     }
 }
