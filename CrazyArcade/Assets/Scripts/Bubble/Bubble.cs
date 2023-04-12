@@ -26,7 +26,7 @@ public class Bubble : MonoBehaviour
 
     private void Start()
     {
-        _explosionInterval = new WaitForSeconds(GameManager.Instance.ExplosionInterval);
+        _explosionInterval = new WaitForSeconds(0.05f);
         _bubbleEffectPool = GetComponent<BubbleEffectPool>().EffectPool;
     }
 
@@ -108,10 +108,21 @@ public class Bubble : MonoBehaviour
                         continue;
                     }
 
+                    if (MapManager.mapInfo[ny, nx].isWall)
+                    {
+                        continue;
+                    }
+
+                    if (MapManager.mapInfo[ny, nx].isBlock)
+                    {
+                        visitedNode[ny + s_dy[j], nx + s_dx[j]] = true;
+                    }
+
                     if (visitedNode[ny, nx] == true)
                     {
                         continue;
                     }
+
 
                     visitedNode[ny, nx] = true;
 
