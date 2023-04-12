@@ -12,7 +12,7 @@ public class FixedBlock : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("BubbleEffect"))
         {
@@ -22,6 +22,7 @@ public class FixedBlock : MonoBehaviour
 
     public void Deactive()
     {
+        MapManager.GetTotalMapInfo();
         gameObject.SetActive(false);
     }
 }
