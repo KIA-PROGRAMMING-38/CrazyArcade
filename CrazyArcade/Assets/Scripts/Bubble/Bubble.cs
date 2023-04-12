@@ -108,12 +108,7 @@ public class Bubble : MonoBehaviour
                         continue;
                     }
 
-                    if (MapManager.mapInfo[ny, nx].isWall)
-                    {
-                        continue;
-                    }
-
-                    if (MapManager.mapInfo[ny, nx].isBlock)
+                    if (MapManager.mapInfo[ny, nx].isWall || MapManager.mapInfo[ny, nx].isBlock)
                     {
                         visitedNode[ny + s_dy[j], nx + s_dx[j]] = true;
                     }
