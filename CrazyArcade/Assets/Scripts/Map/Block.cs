@@ -17,6 +17,11 @@ public class Block : MonoBehaviour
     }
 
 
+    public void Pop()
+    {
+        _animator.SetTrigger(MapAnimID.POP);
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("BubbleEffect"))
@@ -26,7 +31,6 @@ public class Block : MonoBehaviour
     }
     public void Deactive()
     {
-        MapManager.GetTotalMapInfo();
         gameObject.SetActive(false);
     }
 }

@@ -56,6 +56,8 @@ public class Bubble : MonoBehaviour
     {
         StartCoroutine(GenerateBubbleEffect(_playerPower));
         gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        // ¸Ê Á¤º¸ °»½Å
+        MapManager.GetTotalMapInfo();
     }
     
     bool[,] visitedNode = new bool[14, 16];

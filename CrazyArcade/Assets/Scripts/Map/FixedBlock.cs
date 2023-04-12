@@ -22,7 +22,6 @@ public class FixedBlock : MonoBehaviour
 
     public void Deactive()
     {
-        MapManager.GetTotalMapInfo();
         gameObject.SetActive(false);
     }
 }
