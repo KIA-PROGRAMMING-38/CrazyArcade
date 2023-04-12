@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapManager
+public static class MapManager
 {
     public class MapInfo
     {
@@ -19,12 +19,12 @@ public class MapManager
     }
 
     // TODO: 추후 맵 정보에 대한 내용 static 등으로 관리할 수 있도록 수정 필요
-    public MapInfo[,] mapInfo = new MapInfo[14, 16];
+    public static MapInfo[,] mapInfo = new MapInfo[14, 16];
 
     /// <summary>
     /// 맵 전체 좌표에 대해 블록, 벽, 물풍선 배치 여부를 mapInfo에 저장
     /// </summary>
-    public void GetTotalMapInfo()
+    public static void GetTotalMapInfo()
     {
         for (int y = 0; y < 14; ++y)
         {
@@ -46,7 +46,7 @@ public class MapManager
                         isBlock = true;
                     }
 
-                    if(col.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                    if(col.gameObject.layer == LayerMask.NameToLayer("WallBlock"))
                     {
                         isWall = true;
                     }
@@ -63,7 +63,7 @@ public class MapManager
     /// <param name="x">x좌표</param>
     /// <param name="y">y좌표</param>
     /// <returns></returns>
-    public MapInfo GetCoordinateInfo(int x, int y)
+    public static MapInfo GetCoordinateInfo(int x, int y)
     {
         bool isBubble = false;
         bool isWall = false;
@@ -81,7 +81,7 @@ public class MapManager
                 isBlock = true;
             }
 
-            if (col.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            if (col.gameObject.layer == LayerMask.NameToLayer("WallBlock"))
             {
                 isWall = true;
             }

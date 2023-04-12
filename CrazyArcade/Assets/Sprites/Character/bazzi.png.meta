@@ -108,12 +108,12 @@ TextureImporter:
       name: bazzi_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 490
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 13
+        y: 497
+        width: 44
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,12 +129,12 @@ TextureImporter:
       name: bazzi_1
       rect:
         serializedVersion: 2
-        x: 70
-        y: 490
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 84
+        y: 497
+        width: 43
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,12 +150,12 @@ TextureImporter:
       name: bazzi_2
       rect:
         serializedVersion: 2
-        x: 140
-        y: 490
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 153
+        y: 498
+        width: 44
+        height: 55
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -171,12 +171,12 @@ TextureImporter:
       name: bazzi_3
       rect:
         serializedVersion: 2
-        x: 210
-        y: 490
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 224
+        y: 497
+        width: 43
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: bazzi_4
       rect:
         serializedVersion: 2
-        x: 280
-        y: 490
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 293
+        y: 498
+        width: 44
+        height: 55
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -213,12 +213,12 @@ TextureImporter:
       name: bazzi_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 420
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 13
+        y: 427
+        width: 44
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -234,12 +234,12 @@ TextureImporter:
       name: bazzi_6
       rect:
         serializedVersion: 2
-        x: 70
-        y: 420
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 84
+        y: 427
+        width: 42
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -255,12 +255,12 @@ TextureImporter:
       name: bazzi_7
       rect:
         serializedVersion: 2
-        x: 140
-        y: 420
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 153
+        y: 429
+        width: 42
+        height: 55
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -276,12 +276,12 @@ TextureImporter:
       name: bazzi_8
       rect:
         serializedVersion: 2
-        x: 210
-        y: 420
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 224
+        y: 429
+        width: 42
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -297,12 +297,12 @@ TextureImporter:
       name: bazzi_9
       rect:
         serializedVersion: 2
-        x: 280
-        y: 420
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 293
+        y: 430
+        width: 42
+        height: 55
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -318,12 +318,12 @@ TextureImporter:
       name: bazzi_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 350
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 15
+        y: 357
+        width: 42
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -339,12 +339,12 @@ TextureImporter:
       name: bazzi_11
       rect:
         serializedVersion: 2
-        x: 70
-        y: 350
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 82
+        y: 357
+        width: 44
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -360,12 +360,12 @@ TextureImporter:
       name: bazzi_12
       rect:
         serializedVersion: 2
-        x: 140
-        y: 350
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 152
+        y: 357
+        width: 43
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -381,12 +381,12 @@ TextureImporter:
       name: bazzi_13
       rect:
         serializedVersion: 2
-        x: 210
-        y: 350
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 224
+        y: 357
+        width: 41
+        height: 58
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -402,12 +402,12 @@ TextureImporter:
       name: bazzi_14
       rect:
         serializedVersion: 2
-        x: 0
-        y: 280
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 15
+        y: 287
+        width: 41
+        height: 58
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -423,12 +423,12 @@ TextureImporter:
       name: bazzi_15
       rect:
         serializedVersion: 2
-        x: 70
-        y: 280
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 85
+        y: 287
+        width: 43
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -444,12 +444,12 @@ TextureImporter:
       name: bazzi_16
       rect:
         serializedVersion: 2
-        x: 140
-        y: 280
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 154
+        y: 287
+        width: 44
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -465,12 +465,12 @@ TextureImporter:
       name: bazzi_17
       rect:
         serializedVersion: 2
-        x: 210
-        y: 280
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 223
+        y: 287
+        width: 42
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -486,12 +486,12 @@ TextureImporter:
       name: bazzi_18
       rect:
         serializedVersion: 2
-        x: 0
-        y: 210
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 4
+        y: 215
+        width: 60
+        height: 60
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -507,12 +507,12 @@ TextureImporter:
       name: bazzi_19
       rect:
         serializedVersion: 2
-        x: 70
-        y: 210
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 76
+        y: 215
+        width: 60
+        height: 60
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -528,12 +528,12 @@ TextureImporter:
       name: bazzi_20
       rect:
         serializedVersion: 2
-        x: 140
-        y: 210
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 146
+        y: 215
+        width: 60
+        height: 60
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -549,12 +549,12 @@ TextureImporter:
       name: bazzi_21
       rect:
         serializedVersion: 2
-        x: 210
-        y: 210
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 217
+        y: 215
+        width: 60
+        height: 60
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -570,12 +570,12 @@ TextureImporter:
       name: bazzi_22
       rect:
         serializedVersion: 2
-        x: 0
-        y: 140
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1
+        y: 141
+        width: 67
+        height: 67
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -591,12 +591,12 @@ TextureImporter:
       name: bazzi_23
       rect:
         serializedVersion: 2
-        x: 70
-        y: 140
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 71
+        y: 141
+        width: 58
+        height: 69
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -612,12 +612,12 @@ TextureImporter:
       name: bazzi_24
       rect:
         serializedVersion: 2
-        x: 140
-        y: 140
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 109
+        y: 173
+        width: 31
+        height: 36
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -633,12 +633,12 @@ TextureImporter:
       name: bazzi_25
       rect:
         serializedVersion: 2
-        x: 210
-        y: 140
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 153
+        y: 145
+        width: 44
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -654,12 +654,12 @@ TextureImporter:
       name: bazzi_26
       rect:
         serializedVersion: 2
-        x: 280
-        y: 140
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 223
+        y: 145
+        width: 44
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -675,12 +675,12 @@ TextureImporter:
       name: bazzi_27
       rect:
         serializedVersion: 2
-        x: 0
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 293
+        y: 145
+        width: 44
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -696,12 +696,12 @@ TextureImporter:
       name: bazzi_28
       rect:
         serializedVersion: 2
-        x: 70
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 115
+        y: 141
+        width: 25
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -717,12 +717,12 @@ TextureImporter:
       name: bazzi_29
       rect:
         serializedVersion: 2
-        x: 140
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 131
+        y: 156
+        width: 5
+        height: 6
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -738,12 +738,12 @@ TextureImporter:
       name: bazzi_30
       rect:
         serializedVersion: 2
-        x: 210
+        x: 2
         y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 66
+        height: 69
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -759,12 +759,12 @@ TextureImporter:
       name: bazzi_31
       rect:
         serializedVersion: 2
-        x: 280
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 85
+        y: 75
+        width: 44
+        height: 61
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -780,12 +780,12 @@ TextureImporter:
       name: bazzi_32
       rect:
         serializedVersion: 2
-        x: 350
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 143
+        y: 78
+        width: 68
+        height: 61
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -793,6 +793,132 @@ TextureImporter:
       bones: []
       spriteID: ddbcdb16ae743f848a5c824bb25fc490
       internalID: -801991112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bazzi_33
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 96
+        width: 42
+        height: 37
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d7d5753b0e2995429d76e58e954908d
+      internalID: 1465279737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bazzi_34
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 91
+        width: 42
+        height: 38
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be563784dcedbfe4fb7582d71251cce5
+      internalID: 1505196640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bazzi_35
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 84
+        width: 42
+        height: 38
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91d7107f587c99b499e5253c9cf74b9a
+      internalID: -1101427124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bazzi_36
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 71
+        width: 13
+        height: 8
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33502b108bbc47b45a20606d965e6fdf
+      internalID: 1162414695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bazzi_37
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 71
+        width: 12
+        height: 8
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7036faeda43a3034fab792f1d5fab4e0
+      internalID: -1415011689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bazzi_38
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 74
+        width: 16
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ee0c305045599d4ab4199e080604c20
+      internalID: -309854304
       vertices: []
       indices: 
       edges: []
@@ -835,6 +961,12 @@ TextureImporter:
       bazzi_30: 1425970527
       bazzi_31: 1047863107
       bazzi_32: -801991112
+      bazzi_33: 1465279737
+      bazzi_34: 1505196640
+      bazzi_35: -1101427124
+      bazzi_36: 1162414695
+      bazzi_37: -1415011689
+      bazzi_38: -309854304
       bazzi_4: 1621538789
       bazzi_5: 310424743
       bazzi_6: 1954860081

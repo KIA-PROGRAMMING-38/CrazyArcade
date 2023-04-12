@@ -26,7 +26,7 @@ public class Bubble : MonoBehaviour
 
     private void Start()
     {
-        _explosionInterval = new WaitForSeconds(GameManager.Instance.ExplosionInterval);
+        _explosionInterval = new WaitForSeconds(0.05f);
         _bubbleEffectPool = GetComponent<BubbleEffectPool>().EffectPool;
     }
 
@@ -71,6 +71,9 @@ public class Bubble : MonoBehaviour
             }
         }
 
+        // 맵 정보 갱신
+        MapManager.GetTotalMapInfo();
+
         // 시작 위치
         int count = -1;
         Vector2Int startPos = Vector2Int.RoundToInt(transform.position);
@@ -108,10 +111,16 @@ public class Bubble : MonoBehaviour
                         continue;
                     }
 
+                    if (MapManager.mapInfo[ny, nx].isWall || MapManager.mapInfo[ny, nx].isBlock)
+                    {
+                        visitedNode[ny + s_dy[j], nx + s_dx[j]] = true;
+                    }
+
                     if (visitedNode[ny, nx] == true)
                     {
                         continue;
                     }
+
 
                     visitedNode[ny, nx] = true;
 

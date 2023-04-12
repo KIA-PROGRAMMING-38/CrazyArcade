@@ -22,10 +22,17 @@ public class BubbleEffect : MonoBehaviour
     private EffectType Type;
     private EffectDirection Direction;
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        _spriteRenderer.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +40,11 @@ public class BubbleEffect : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayableCharacter>().ReadyDie();
+        }
+
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Block"))
+        {
+            _spriteRenderer.enabled = false;
         }
     }
 
