@@ -56,8 +56,6 @@ public class Bubble : MonoBehaviour
     {
         StartCoroutine(GenerateBubbleEffect(_playerPower));
         gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        // 맵 정보 갱신
-        MapManager.GetTotalMapInfo();
     }
     
     bool[,] visitedNode = new bool[14, 16];
@@ -72,6 +70,9 @@ public class Bubble : MonoBehaviour
                 visitedNode[y, x] = false;
             }
         }
+
+        // 맵 정보 갱신
+        MapManager.GetTotalMapInfo();
 
         // 시작 위치
         int count = -1;

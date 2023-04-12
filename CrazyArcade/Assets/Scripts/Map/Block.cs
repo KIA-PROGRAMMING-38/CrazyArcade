@@ -34,7 +34,6 @@ public class Block : MonoBehaviour
     }
     public void Deactive()
     {
-        Debug.Log("Deactive");
         gameObject.SetActive(false);
     }
 
