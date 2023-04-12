@@ -6,10 +6,12 @@ using static Block;
 public class FixedBlock : MonoBehaviour
 {
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -23,5 +25,15 @@ public class FixedBlock : MonoBehaviour
     public void Deactive()
     {
         gameObject.SetActive(false);
+    }
+
+    public void Disable()
+    {
+        _spriteRenderer.enabled = false;
+    }
+
+    public void Enable()
+    {
+        _spriteRenderer.enabled = true;
     }
 }

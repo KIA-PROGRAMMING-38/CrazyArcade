@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -10,10 +11,12 @@ public class Block : MonoBehaviour
     }
 
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
 
@@ -31,6 +34,17 @@ public class Block : MonoBehaviour
     }
     public void Deactive()
     {
+        Debug.Log("Deactive");
         gameObject.SetActive(false);
+    }
+
+    public void Disable()
+    {
+        _spriteRenderer.enabled = false;
+    }
+
+    public void Enable()
+    {
+        _spriteRenderer.enabled = true;
     }
 }
