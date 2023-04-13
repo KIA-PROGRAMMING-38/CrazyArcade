@@ -13,6 +13,7 @@ public class PlayableCharacter : Character
         public static readonly int VERTICAL = Animator.StringToHash("vertical");
         public static readonly int IS_MOVING = Animator.StringToHash("isMoving");
         public static readonly int IS_DYING = Animator.StringToHash("isDying");
+        public static readonly int IS_DYING_LAST = Animator.StringToHash("isDyingLast");
     }
 
     private bool _isMoving;
@@ -33,12 +34,14 @@ public class PlayableCharacter : Character
 
     private BubblePool _bubblePool;
 
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _input = transform.root.GetComponent<PlayerInput>();
         _playerTransform = transform.root.GetComponent<Transform>();
         _bubblePool = GetComponent<BubblePool>();
+
     }
 
     private void Start()
