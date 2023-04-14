@@ -119,7 +119,7 @@ public class Bubble : MonoBehaviour
                             continue;
                         }
 
-                        if (MapManager.mapInfo[ny, nx].isWall || MapManager.mapInfo[ny, nx].isBlock)
+                        if (MapManager.mapInfo[ny, nx].isBlock)
                         {
                             visitedNode[ny + s_dy[j], nx + s_dx[j]] = true;
                         }
@@ -157,16 +157,29 @@ public class Bubble : MonoBehaviour
 
     public Vector2 _moveDirection { get; private set; }
 
-    private float _triggerTime;
+    private float _collisionTime;
     private float _requiredTimeForMove = 0.5f;
 
-    private void OnCollisionStay2D(Collision2D collision)
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    _collisionTime += Time.deltaTime;
+    //    Debug.Log($"_collisionTime: {_collisionTime}");
+    //    if (_collisionTime >= _requiredTimeForMove && collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+    //    {
+    //        _collisionTime = 0f;
+    //        Vector2Int _playerPosition = Vector2Int.RoundToInt(collision.gameObject.transform.position);
+    //        _moveDirection = new Vector2Int((int)transform.position.x - _playerPosition.x, (int)transform.position.y - _playerPosition.y);
+    //        if (_moveDirection.x == 0 || _moveDirection.y == 0)
+    //        {
+    //            _animator.SetTrigger(BubbleAnimID.GET_FORCE);
+    //        }
+    //    }
+    //}
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        _triggerTime += Time.deltaTime;
-        if (_triggerTime >= _requiredTimeForMove && collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            _triggerTime = 0f;
-            Debug.Log("Shoot");
             Vector2Int _playerPosition = Vector2Int.RoundToInt(collision.gameObject.transform.position);
             _moveDirection = new Vector2Int((int)transform.position.x - _playerPosition.x, (int)transform.position.y - _playerPosition.y);
             if (_moveDirection.x == 0 || _moveDirection.y == 0)

@@ -24,7 +24,7 @@ public class BubbleMove : StateMachineBehaviour
         
         if (hit.collider != null)
         {
-            float radius = animator.GetComponentInParent<CircleCollider2D>().radius;
+            float radius = _bubble.GetComponent<CircleCollider2D>().radius;
             _bubble.transform.position = hit.point + hit.normal * radius;
             animator.SetTrigger(BubbleAnimID.ARRIVED);
         }

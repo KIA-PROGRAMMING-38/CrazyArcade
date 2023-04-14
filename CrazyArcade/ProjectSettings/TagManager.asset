@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - FixedBlock
-  - Block
   - BubbleEffect
   - WallBlock
+  - MovableBlock
   layers:
   - Default
   - TransparentFX
