@@ -114,7 +114,7 @@ public class Bubble : MonoBehaviour
                             continue;
                         }
 
-                        if (ny < 0 || nx < 0 || ny > 13 || nx > 15)
+                        if (ny < 0 || nx < 0 || ny > 12 || nx > 14)
                         {
                             continue;
                         }
