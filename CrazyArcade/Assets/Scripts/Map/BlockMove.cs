@@ -26,36 +26,30 @@ public class BlockMove : StateMachineBehaviour
 
         MapManager.MapInfo targetPos = MapManager.GetCoordinateInfo((int)_targetPosition.x, (int)_targetPosition.y);
 
-        // isBlock, isBubble 확인하여 이동할 수 없는 경우 처리
-        if(targetPos.isBlock || targetPos.isBubble)
+        // 맵 범위 내로 제한
+        if (_targetPosition.x < 0 || _targetPosition.y < 0 || _targetPosition.x > 14 || _targetPosition.y > 12)
         {
             animator.SetTrigger(MapAnimID.ARRIVED);
-            _canMove = false;
-        }
-        else
-        {
-            _canMove = true;
         }
 
+        // isBlock, isBubble 확인하여 이동할 수 없는 경우 처리
+        if (targetPos.isBlock || targetPos.isBubble)
+        {
+            animator.SetTrigger(MapAnimID.ARRIVED);
+        }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // isBlock, isBubble 아닌 경우 한 칸 보간으로 이동
-        if(_canMove)
+        _elapsedTime += Time.deltaTime;
+        animator.transform.position = Vector3.Lerp(_startPosition, _targetPosition, _elapsedTime / _duration);
+
+        if (_elapsedTime >= _duration)
         {
-            _elapsedTime += Time.deltaTime;
-            animator.transform.position = Vector3.Lerp(_startPosition, _targetPosition, _elapsedTime / _duration);
-
-            if(_elapsedTime >= _duration)
-            {
-                animator.GetComponent<Block>()._canMove = true;
-
-                _elapsedTime = 0f;
-                _canMove = false;
-                animator.SetTrigger(MapAnimID.ARRIVED);
-            }
-
+            _elapsedTime = 0f;
+            animator.GetComponent<Block>()._canMove = true;
+            animator.SetTrigger(MapAnimID.ARRIVED);
         }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayableCharacter : Character
 {
-    private int _selectedCharacterId = 0;  // 아직 캐릭터 선택 기능이 없어 정보를 참조할 곳이 명확하지 않으므로 우선 0(배찌)으로 지정
+    private Status _status;
     private PlayerInput _input;
     private Transform _playerTransform;
     private Animator _animator;
@@ -20,17 +20,9 @@ public class PlayableCharacter : Character
 
     private float deltaTime;
 
-    public float _speed {get; set;}
-    public float _savedSpeed {get; set;}
-    private float _maxSpeed;
     private Vector2 _moveDirection;
 
-    [SerializeField] private int _power;
-    private int _maxPower;
-
-    [SerializeField] private int _count;
     [SerializeField] private int _currentCount;
-    private int _maxCount;
 
     private BubblePool _bubblePool;
 
@@ -39,14 +31,9 @@ public class PlayableCharacter : Character
     {
         _animator = GetComponent<Animator>();
         _input = transform.root.GetComponent<PlayerInput>();
+        _status = GetComponent<Status>();
         _playerTransform = transform.root.GetComponent<Transform>();
         _bubblePool = GetComponent<BubblePool>();
-
-    }
-
-    private void Start()
-    {
-        GetStatus(_selectedCharacterId);
     }
 
     private void Update()
@@ -77,7 +64,7 @@ public class PlayableCharacter : Character
         }
 
         _moveDirection = new Vector2(_input._horizontal, _input._vertical);
-        _playerTransform.Translate(_moveDirection * (_speed * deltaTime));
+        _playerTransform.Translate(_moveDirection * (_status.Speed * deltaTime));
         _animator.SetFloat(PlayerAnimID.HORIZONTAL, _input._horizontal);
         _animator.SetFloat(PlayerAnimID.VERTICAL, _input._vertical);
     }
@@ -90,7 +77,7 @@ public class PlayableCharacter : Character
         Vector3Int bubblePosition = Vector3Int.RoundToInt(transform.position);
 
         // 물풍선이 맵에 존재할 수 있는 개수를 넘어서지 않도록 제한
-        if (_currentCount > _count)
+        if (_currentCount > _status.Count)
         {
             _currentCount -= 1;
             return;
@@ -105,18 +92,25 @@ public class PlayableCharacter : Character
         }
 
         Bubble newBubble = _bubblePool.bubblePool.Get();
-        newBubble.SetBubble(bubblePosition, _power);
+        newBubble.SetBubble(bubblePosition, _status.Power);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        IPickupable item = collision.GetComponent<IPickupable>();
+        item?.Pickup(gameObject);
+        if(item != null)
+        {
+            Destroy(collision.gameObject);
+        }
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bubble"))
         {
             collision.isTrigger = false;
         }
     }
 
-    public void DecreaseCount()
+    public void DecreaseCurrentCount()
     {
         --_currentCount;
     }
@@ -129,15 +123,5 @@ public class PlayableCharacter : Character
     public override void Die()
     {
         base.Die();
-    }
-
-    private void GetStatus(int id)
-    {
-        _speed = DataReader.PlayableCharacters[id].speed / 2;
-        _maxSpeed = DataReader.PlayableCharacters[id].maxSpeed / 2;
-        _power = DataReader.PlayableCharacters[id].power;
-        _maxPower = DataReader.PlayableCharacters[id].maxPower;
-        _count = DataReader.PlayableCharacters[id].count;
-        _maxCount = DataReader.PlayableCharacters[id].maxCount;
     }
 }
