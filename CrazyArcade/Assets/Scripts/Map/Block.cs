@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static BubbleMove;
+using UnityEngine.EventSystems;
 
 public class Block : MonoBehaviour
 {
     public static class MapAnimID
     {
         public static readonly int POP = Animator.StringToHash("Pop");
+        public static readonly int GET_FORCE = Animator.StringToHash("GetForce");
+        public static readonly int ARRIVED = Animator.StringToHash("Arrived");
     }
 
     private Animator _animator;
@@ -25,6 +29,7 @@ public class Block : MonoBehaviour
         _animator.SetTrigger(MapAnimID.POP);
     }
 
+    public Vector2 _moveDirection {get; private set;}
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("BubbleEffect"))
@@ -32,17 +37,41 @@ public class Block : MonoBehaviour
             _animator.SetTrigger(MapAnimID.POP);
         }
     }
-    public void Deactive()
+
+    public bool _canMove { get; set; } = true;
+    private float _collisionTime;
+    private float _requiredTimeForMove = 0.5f;
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && _canMove)
+        {
+            _collisionTime += Time.deltaTime;
+
+            if(_collisionTime > _requiredTimeForMove )
+            {
+                _collisionTime = 0f;
+                Vector2Int _playerPosition = Vector2Int.RoundToInt(collision.gameObject.transform.position);
+                _moveDirection = new Vector2Int((int)transform.position.x - _playerPosition.x, (int)transform.position.y - _playerPosition.y);
+
+
+                if (_moveDirection.x == 0 || _moveDirection.y == 0)
+                {
+                    _animator.SetTrigger(MapAnimID.GET_FORCE);
+                }
+            }
+        }
+    }
+    private void Deactive()
     {
         gameObject.SetActive(false);
     }
 
-    public void Disable()
+    private void Disable()
     {
         _spriteRenderer.enabled = false;
     }
 
-    public void Enable()
+    private void Enable()
     {
         _spriteRenderer.enabled = true;
     }

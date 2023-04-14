@@ -30,6 +30,7 @@ public class BubblePool : MonoBehaviour
     private void OnGet(Bubble bubble)
     {
         bubble.gameObject.SetActive(true);
+        bubble.GetComponent<CircleCollider2D>().isTrigger = true;
     }
 
     private void OnRelease(Bubble bubble)

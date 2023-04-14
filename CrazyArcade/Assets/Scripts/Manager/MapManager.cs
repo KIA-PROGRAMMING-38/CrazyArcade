@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class MapManager
@@ -7,13 +5,11 @@ public static class MapManager
     public class MapInfo
     {
         public bool isBubble;
-        public bool isWall;
         public bool isBlock;
 
-        public MapInfo(bool _isBubble, bool _isWall, bool _isBlock)
+        public MapInfo(bool _isBubble, bool _isBlock)
         {
             isBubble = _isBubble;
-            isWall = _isWall;
             isBlock = _isBlock;
         }
     }
@@ -31,7 +27,6 @@ public static class MapManager
             for (int x = 0; x < 16; ++x)
             {
                 bool isBubble = false;
-                bool isWall = false;
                 bool isBlock = false;
 
                 foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(x, y), 0.4f))
@@ -45,14 +40,9 @@ public static class MapManager
                     {
                         isBlock = true;
                     }
-
-                    if(col.gameObject.layer == LayerMask.NameToLayer("WallBlock"))
-                    {
-                        isWall = true;
-                    }
                 }
 
-                mapInfo[y, x] = new MapInfo(isBubble, isWall, isBlock);
+                mapInfo[y, x] = new MapInfo(isBubble, isBlock);
             }
         }
     }
@@ -66,7 +56,6 @@ public static class MapManager
     public static MapInfo GetCoordinateInfo(int x, int y)
     {
         bool isBubble = false;
-        bool isWall = false;
         bool isBlock = false;
 
         foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(x, y), 0.4f))
@@ -80,14 +69,9 @@ public static class MapManager
             {
                 isBlock = true;
             }
-
-            if (col.gameObject.layer == LayerMask.NameToLayer("WallBlock"))
-            {
-                isWall = true;
-            }
         }
 
-        MapInfo mapInfo = new MapInfo(isBubble, isWall, isBlock);
+        MapInfo mapInfo = new MapInfo(isBubble, isBlock);
 
         return mapInfo;
     }

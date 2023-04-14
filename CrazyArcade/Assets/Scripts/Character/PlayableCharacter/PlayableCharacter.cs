@@ -108,6 +108,14 @@ public class PlayableCharacter : Character
         newBubble.SetBubble(bubblePosition, _power);
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Bubble"))
+        {
+            collision.isTrigger = false;
+        }
+    }
+
     public void DecreaseCount()
     {
         --_currentCount;
