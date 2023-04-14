@@ -8,6 +8,7 @@ public class BubbleMove : StateMachineBehaviour
         public static readonly int ARRIVED = Animator.StringToHash("arrived");
     }
 
+    private float _radius;
     private Vector2 _direction;
     private float _speed = 15f;
     private Bubble _bubble;
@@ -16,21 +17,24 @@ public class BubbleMove : StateMachineBehaviour
     {
         _bubble = animator.transform.root.GetComponent<Bubble>();
         _direction = _bubble._moveDirection;
+        _radius = _bubble.GetComponent<CircleCollider2D>().radius;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        RaycastHit2D hit = Physics2D.Raycast(animator.transform.position, _direction, 0.1f, LayerMask.GetMask("Block"));
+        RaycastHit2D hit = Physics2D.Raycast(animator.transform.position, _direction, _radius, LayerMask.GetMask("Block"));
+        RaycastHit2D hitStage = Physics2D.Raycast(animator.transform.position, _direction, 0.3f, LayerMask.GetMask("StageObject"));
         
-        if (hit.collider != null)
+        if (hit.collider != null || hitStage.collider != null)
         {
-            float radius = _bubble.GetComponent<CircleCollider2D>().radius;
-            _bubble.transform.position = hit.point + hit.normal * radius;
             animator.SetTrigger(BubbleAnimID.ARRIVED);
         }
         else
         {
             _bubble.transform.Translate(_direction * (_speed * Time.deltaTime));
         }
+
+
+
     }
 }
