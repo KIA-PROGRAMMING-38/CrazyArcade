@@ -27,6 +27,9 @@ public class Block : MonoBehaviour
     public Vector2 _moveDirection {get; private set;}
     void OnTriggerEnter2D(Collider2D collision)
     {
+        IRemovable removableObj = collision.GetComponent<IRemovable>();
+        removableObj?.Remove();
+
         if (collision.gameObject.CompareTag("BubbleEffect"))
         {
             _animator.SetTrigger(MapAnimID.POP);

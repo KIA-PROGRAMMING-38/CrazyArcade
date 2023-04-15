@@ -9,11 +9,8 @@ public class BlockMove : StateMachineBehaviour
 
     private Block _block;
 
-    private bool _canMove;
-
     private float _elapsedTime;
     [SerializeField]private float _duration = 0.5f;
-    private float _speed = 10f;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

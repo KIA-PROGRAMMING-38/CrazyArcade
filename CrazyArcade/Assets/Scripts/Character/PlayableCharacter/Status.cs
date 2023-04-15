@@ -46,6 +46,7 @@ public class Status : MonoBehaviour
 
     private void Start()
     {
+        // TODO: _selectedCharacterId를 참조해오기
         GetStatus(_selectedCharacterId);
     }
 

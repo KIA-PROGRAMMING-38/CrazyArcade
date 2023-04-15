@@ -95,15 +95,14 @@ public class PlayableCharacter : Character
         newBubble.SetBubble(bubblePosition, _status.Power);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         IPickupable item = collision.GetComponent<IPickupable>();
         item?.Pickup(gameObject);
-        if(item != null)
-        {
-            Destroy(collision.gameObject);
-        }
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bubble"))
         {
             collision.isTrigger = false;
