@@ -6,6 +6,7 @@ public class PlayableCharacter : Character
     private Status _status;
     private PlayerInput _input;
     private Animator _animator;
+    private Inventory _inventory;
     public static class PlayerAnimID
     {
         public static readonly int HORIZONTAL = Animator.StringToHash("horizontal");
@@ -13,6 +14,7 @@ public class PlayableCharacter : Character
         public static readonly int IS_MOVING = Animator.StringToHash("isMoving");
         public static readonly int IS_DYING = Animator.StringToHash("isDying");
         public static readonly int IS_DYING_LAST = Animator.StringToHash("isDyingLast");
+        public static readonly int REVIVAL = Animator.StringToHash("isRevival");
     }
 
     private bool _isMoving;
@@ -32,6 +34,7 @@ public class PlayableCharacter : Character
         _input = transform.root.GetComponent<PlayerInput>();
         _status = GetComponent<Status>();
         _bubblePool = GetComponent<BubblePool>();
+        _inventory = transform.root.GetComponentInChildren<Inventory>();
     }
 
     private void Update()
@@ -40,6 +43,11 @@ public class PlayableCharacter : Character
         if (_input._isPutBubbleBtn)
         {
             Attack();
+        }
+
+        if(_input._isUseItemBtn)
+        {
+            _inventory.UseItem(0, this);
         }
 
         Move();

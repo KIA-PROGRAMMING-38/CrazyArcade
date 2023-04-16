@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -69,7 +70,25 @@ public class Inventory : MonoBehaviour
             }
 
             _inventoryManager.DrawInventory(_holdingItems);
+
+            if(_holdingItems.Count == 0)
+            {
+                _slotManager.DrawSlot(null);
+                return;
+            }
             _slotManager.DrawSlot(_holdingItems[0]);
         }
+    }
+
+    public void UseItem(int selectedSlotIndex, Character useCharacter)
+    {
+        ItemData useItem = _holdingItems[selectedSlotIndex]?.itemData;
+        if(useItem == null)
+        {
+            return;
+        }
+        Action<Character> action = ItemActions.itemActions[useItem.Id];
+        action(useCharacter);
+        Remove(useItem);
     }
 }

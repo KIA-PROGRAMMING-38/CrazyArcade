@@ -9,7 +9,6 @@ public class PlayableCharacterDying : StateMachineBehaviour
     private SpriteRenderer _spriteRenderer;
     private Color _color;
 
-    private float _deltaTime;
     private float _elapsedTime;
     private float _duration;
     private float _startAlpha;
@@ -19,8 +18,6 @@ public class PlayableCharacterDying : StateMachineBehaviour
     {
         // 속도 변화
         _status = animator.GetComponent<Status>();
-        //_status.SavedSpeed = _status.Speed;
-        //_status._speed = 0.2f;
         _status.SpeedDebuff = true;
 
         // alpha값 변화
@@ -50,5 +47,7 @@ public class PlayableCharacterDying : StateMachineBehaviour
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _status.SpeedDebuff = false;
+        _color.a = 1f;
+        _spriteRenderer.material.color = _color;
     }
 }
