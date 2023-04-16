@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PlayableCharacterRevival : StateMachineBehaviour
 {
-    PlayableCharacter _playableCharacter;
+    Status _status;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.GetComponent<BoxCollider2D>().enabled = false;
-        _playableCharacter = animator.GetComponent<PlayableCharacter>();
-        _playableCharacter._speed = 0f;
+        _status = animator.GetComponent<Status>();
+        _status.MoveRestrict = true;
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.GetComponent<BoxCollider2D>().enabled = true;
-        _playableCharacter._speed = _playableCharacter._savedSpeed;
+        _status.MoveRestrict = false;
     }
 }

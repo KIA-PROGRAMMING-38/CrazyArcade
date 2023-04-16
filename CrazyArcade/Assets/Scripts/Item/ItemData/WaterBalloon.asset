@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33d9878b650699346b94b052c8290646, type: 3}
+  m_Name: WaterBalloon
+  m_EditorClassIdentifier: 
+  Id: 1
+  Icon: {fileID: 1733288576, guid: aa209a4686cd5c8479782b7e37c7f8d3, type: 3}

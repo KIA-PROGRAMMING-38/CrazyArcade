@@ -37,6 +37,9 @@ public class BubbleEffect : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        IRemovable removableObj = collision.GetComponent<IRemovable>();
+        removableObj?.Remove();
+
         if(collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayableCharacter>().ReadyDie();

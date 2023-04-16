@@ -23,13 +23,13 @@ public class BlockMove : StateMachineBehaviour
 
         MapManager.MapInfo targetPos = MapManager.GetCoordinateInfo((int)_targetPosition.x, (int)_targetPosition.y);
 
-        // ¸Ê ¹üÀ§ ³»·Î Á¦ÇÑ
-        if(_targetPosition.x < 0 || _targetPosition.y < 0 || _targetPosition.x > 14 || _targetPosition.y > 12 )
+        // ë§µ ë²”ìœ„ ë‚´ë¡œ ì œí•œ
+        if(_targetPosition.x < 0 || _targetPosition.y < 0 || _targetPosition.x > 14 || _targetPosition.y > 12 
         {
             animator.SetTrigger(MapAnimID.ARRIVED);
         }
 
-        // isBlock, isBubble È®ÀÎÇÏ¿© ÀÌµ¿ÇÒ ¼ö ¾ø´Â °æ¿ì Ã³¸®
+        // isBlock, isBubble í™•ì¸í•˜ì—¬ ì´ë™í•  ìˆ˜ ì—†ëŠ” ê²½ìš° ì²˜ë¦¬
         if (targetPos.isBlock || targetPos.isBubble)
         {
             animator.SetTrigger(MapAnimID.ARRIVED);
@@ -38,14 +38,14 @@ public class BlockMove : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // isBlock, isBubble ¾Æ´Ñ °æ¿ì ÇÑ Ä­ º¸°£À¸·Î ÀÌµ¿
+        // isBlock, isBubble ì•„ë‹Œ ê²½ìš° í•œ ì¹¸ ë³´ê°„ìœ¼ë¡œ ì´ë™
         _elapsedTime += Time.deltaTime;
         animator.transform.position = Vector3.Lerp(_startPosition, _targetPosition, _elapsedTime / _duration);
 
         if (_elapsedTime >= _duration)
         {
-            animator.GetComponent<Block>()._canMove = true;
             _elapsedTime = 0f;
+            animator.GetComponent<Block>()._canMove = true;
             animator.SetTrigger(MapAnimID.ARRIVED);
         }
     }

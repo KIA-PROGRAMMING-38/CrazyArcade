@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using static BubbleMove;
-using UnityEngine.EventSystems;
 
 public class Block : MonoBehaviour
 {
@@ -23,7 +19,6 @@ public class Block : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-
     public void Pop()
     {
         _animator.SetTrigger(MapAnimID.POP);
@@ -32,6 +27,9 @@ public class Block : MonoBehaviour
     public Vector2 _moveDirection {get; private set;}
     void OnTriggerEnter2D(Collider2D collision)
     {
+        IRemovable removableObj = collision.GetComponent<IRemovable>();
+        removableObj?.Remove();
+
         if (collision.gameObject.CompareTag("BubbleEffect"))
         {
             _animator.SetTrigger(MapAnimID.POP);
@@ -52,7 +50,6 @@ public class Block : MonoBehaviour
                 _collisionTime = 0f;
                 Vector2Int _playerPosition = Vector2Int.RoundToInt(collision.gameObject.transform.position);
                 _moveDirection = new Vector2Int((int)transform.position.x - _playerPosition.x, (int)transform.position.y - _playerPosition.y);
-
 
                 if (_moveDirection.x == 0 || _moveDirection.y == 0)
                 {
