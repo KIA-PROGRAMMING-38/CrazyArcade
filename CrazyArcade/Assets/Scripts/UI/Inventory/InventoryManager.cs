@@ -9,12 +9,12 @@ public class InventoryManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Inventory.OnInventoryChange += DrawInventory;
+        // Inventory.OnInventoryChange += DrawInventory;
     }
 
     private void OnDisable()
     {
-        Inventory.OnInventoryChange -= DrawInventory;
+        // Inventory.OnInventoryChange -= DrawInventory;
     }
 
     void ResetInventory()
@@ -27,9 +27,9 @@ public class InventoryManager : MonoBehaviour
         InventorySlots = new List<InventorySlot>(6);
     }
 
-    void DrawInventory(List<InventoryItem> inventory)
+    public void DrawInventory(List<InventoryItem> inventory)
     {
-        ResetInventory();
+        // ResetInventory();
 
         for(int i = 0; i < InventorySlots.Capacity; ++i)
         {

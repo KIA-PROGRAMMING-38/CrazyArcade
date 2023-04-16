@@ -64,7 +64,7 @@ public class PlayableCharacter : Character
         }
 
         _moveDirection = new Vector2(_input._horizontal, _input._vertical);
-        _playerTransform.Translate(_moveDirection * (_status.Speed * deltaTime));
+        transform.Translate(_moveDirection * (_status.Speed * deltaTime));
         _animator.SetFloat(PlayerAnimID.HORIZONTAL, _input._horizontal);
         _animator.SetFloat(PlayerAnimID.VERTICAL, _input._vertical);
     }

@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public InventoryManager _inventoryManager;
     public static event Action<List<InventoryItem>> OnInventoryChange;
 
-    public List<InventoryItem> HoldingItems = new List<InventoryItem>();
+    public List<InventoryItem> HoldingItems = new List<InventoryItem>();  // 슬롯에 표시될 아이템
+    public List<InventoryItem> KeepItems = new List<InventoryItem>();  // 스탯 아이템 저장
     private Dictionary<ItemData, InventoryItem> itemDictionary = new Dictionary<ItemData, InventoryItem>();
 
-    private void OnEnable()
+    private void Awake()
     {
-        Needle.OnPickUpNeedle += Add;
-    }
-
-    private void OnDisable()
-    {
-        Needle.OnPickUpNeedle -= Add;
+        _inventoryManager = transform.root.GetChild(0).GetChild(0).GetComponent<InventoryManager>();
     }
 
     public void Add(ItemData itemData)
@@ -24,14 +21,15 @@ public class Inventory : MonoBehaviour
         if(itemDictionary.TryGetValue(itemData, out InventoryItem item))
         {
             item.AddToInventory();
-            OnInventoryChange?.Invoke(HoldingItems);
+            _inventoryManager.DrawInventory(HoldingItems);
         }
         else
         {
             InventoryItem newItem = new InventoryItem(itemData);
             HoldingItems.Add(newItem);
             itemDictionary.Add(itemData, newItem);
-            OnInventoryChange?.Invoke(HoldingItems);
+            // OnInventoryChange?.Invoke(HoldingItems);
+            _inventoryManager.DrawInventory(HoldingItems);
         }
     }
 
@@ -46,7 +44,7 @@ public class Inventory : MonoBehaviour
                 itemDictionary.Remove(itemData);
             }
 
-            OnInventoryChange?.Invoke(HoldingItems);
+            // OnInventoryChange?.Invoke(HoldingItems);
         }
     }
 }
