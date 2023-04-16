@@ -5,7 +5,6 @@ public class PlayableCharacter : Character
 {
     private Status _status;
     private PlayerInput _input;
-    private Transform _playerTransform;
     private Animator _animator;
     public static class PlayerAnimID
     {
@@ -32,7 +31,6 @@ public class PlayableCharacter : Character
         _animator = GetComponent<Animator>();
         _input = transform.root.GetComponent<PlayerInput>();
         _status = GetComponent<Status>();
-        _playerTransform = transform.root.GetComponent<Transform>();
         _bubblePool = GetComponent<BubblePool>();
     }
 

@@ -6,6 +6,7 @@ public class Flask : Item
     {
         character.GetComponent<Status>().AdditionalPower += 1;
         Debug.Log($"플라스크 효과 적용 후 Power: {character.GetComponent<Status>().Power}");
+        character.transform.root.GetComponentInChildren<Inventory>().Keep(itemData);
         Remove();
     }
 
