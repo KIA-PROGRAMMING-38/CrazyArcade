@@ -2,9 +2,12 @@
 
 public class Needle : Item, IEquipable
 {
+    public static event PickUpNeedle OnPickUpNeedle;
+    public delegate void PickUpNeedle(ItemData itemData);
     public override void Pickup(GameObject character)
     {
         Equip(character);
+        OnPickUpNeedle?.Invoke(itemData);
         Remove();
     }
 
