@@ -24,7 +24,7 @@ public class BlockMove : StateMachineBehaviour
         MapManager.MapInfo targetPos = MapManager.GetCoordinateInfo((int)_targetPosition.x, (int)_targetPosition.y);
 
         // 맵 범위 내로 제한
-        if(_targetPosition.x < 0 || _targetPosition.y < 0 || _targetPosition.x > 14 || _targetPosition.y > 12 
+        if(_targetPosition.x < 0 || _targetPosition.y < 0 || _targetPosition.x > 14 || _targetPosition.y > 12)
         {
             animator.SetTrigger(MapAnimID.ARRIVED);
         }

@@ -11,7 +11,7 @@ public class BubbleMove : StateMachineBehaviour
     private float _radius;
     private Vector2 _direction;
     private float _speed = 15f;
-    private float _radius;
+    // private float _radius;
     private Bubble _bubble;
     
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,7 +19,6 @@ public class BubbleMove : StateMachineBehaviour
         _bubble = animator.transform.root.GetComponent<Bubble>();
         _radius = _bubble.GetComponent<CircleCollider2D>().radius;
         _direction = _bubble._moveDirection;
-        _radius = _bubble.GetComponent<CircleCollider2D>().radius;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
