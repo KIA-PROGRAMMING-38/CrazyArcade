@@ -8,6 +8,7 @@ public class BubbleMove : StateMachineBehaviour
         public static readonly int ARRIVED = Animator.StringToHash("arrived");
     }
 
+    private float _radius;
     private Vector2 _direction;
     private float _speed = 15f;
     private float _radius;
@@ -18,6 +19,7 @@ public class BubbleMove : StateMachineBehaviour
         _bubble = animator.transform.root.GetComponent<Bubble>();
         _radius = _bubble.GetComponent<CircleCollider2D>().radius;
         _direction = _bubble._moveDirection;
+        _radius = _bubble.GetComponent<CircleCollider2D>().radius;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
