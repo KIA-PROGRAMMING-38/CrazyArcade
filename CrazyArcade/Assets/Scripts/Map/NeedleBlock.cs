@@ -8,7 +8,7 @@ public class NeedleBlock : MonoBehaviour
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Bubble"))
         {
-            
+            collision.gameObject.GetComponent<Bubble>().Boom();
         }
     }
 }

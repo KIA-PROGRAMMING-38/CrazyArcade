@@ -128,5 +128,7 @@ public class PlayableCharacter : Character
     public override void Die()
     {
         base.Die();
+        transform.root.gameObject.SetActive(false);
+        //TODO: 승패 판정 관련해서 Die에서 이벤트 발생할지 고민..
     }
 }

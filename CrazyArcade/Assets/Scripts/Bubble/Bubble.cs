@@ -58,7 +58,7 @@ public class Bubble : MonoBehaviour
         }
     }
 
-    private void Boom()
+    public void Boom()
     {
         StartCoroutine(_generateBubbleEffect);
         gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
