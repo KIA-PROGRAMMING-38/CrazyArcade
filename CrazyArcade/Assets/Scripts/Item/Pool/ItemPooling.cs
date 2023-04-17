@@ -11,5 +11,22 @@ public class ItemPooling : MonoBehaviour
         _itemPool = GetComponent<ItemPool>();
     }
 
-    // TODO: 박스 사라지는 거 구독해서 .. 그 위치에 Get 한 아이템 배치할 수 있도록
+    private void OnEnable()
+    {
+        Block.OnBreak += PutItemOnMap;
+    }
+
+    private void OnDisable()
+    {
+        Block.OnBreak -= PutItemOnMap;
+    }
+
+    private void PutItemOnMap(Transform boxTransform)
+    {
+        Item item = _itemPool.ItemsPool.Get();
+        if (item == null)
+            return;
+
+        item.transform.position = boxTransform.position;
+    }
 }

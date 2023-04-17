@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using static BubbleMove;
 
 public class Block : MonoBehaviour
 {
+    public static event Action<Transform> OnBreak;
     public static class MapAnimID
     {
         public static readonly int POP = Animator.StringToHash("Pop");
@@ -61,6 +63,11 @@ public class Block : MonoBehaviour
     private void Deactive()
     {
         gameObject.SetActive(false);
+    }
+
+    private void GetItem()
+    {
+        OnBreak?.Invoke(transform);
     }
 
     private void Disable()

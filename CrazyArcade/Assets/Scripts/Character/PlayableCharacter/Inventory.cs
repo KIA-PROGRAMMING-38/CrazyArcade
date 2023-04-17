@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     /// <param name="itemData"></param>
     public void Keep(ItemData itemData)
     {
-        if (_itemDictionary.TryGetValue(itemData, out InventoryItem item))
+        if (_keepItemDictionary.TryGetValue(itemData, out InventoryItem item))
         {
             item.AddToInventory();
         }
