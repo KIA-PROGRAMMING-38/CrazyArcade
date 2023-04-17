@@ -138,8 +138,10 @@ public class PlayableCharacter : Character
         --_currentCount;
     }
 
+    // Material mat;
     public void ReadyDie()
     {
+        // mat.SetColor("_OutlineColor", Color.red);
         _animator.SetTrigger(PlayerAnimID.IS_DYING);
     }    
 
