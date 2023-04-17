@@ -15,6 +15,7 @@ public class PlayableCharacter : Character
         public static readonly int IS_DYING = Animator.StringToHash("isDying");
         public static readonly int IS_DYING_LAST = Animator.StringToHash("isDyingLast");
         public static readonly int REVIVAL = Animator.StringToHash("isRevival");
+        public static readonly int IS_DIE = Animator.StringToHash("isDie");
     }
 
     private bool _isMoving;
@@ -115,6 +116,23 @@ public class PlayableCharacter : Character
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("NeedleBlock"))
+        {
+            Vector2 needleDir = collision.gameObject.GetComponent<NeedleWallDirection>().NeedleDirection;
+            if (needleDir + _moveDirection == Vector2.zero || needleDir == Vector2.zero)
+            {
+                _animator.SetTrigger(PlayerAnimID.IS_DIE);
+            }
+        }
+
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            _animator.SetTrigger(PlayerAnimID.IS_DIE);
+        }
+    }
+
     public void DecreaseCurrentCount()
     {
         --_currentCount;
@@ -125,10 +143,15 @@ public class PlayableCharacter : Character
         _animator.SetTrigger(PlayerAnimID.IS_DYING);
     }    
 
+    public void ImmediatelyDie()
+    {
+        _animator.SetTrigger(PlayerAnimID.IS_DIE);
+    }
+
     public override void Die()
     {
         base.Die();
-        transform.root.gameObject.SetActive(false);
+        transform.root.GetChild(1).gameObject.SetActive(false);
         //TODO: 승패 판정 관련해서 Die에서 이벤트 발생할지 고민..
     }
 }
