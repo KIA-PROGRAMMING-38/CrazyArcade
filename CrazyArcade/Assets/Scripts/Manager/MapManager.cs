@@ -4,13 +4,15 @@ public static class MapManager
 {
     public class MapInfo
     {
-        public bool isBubble;
-        public bool isBlock;
+        public bool IsBubble;
+        public bool IsBlock;
+        public bool IsEdge;
 
-        public MapInfo(bool _isBubble, bool _isBlock)
+        public MapInfo(bool _isBubble, bool _isBlock, bool _isEdge)
         {
-            isBubble = _isBubble;
-            isBlock = _isBlock;
+            IsBubble = _isBubble;
+            IsBlock = _isBlock;
+            IsEdge = _isEdge;
         }
     }
 
@@ -28,6 +30,7 @@ public static class MapManager
             {
                 bool isBubble = false;
                 bool isBlock = false;
+                bool isEdge = false;
 
                 foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(x, y), 0.4f))
                 {
@@ -45,9 +48,14 @@ public static class MapManager
                     {
                         isBlock = true;
                     }
+
+                    if(x == 0 || y == 0)
+                    {
+                        isEdge = true;
+                    }
                 }
 
-                mapInfo[y, x] = new MapInfo(isBubble, isBlock);
+                mapInfo[y, x] = new MapInfo(isBubble, isBlock, isEdge);
             }
         }
     }
@@ -62,6 +70,7 @@ public static class MapManager
     {
         bool isBubble = false;
         bool isBlock = false;
+        bool isEdge = false;
 
         foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(x, y), 0.4f))
         {
@@ -74,9 +83,14 @@ public static class MapManager
             {
                 isBlock = true;
             }
+
+            if (x == 0 || y == 0)
+            {
+                isEdge = true;
+            }
         }
 
-        MapInfo mapInfo = new MapInfo(isBubble, isBlock);
+        MapInfo mapInfo = new MapInfo(isBubble, isBlock, isEdge);
 
         return mapInfo;
     }

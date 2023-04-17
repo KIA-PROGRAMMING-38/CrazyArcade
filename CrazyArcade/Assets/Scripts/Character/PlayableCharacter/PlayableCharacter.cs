@@ -91,7 +91,7 @@ public class PlayableCharacter : Character
 
         // 맵 정보를 받아와 놓으려는 위치에 물풍선이 있는 경우 놓을 수 없도록 제한
         MapManager.MapInfo mapInfo = MapManager.GetCoordinateInfo(bubblePosition.x, bubblePosition.y);
-        if(mapInfo.isBubble)
+        if(mapInfo.IsBubble)
         {
             _currentCount -= 1;
             return;

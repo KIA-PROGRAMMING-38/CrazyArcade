@@ -33,7 +33,11 @@ public class BubbleMove : StateMachineBehaviour
         }
         else if(hitNeedleWall.collider != null)
         {
-            animator.transform.root.GetComponent<Bubble>().Boom();
+            Vector2 needleDir = hitNeedleWall.transform.GetComponent<NeedleWallDirection>().NeedleDirection;
+            if(needleDir + _direction == Vector2.zero || needleDir == Vector2.zero)
+            {
+                animator.transform.root.GetComponent<Bubble>().Boom();
+            }
         }
         else
         {

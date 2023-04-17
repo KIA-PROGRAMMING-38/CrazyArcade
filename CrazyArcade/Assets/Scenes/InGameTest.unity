@@ -768,6 +768,7 @@ GameObject:
   - component: {fileID: 340638039}
   - component: {fileID: 340638038}
   - component: {fileID: 340638041}
+  - component: {fileID: 340638042}
   m_Layer: 11
   m_Name: NeedleBlock_Down
   m_TagString: Untagged
@@ -855,7 +856,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.35}
@@ -866,8 +867,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.71, y: 0.3}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &340638042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340638037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b41513a4d6aae24d8b1f113fb3de1ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Direction: 3
 --- !u!1 &349398906
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +893,7 @@ GameObject:
   - component: {fileID: 349398909}
   - component: {fileID: 349398908}
   - component: {fileID: 349398907}
+  - component: {fileID: 349398910}
   m_Layer: 11
   m_Name: NeedleBlock_Around
   m_TagString: Untagged
@@ -979,6 +994,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &349398910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349398906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b41513a4d6aae24d8b1f113fb3de1ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Direction: 4
 --- !u!1 &510529095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,6 +2038,7 @@ GameObject:
   - component: {fileID: 935145250}
   - component: {fileID: 935145249}
   - component: {fileID: 935145248}
+  - component: {fileID: 935145251}
   m_Layer: 11
   m_Name: NeedleBlock_Left
   m_TagString: Untagged
@@ -2030,7 +2059,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.4, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.35}
@@ -2041,7 +2070,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.7}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &935145249
 SpriteRenderer:
@@ -2110,6 +2139,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &935145251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935145247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b41513a4d6aae24d8b1f113fb3de1ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Direction: 0
 --- !u!1 &969361526
 GameObject:
   m_ObjectHideFlags: 0
@@ -2620,6 +2662,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111653700}
   m_CullTransparentMesh: 1
+--- !u!1001 &1133798833
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082716, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697004135979082718, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
+      propertyPath: m_Name
+      value: Needle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2bd4690fbc44d414f85baad28b7aeea7, type: 3}
 --- !u!1 &1146187627
 GameObject:
   m_ObjectHideFlags: 0
@@ -3140,6 +3239,7 @@ GameObject:
   - component: {fileID: 1389751691}
   - component: {fileID: 1389751690}
   - component: {fileID: 1389751689}
+  - component: {fileID: 1389751692}
   m_Layer: 11
   m_Name: NeedleBlock_Up
   m_TagString: Untagged
@@ -3160,7 +3260,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.3}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.35}
@@ -3171,7 +3271,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.3}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &1389751690
 SpriteRenderer:
@@ -3240,6 +3340,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1389751692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389751688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b41513a4d6aae24d8b1f113fb3de1ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Direction: 2
 --- !u!1 &1475477110
 GameObject:
   m_ObjectHideFlags: 0
@@ -6053,6 +6166,7 @@ GameObject:
   - component: {fileID: 1744152014}
   - component: {fileID: 1744152013}
   - component: {fileID: 1744152015}
+  - component: {fileID: 1744152016}
   m_Layer: 11
   m_Name: NeedleBlock_Right
   m_TagString: Untagged
@@ -6140,7 +6254,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.35}
@@ -6151,8 +6265,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.7}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1744152016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744152012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b41513a4d6aae24d8b1f113fb3de1ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Direction: 1
 --- !u!1 &1816944652
 GameObject:
   m_ObjectHideFlags: 0
