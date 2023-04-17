@@ -40,6 +40,11 @@ public static class MapManager
                     {
                         isBlock = true;
                     }
+
+                    if(col.gameObject.layer == LayerMask.NameToLayer("NeedleBlock"))
+                    {
+                        isBlock = true;
+                    }
                 }
 
                 mapInfo[y, x] = new MapInfo(isBubble, isBlock);
