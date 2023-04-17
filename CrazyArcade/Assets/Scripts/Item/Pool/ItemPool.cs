@@ -14,6 +14,7 @@ public class ItemPool : MonoBehaviour
                 OnGet,
                 OnRelease,
                 ActionOnDestroy,
+                defaultCapacity: 5,
                 maxSize: 30
             );
     }
@@ -21,7 +22,13 @@ public class ItemPool : MonoBehaviour
     // random 아이템을 생성
     private Item CreateItems()
     {
-        int randomIndex = Random.Range(0, ItemPrefabs.Length );
+        int randomIndex = Random.Range(0, ItemPrefabs.Length + 1);
+
+        if(randomIndex == ItemPrefabs.Length)
+        {
+            return null;
+        }
+
         Item item = Instantiate(ItemPrefabs[randomIndex]);
         item.SetPool(ItemsPool);
         return item;
@@ -29,7 +36,13 @@ public class ItemPool : MonoBehaviour
 
     private void OnGet(Item item)
     {
+        if(item == null)
+        {
+            return;
+        }
+
         item.gameObject.SetActive(true);
+        item.GetComponent<Animator>().SetTrigger("GetFromBlock");
     }
 
     private void OnRelease(Item item)

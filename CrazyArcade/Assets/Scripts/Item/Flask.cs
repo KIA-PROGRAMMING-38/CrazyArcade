@@ -12,6 +12,7 @@ public class Flask : Item
 
     public override void Remove()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        ItemPool.Release(this);
     }
 }
