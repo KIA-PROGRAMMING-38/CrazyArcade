@@ -12,7 +12,14 @@ public class WaterBalloon : Item
 
     public override void Remove()
     {
-        gameObject.SetActive(false);
+        if (ItemPool != null)
+        {
+            ItemPool.Release(this);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
 

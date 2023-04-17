@@ -29,6 +29,8 @@ public class PlayableCharacterDying : StateMachineBehaviour
         _color = _spriteRenderer.material.color;
         _color.a = _startAlpha;
         _spriteRenderer.material.color = _color;
+
+        animator.gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -46,8 +48,10 @@ public class PlayableCharacterDying : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _status.SpeedDebuff = false;
         _color.a = 1f;
         _spriteRenderer.material.color = _color;
+        _status.MoveRestrict = true;
+
+        animator.gameObject.layer = LayerMask.NameToLayer("Player");
     }
 }

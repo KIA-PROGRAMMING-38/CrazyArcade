@@ -60,6 +60,12 @@ public class Block : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        _collisionTime = 0f;
+    }
+
     private void Deactive()
     {
         gameObject.SetActive(false);

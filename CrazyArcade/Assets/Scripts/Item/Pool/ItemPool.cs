@@ -22,9 +22,9 @@ public class ItemPool : MonoBehaviour
     // random 아이템을 생성
     private Item CreateItems()
     {
-        int randomIndex = Random.Range(0, ItemPrefabs.Length + 1);
+        int randomIndex = Random.Range(0, ItemPrefabs.Length + 5);
 
-        if(randomIndex == ItemPrefabs.Length)
+        if(randomIndex >= ItemPrefabs.Length)
         {
             return null;
         }

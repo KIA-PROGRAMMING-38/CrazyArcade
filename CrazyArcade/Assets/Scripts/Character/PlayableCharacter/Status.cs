@@ -31,14 +31,29 @@ public class Status : MonoBehaviour
             }
             else
             {
-                return Mathf.Min(_speed + AdditionalSpeed, _maxSpeed);
+                return Mathf.Min(_speed + AdditionalSpeed, _maxSpeed) * 0.7f;
             }
         }
     }
     public float AdditionalSpeed { get; set; }
     public float SavedSpeed { get; set; }
 
-    public int Power { get { return Mathf.Min(_power + AdditionalPower, _maxPower); } }
+    public bool MaxPower { get; set; } = false;
+
+    public int Power 
+    { 
+        get 
+        {
+            if(MaxPower == false)
+            {
+                return Mathf.Min(_power + AdditionalPower, _maxPower);
+            }
+            else
+            {
+                return _maxPower;
+            }
+        } 
+    }
     public int AdditionalPower { get; set; }
 
     public int Count { get { return Mathf.Min(_count + AdditionalCount, _maxCount); } }
@@ -52,8 +67,8 @@ public class Status : MonoBehaviour
 
     private void GetStatus(int id)
     {
-        _speed = DataReader.PlayableCharacters[id].speed / 2;
-        _maxSpeed = DataReader.PlayableCharacters[id].maxSpeed / 2;
+        _speed = DataReader.PlayableCharacters[id].speed;
+        _maxSpeed = DataReader.PlayableCharacters[id].maxSpeed;
         _power = DataReader.PlayableCharacters[id].power;
         _maxPower = DataReader.PlayableCharacters[id].maxPower;
         _count = DataReader.PlayableCharacters[id].count;

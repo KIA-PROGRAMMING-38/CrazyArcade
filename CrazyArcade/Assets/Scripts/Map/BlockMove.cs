@@ -31,7 +31,7 @@ public class BlockMove : StateMachineBehaviour
         }
 
         // isBlock, isBubble 확인하여 이동할 수 없는 경우 처리
-        if (targetPos.isBlock || targetPos.isBubble)
+        if (targetPos.IsBlock || targetPos.IsBubble)
         {
             _block._canMove = true;
             animator.SetTrigger(MapAnimID.ARRIVED);

@@ -25,10 +25,19 @@ public class BubbleMove : StateMachineBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(animator.transform.position, _direction, _radius, LayerMask.GetMask("Block"));
         RaycastHit2D hitStage = Physics2D.Raycast(animator.transform.position, _direction, 0.3f, LayerMask.GetMask("StageObject"));
+        RaycastHit2D hitNeedleWall = Physics2D.Raycast(animator.transform.position, _direction, _radius, LayerMask.GetMask("NeedleBlock"));
 
         if (hit.collider != null || hitStage.collider != null)
         {
             animator.SetTrigger(BubbleAnimID.ARRIVED);
+        }
+        else if(hitNeedleWall.collider != null)
+        {
+            Vector2 needleDir = hitNeedleWall.transform.GetComponent<NeedleWallDirection>().NeedleDirection;
+            if(needleDir + _direction == Vector2.zero || needleDir == Vector2.zero)
+            {
+                animator.transform.root.GetComponent<Bubble>().Boom();
+            }
         }
         else
         {

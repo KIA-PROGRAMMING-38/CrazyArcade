@@ -58,7 +58,7 @@ public class Bubble : MonoBehaviour
         }
     }
 
-    private void Boom()
+    public void Boom()
     {
         StartCoroutine(_generateBubbleEffect);
         gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
@@ -119,7 +119,7 @@ public class Bubble : MonoBehaviour
                             continue;
                         }
 
-                        if (MapManager.mapInfo[ny, nx].isBlock)
+                        if (MapManager.mapInfo[ny, nx].IsBlock && MapManager.mapInfo[ny, nx].IsEdge == false)
                         {
                             visitedNode[ny + s_dy[j], nx + s_dx[j]] = true;
                         }
