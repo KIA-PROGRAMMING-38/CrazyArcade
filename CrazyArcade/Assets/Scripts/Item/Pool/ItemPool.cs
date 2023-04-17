@@ -14,7 +14,7 @@ public class ItemPool : MonoBehaviour
                 OnGet,
                 OnRelease,
                 ActionOnDestroy,
-                defaultCapacity: 5,
+                defaultCapacity: 10,
                 maxSize: 30
             );
     }
