@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using static Block;
 
 public class FixedBlock : MonoBehaviour
 {
+    public static event Action<Transform> OnFixedBlockBreak;
+
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
 
@@ -35,5 +38,10 @@ public class FixedBlock : MonoBehaviour
     public void Enable()
     {
         _spriteRenderer.enabled = true;
+    }
+
+    private void GetItem()
+    {
+        OnFixedBlockBreak?.Invoke(transform);
     }
 }

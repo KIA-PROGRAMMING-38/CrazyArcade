@@ -14,11 +14,13 @@ public class ItemPooling : MonoBehaviour
     private void OnEnable()
     {
         Block.OnBreak += PutItemOnMap;
+        FixedBlock.OnFixedBlockBreak += PutItemOnMap;
     }
 
     private void OnDisable()
     {
         Block.OnBreak -= PutItemOnMap;
+        FixedBlock.OnFixedBlockBreak -= PutItemOnMap;
     }
 
     private void PutItemOnMap(Transform boxTransform)
