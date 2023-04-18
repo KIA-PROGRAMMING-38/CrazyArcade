@@ -17,5 +17,6 @@ public class PlayableCharacterRevival : StateMachineBehaviour
         animator.GetComponent<BoxCollider2D>().enabled = true;
         _status.MoveRestrict = false;
         _status.SpeedDebuff = false;
+        animator.GetComponent<PlayableCharacter>().IsAlive = true;
     }
 }

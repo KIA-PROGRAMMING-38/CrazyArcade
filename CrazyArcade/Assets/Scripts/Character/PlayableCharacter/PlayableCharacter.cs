@@ -19,6 +19,7 @@ public class PlayableCharacter : Character
     }
 
     private bool _isMoving;
+    public bool IsAlive { get; set; } = true; 
 
     private float deltaTime;
 
@@ -79,6 +80,11 @@ public class PlayableCharacter : Character
     public override void Attack()
     {
         base.Attack();
+
+        if (IsAlive == false)
+        {
+            return;
+        }
 
         ++_currentCount;
         Vector3Int bubblePosition = Vector3Int.RoundToInt(transform.position);

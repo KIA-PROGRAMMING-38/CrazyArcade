@@ -121,10 +121,10 @@ public class Bubble : MonoBehaviour
 
                         if (MapManager.mapInfo[ny, nx].IsBlock)
                         {
-                            if (ny + s_dy[j] < 0 || nx + s_dx[j] < 0)
-                                continue;
-
-                            visitedNode[ny + s_dy[j], nx + s_dx[j]] = true;
+                            if (ny + s_dy[j] >= 0 && nx + s_dx[j] >= 0)
+                            {
+                                visitedNode[ny + s_dy[j], nx + s_dx[j]] = true;
+                            }
                         }
 
                         if (visitedNode[ny, nx] == true)

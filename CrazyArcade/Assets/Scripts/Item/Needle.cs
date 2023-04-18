@@ -15,15 +15,4 @@ public class Needle : Item, IEquipable
         Debug.Log($"{character.name}: 바늘 획득");
     }
 
-    public override void Remove()
-    {
-        if (ItemPool != null)
-        {
-            ItemPool.Release(this);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-    }
 }
