@@ -44,14 +44,16 @@ public class Status : MonoBehaviour
     { 
         get 
         {
-            if(MaxPower == false)
-            {
-                return Mathf.Min(_power + AdditionalPower, _maxPower);
-            }
-            else
-            {
-                return _maxPower;
-            }
+            return _maxPower;
+
+            //if(MaxPower == false)
+            //{
+            //    return Mathf.Min(_power + AdditionalPower, _maxPower);
+            //}
+            //else
+            //{
+            //    return _maxPower;
+            //}
         } 
     }
     public int AdditionalPower { get; set; }

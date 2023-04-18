@@ -119,8 +119,11 @@ public class Bubble : MonoBehaviour
                             continue;
                         }
 
-                        if (MapManager.mapInfo[ny, nx].IsBlock && MapManager.mapInfo[ny, nx].IsEdge == false)
+                        if (MapManager.mapInfo[ny, nx].IsBlock)
                         {
+                            if (ny + s_dy[j] < 0 || nx + s_dx[j] < 0)
+                                continue;
+
                             visitedNode[ny + s_dy[j], nx + s_dx[j]] = true;
                         }
 
