@@ -80,13 +80,25 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    int isDying = Animator.StringToHash("Base Layer.Dying.Dying_Start");
     public void UseItem(int selectedSlotIndex, Character useCharacter)
     {
-        ItemData useItem = _holdingItems[selectedSlotIndex]?.itemData;
+        if(_holdingItems.Count == 0)
+        {
+            return;
+        }
+
+        ItemData useItem = _holdingItems[selectedSlotIndex].itemData;
         if(useItem == null)
         {
             return;
         }
+
+        if (useCharacter.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash != PlayableCharacter.PlayerAnimID.ON_IS_DYING_START)
+        {
+            return;
+        }
+
         Action<Character> action = ItemActions.itemActions[useItem.Id];
         action(useCharacter);
         Remove(useItem);
