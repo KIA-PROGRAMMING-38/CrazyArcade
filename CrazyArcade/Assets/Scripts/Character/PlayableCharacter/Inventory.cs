@@ -80,7 +80,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    int isDying = Animator.StringToHash("Base Layer.Dying.Dying_Start");
     public void UseItem(int selectedSlotIndex, Character useCharacter)
     {
         if(_holdingItems.Count == 0)
@@ -94,11 +93,14 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        if (useCharacter.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash != PlayableCharacter.PlayerAnimID.ON_IS_DYING_START)
+        // 아이템 사용 조건 확인
+        int characterCondition = useCharacter.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
+        if (characterCondition != useItem.Condition)
         {
             return;
         }
 
+        // 아이템을 사용한 캐릭터에 효과 적용
         Action<Character> action = ItemActions.itemActions[useItem.Id];
         action(useCharacter);
         Remove(useItem);
