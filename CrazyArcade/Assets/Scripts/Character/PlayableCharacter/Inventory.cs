@@ -82,11 +82,25 @@ public class Inventory : MonoBehaviour
 
     public void UseItem(int selectedSlotIndex, Character useCharacter)
     {
-        ItemData useItem = _holdingItems[selectedSlotIndex]?.itemData;
+        if(_holdingItems.Count == 0)
+        {
+            return;
+        }
+
+        ItemData useItem = _holdingItems[selectedSlotIndex].itemData;
         if(useItem == null)
         {
             return;
         }
+
+        // 아이템 사용 조건 확인
+        int characterCondition = useCharacter.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
+        if (characterCondition != useItem.Condition)
+        {
+            return;
+        }
+
+        // 아이템을 사용한 캐릭터에 효과 적용
         Action<Character> action = ItemActions.itemActions[useItem.Id];
         action(useCharacter);
         Remove(useItem);

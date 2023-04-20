@@ -9,6 +9,7 @@ public class PlayableCharacter : Character
     private Inventory _inventory;
     public static class PlayerAnimID
     {
+        // Parameters
         public static readonly int HORIZONTAL = Animator.StringToHash("horizontal");
         public static readonly int VERTICAL = Animator.StringToHash("vertical");
         public static readonly int IS_MOVING = Animator.StringToHash("isMoving");
@@ -16,9 +17,13 @@ public class PlayableCharacter : Character
         public static readonly int IS_DYING_LAST = Animator.StringToHash("isDyingLast");
         public static readonly int REVIVAL = Animator.StringToHash("isRevival");
         public static readonly int IS_DIE = Animator.StringToHash("isDie");
+
+        // StateInfo
+        public static readonly int ON_IS_DYING_START = Animator.StringToHash("Base Layer.Dying.Dying_Start");
     }
 
     private bool _isMoving;
+    public bool IsAlive { get; set; } = true; 
 
     private float deltaTime;
 
@@ -80,6 +85,11 @@ public class PlayableCharacter : Character
     {
         base.Attack();
 
+        if (IsAlive == false)
+        {
+            return;
+        }
+
         ++_currentCount;
         Vector3Int bubblePosition = Vector3Int.RoundToInt(transform.position);
 
@@ -138,8 +148,10 @@ public class PlayableCharacter : Character
         --_currentCount;
     }
 
+    // Material mat;
     public void ReadyDie()
     {
+        // mat.SetColor("_OutlineColor", Color.red);
         _animator.SetTrigger(PlayerAnimID.IS_DYING);
     }    
 

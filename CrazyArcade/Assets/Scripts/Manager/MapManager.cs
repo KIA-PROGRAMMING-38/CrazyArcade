@@ -7,12 +7,14 @@ public static class MapManager
         public bool IsBubble;
         public bool IsBlock;
         public bool IsEdge;
+        public bool IsOut;
 
-        public MapInfo(bool _isBubble, bool _isBlock, bool _isEdge)
+        public MapInfo(bool _isBubble, bool _isBlock, bool _isEdge, bool _isOut)
         {
             IsBubble = _isBubble;
             IsBlock = _isBlock;
             IsEdge = _isEdge;
+            IsOut = _isOut;
         }
     }
 
@@ -31,6 +33,7 @@ public static class MapManager
                 bool isBubble = false;
                 bool isBlock = false;
                 bool isEdge = false;
+                bool isOut = false;
 
                 foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(x, y), 0.4f))
                 {
@@ -49,13 +52,18 @@ public static class MapManager
                         isBlock = true;
                     }
 
-                    if(x == 0 || y == 0)
+                    //if(x == 0 || y == 0)
+                    //{
+                    //    isEdge = true;
+                    //}
+
+                    if (x < 0 || y < 0)
                     {
-                        isEdge = true;
+                        isOut = true;
                     }
                 }
 
-                mapInfo[y, x] = new MapInfo(isBubble, isBlock, isEdge);
+                mapInfo[y, x] = new MapInfo(isBubble, isBlock, isEdge, isOut);
             }
         }
     }
@@ -71,6 +79,7 @@ public static class MapManager
         bool isBubble = false;
         bool isBlock = false;
         bool isEdge = false;
+        bool isOut = false;
 
         foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(x, y), 0.4f))
         {
@@ -84,13 +93,18 @@ public static class MapManager
                 isBlock = true;
             }
 
-            if (x == 0 || y == 0)
+            //if (x == 0 || y == 0)
+            //{
+            //    isEdge = true;
+            //}
+
+            if (x < 0 || y < 0)
             {
-                isEdge = true;
+                isOut = true;
             }
         }
 
-        MapInfo mapInfo = new MapInfo(isBubble, isBlock, isEdge);
+        MapInfo mapInfo = new MapInfo(isBubble, isBlock, isEdge, isOut);
 
         return mapInfo;
     }

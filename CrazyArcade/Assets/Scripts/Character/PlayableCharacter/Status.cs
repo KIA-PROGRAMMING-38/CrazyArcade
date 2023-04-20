@@ -44,7 +44,7 @@ public class Status : MonoBehaviour
     { 
         get 
         {
-            if(MaxPower == false)
+            if (MaxPower == false)
             {
                 return Mathf.Min(_power + AdditionalPower, _maxPower);
             }

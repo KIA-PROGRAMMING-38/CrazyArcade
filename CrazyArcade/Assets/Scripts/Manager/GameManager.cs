@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : SingletoneBehaviour<GameManager>
 {
+    public MapData SelectedStage;
+
     protected override void Awake()
     {
         base.Awake();

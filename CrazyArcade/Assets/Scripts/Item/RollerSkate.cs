@@ -10,15 +10,4 @@ public class RollerSkate : Item
         Remove();
     }
 
-    public override void Remove()
-    {
-        if (ItemPool != null)
-        {
-            ItemPool.Release(this);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-    }
 }

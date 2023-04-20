@@ -10,16 +10,4 @@ public class MaxFlask : Item
         character.transform.root.GetComponentInChildren<Inventory>().Keep(itemData);
         Remove();
     }
-
-    public override void Remove()
-    {
-        if (ItemPool != null)
-        {
-            ItemPool.Release(this);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-    }
 }

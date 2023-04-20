@@ -14,16 +14,4 @@ public class Needle : Item, IEquipable
         character.transform.root.GetComponentInChildren<Inventory>().Add(itemData);
         Debug.Log($"{character.name}: 바늘 획득");
     }
-
-    public override void Remove()
-    {
-        if (ItemPool != null)
-        {
-            ItemPool.Release(this);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-    }
 }

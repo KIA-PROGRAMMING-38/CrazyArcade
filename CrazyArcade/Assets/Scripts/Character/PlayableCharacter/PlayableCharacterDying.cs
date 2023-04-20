@@ -31,6 +31,7 @@ public class PlayableCharacterDying : StateMachineBehaviour
         _spriteRenderer.material.color = _color;
 
         animator.gameObject.layer = LayerMask.NameToLayer("Default");
+        animator.GetComponent<PlayableCharacter>().IsAlive = false;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
