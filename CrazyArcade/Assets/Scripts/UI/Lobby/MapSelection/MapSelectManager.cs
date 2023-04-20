@@ -28,10 +28,12 @@ public class MapSelectManager : MonoBehaviour
         _mapSelectionButtons[_selectedMapNumber].GetComponent<Image>().color = _alphaMax;
         _mapSelectionButtons[_selectedMapNumber].transform.GetChild(1).GetComponent<Text>().color = _selectedNameColor;
         _mapSelectionButtons[_selectedMapNumber].transform.GetChild(2).GetComponent<Text>().color = _selectedNameColor;
+    }
 
+    private void Start()
+    {
         SetCurrentInfo(_selectedMapNumber);
         SetSelectedMap();
-
         transform.parent.gameObject.SetActive(false);
     }
 
