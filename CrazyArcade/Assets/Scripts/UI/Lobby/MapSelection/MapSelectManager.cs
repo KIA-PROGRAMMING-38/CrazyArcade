@@ -25,8 +25,9 @@ public class MapSelectManager : MonoBehaviour
             _mapSelectionButtons[i] = transform.GetChild(i - 1).GetComponent<Button>();
         }
 
-        _mapSelectionButtons[1].GetComponent<Image>().color = _alphaMax;
-        _mapSelectionButtons[1].GetComponentInChildren<Text>().color = _selectedNameColor;
+        _mapSelectionButtons[_selectedMapNumber].GetComponent<Image>().color = _alphaMax;
+        _mapSelectionButtons[_selectedMapNumber].transform.GetChild(1).GetComponent<Text>().color = _selectedNameColor;
+        _mapSelectionButtons[_selectedMapNumber].transform.GetChild(2).GetComponent<Text>().color = _selectedNameColor;
 
         SetCurrentInfo(_selectedMapNumber);
         SetSelectedMap();
@@ -43,12 +44,14 @@ public class MapSelectManager : MonoBehaviour
         for(int i = 1; i <= _numOfMaps; ++i)
         {
             _mapSelectionButtons[i].GetComponent<Image>().color = _alphaZero;
-            _mapSelectionButtons[i].GetComponentInChildren<Text>().color = _unselectedNameColor;
-            
+            _mapSelectionButtons[i].transform.GetChild(1).GetComponent<Text>().color = _unselectedNameColor;
+            _mapSelectionButtons[i].transform.GetChild(2).GetComponent<Text>().color = _unselectedNameColor;
+
         }
 
         _mapSelectionButtons[_selectedMapNumber].GetComponent<Image>().color = _alphaMax;
-        _mapSelectionButtons[_selectedMapNumber].GetComponentInChildren<Text>().color = _selectedNameColor;
+        _mapSelectionButtons[_selectedMapNumber].transform.GetChild(1).GetComponent<Text>().color = _selectedNameColor;
+        _mapSelectionButtons[_selectedMapNumber].transform.GetChild(2).GetComponent<Text>().color = _selectedNameColor;
 
         SetCurrentInfo(_selectedMapNumber);
     }
