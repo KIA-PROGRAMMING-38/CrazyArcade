@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : SingletoneBehaviour<GameManager>
 {
-    public int SelectedStage;
+    public MapData SelectedStage;
 
     protected override void Awake()
     {
@@ -13,6 +13,5 @@ public class GameManager : SingletoneBehaviour<GameManager>
         // TODO: 씬 전환 구현 후에는 스테이지 씬으로 전환하는 경우 불러와야 함
         MapManager.GetTotalMapInfo();
         ItemActions.SaveActions();
-        SelectedStage = 1;
     }
 }

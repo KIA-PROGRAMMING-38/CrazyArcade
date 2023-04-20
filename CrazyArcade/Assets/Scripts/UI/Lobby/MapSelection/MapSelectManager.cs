@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,14 @@ using UnityEngine.UI;
 
 public class MapSelectManager : MonoBehaviour
 {
+    public static event Action<MapData> OnMapSelected;
+
+    public MapData[] MapDataArr;
+    public GameObject CurrentInfo;
+    public GameObject SelectedInfo;
     private Button[] _mapSelectionButtons;
     private int _numOfMaps;
-    public int _selectedMapNumber { get; set; }
+    public int _selectedMapNumber { get; set; } = 1;
 
     private void Awake()
     {
@@ -18,6 +24,14 @@ public class MapSelectManager : MonoBehaviour
         {
             _mapSelectionButtons[i] = transform.GetChild(i - 1).GetComponent<Button>();
         }
+
+        _mapSelectionButtons[1].GetComponent<Image>().color = _alphaMax;
+        _mapSelectionButtons[1].GetComponentInChildren<Text>().color = _selectedNameColor;
+
+        SetCurrentInfo(_selectedMapNumber);
+        SetSelectedMap();
+
+        transform.parent.gameObject.SetActive(false);
     }
 
     private Color _alphaZero = new Color(1f, 1f, 1f, 0f);
@@ -30,15 +44,25 @@ public class MapSelectManager : MonoBehaviour
         {
             _mapSelectionButtons[i].GetComponent<Image>().color = _alphaZero;
             _mapSelectionButtons[i].GetComponentInChildren<Text>().color = _unselectedNameColor;
+            
         }
 
         _mapSelectionButtons[_selectedMapNumber].GetComponent<Image>().color = _alphaMax;
         _mapSelectionButtons[_selectedMapNumber].GetComponentInChildren<Text>().color = _selectedNameColor;
+
+        SetCurrentInfo(_selectedMapNumber);
+    }
+
+    private void SetCurrentInfo(int stageNum)
+    {
+        CurrentInfo.GetComponentInChildren<Text>().text = MapDataArr[stageNum].MaxPersonnel.ToString();
+        CurrentInfo.GetComponentInChildren<Image>().sprite = MapDataArr[stageNum].PreviewImg;
     }
 
     public void SetSelectedMap()
     {
-        GameManager.Instance.SelectedStage = _selectedMapNumber;
+        OnMapSelected?.Invoke(MapDataArr[_selectedMapNumber]);
+        GameManager.Instance.SelectedStage = MapDataArr[_selectedMapNumber];
         transform.parent.gameObject.SetActive(false);
     }
 }

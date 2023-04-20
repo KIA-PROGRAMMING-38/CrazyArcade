@@ -16,6 +16,6 @@ public class GameStartButton : MonoBehaviour
 
     public void LoadStage()
     {
-        SceneManager.LoadScene(GameManager.Instance.SelectedStage);
+        SceneManager.LoadScene(GameManager.Instance.SelectedStage.StageNumber);
     }
 }

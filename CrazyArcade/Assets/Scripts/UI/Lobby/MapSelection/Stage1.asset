@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Stage1
   m_EditorClassIdentifier: 
   StageNumber: 1
+  StageName: "\uD3EC\uB808\uC2A4\uD2B8 01"
+  MaxPersonnel: 8
+  PreviewImg: {fileID: 21300000, guid: b2869a55054fa3c45bec9b2568d1a1e0, type: 3}
