@@ -42,7 +42,7 @@ public class PlayableCharacter : Character
         _bubblePool = GetComponent<BubblePool>();
         _inventory = transform.root.GetComponentInChildren<Inventory>();
     }
-
+    
     private void Update()
     {
         deltaTime = Time.deltaTime;
