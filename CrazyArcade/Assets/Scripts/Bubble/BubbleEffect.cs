@@ -49,6 +49,11 @@ public class BubbleEffect : MonoBehaviour
         {
             _spriteRenderer.enabled = false;
         }
+
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Bubble"))
+        {
+            collision.GetComponent<Bubble>().Boom();
+        }
     }
 
     public void SetEffectInfo(int type, int direction)
