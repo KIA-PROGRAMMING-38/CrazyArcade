@@ -60,17 +60,14 @@ public class RoundManager : MonoBehaviour
             case GAME_MODE.One_on_one:
                 if(_team1Count > 0 && _team2Count == 0)
                 {
-                    Debug.Log("player1 win");
                     PlayersInfo.SavePlayersResult(RESULT.Win, RESULT.Lose);
                 }
                 else if(_team2Count > 0 && _team1Count == 0)
                 {
-                    Debug.Log("player2 win");
                     PlayersInfo.SavePlayersResult(RESULT.Lose, RESULT.Win);
                 }
                 else
                 {
-                    Debug.Log("DRAW");
                     PlayersInfo.SavePlayersResult(RESULT.Draw, RESULT.Draw);
                 }
 
