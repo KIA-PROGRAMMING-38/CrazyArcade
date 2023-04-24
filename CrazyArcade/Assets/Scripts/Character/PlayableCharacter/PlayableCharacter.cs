@@ -1,8 +1,12 @@
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 public class PlayableCharacter : Character
 {
+    public static event Action<Character> OnDie;
+
+    private RoundManager _roundManager;
+
     private Status _status;
     private PlayerInput _input;
     private Animator _animator;
@@ -17,6 +21,7 @@ public class PlayableCharacter : Character
         public static readonly int IS_DYING_LAST = Animator.StringToHash("isDyingLast");
         public static readonly int REVIVAL = Animator.StringToHash("isRevival");
         public static readonly int IS_DIE = Animator.StringToHash("isDie");
+        public static readonly int IS_WIN = Animator.StringToHash("isWin");
 
         // StateInfo
         public static readonly int ON_IS_DYING_START = Animator.StringToHash("Base Layer.Dying.Dying_Start");
@@ -42,10 +47,41 @@ public class PlayableCharacter : Character
         _bubblePool = GetComponent<BubblePool>();
         _inventory = transform.root.GetComponentInChildren<Inventory>();
     }
-    
+
+    private void Start()
+    {
+        _roundManager = GameManager.Instance.GetComponentInChildren<RoundManager>();
+
+        switch(GameManager.Instance.SelectedStage.GameMode)
+        {
+            case GAME_MODE.One_on_one:
+                if(transform.parent.name == "Player1")
+                {
+                    _roundManager.SurvivePlayersTeam1.Add(this);
+                }
+                else
+                {
+                    _roundManager.SurvivePlayersTeam2.Add(this);
+                }
+
+                break;
+
+            case GAME_MODE.Monster:
+                _roundManager.SurvivePlayersTeam1.Add(this);
+                break;
+        }
+    }
+
     private void Update()
     {
         deltaTime = Time.deltaTime;
+        
+        if(_input._gameEnded == true)
+        {
+            _animator.SetTrigger(PlayerAnimID.IS_WIN);
+            return;
+        }
+
         if (_input._isPutBubbleBtn)
         {
             Attack();
@@ -120,7 +156,7 @@ public class PlayableCharacter : Character
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Bubble"))
+        if (collision.gameObject.layer == Layers.BUBBLE)
         {
             collision.isTrigger = false;
         }
@@ -137,7 +173,7 @@ public class PlayableCharacter : Character
             }
         }
 
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if(collision.gameObject.layer == Layers.PLAYER)
         {
             _animator.SetTrigger(PlayerAnimID.IS_DIE);
         }
@@ -165,5 +201,6 @@ public class PlayableCharacter : Character
         base.Die();
         transform.root.GetChild(1).gameObject.SetActive(false);
         //TODO: 승패 판정 관련해서 Die에서 이벤트 발생할지 고민..
+        OnDie?.Invoke(this);
     }
 }

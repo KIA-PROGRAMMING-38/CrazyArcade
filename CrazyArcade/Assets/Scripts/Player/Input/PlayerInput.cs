@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -14,6 +12,8 @@ public class PlayerInput : MonoBehaviour
     public bool _isPutBubbleBtn { get; set; }
     public bool _isUseItemBtn { get; set; }
 
+    public bool _gameEnded { get; set; } = false;
+
     private void Awake()
     {
         _horizontalAxisName = name + "Horizontal";
@@ -24,9 +24,27 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        _horizontal = Input.GetAxisRaw(_horizontalAxisName);
-        _vertical = Input.GetAxisRaw(_verticalAxisName);
-        _isPutBubbleBtn = Input.GetButtonDown(_putBubbleBtnName);
-        _isUseItemBtn = Input.GetButtonDown(_useItemBtnName);
+        if (_gameEnded == false)
+        {
+            _horizontal = Input.GetAxisRaw(_horizontalAxisName);
+            _vertical = Input.GetAxisRaw(_verticalAxisName);
+            _isPutBubbleBtn = Input.GetButtonDown(_putBubbleBtnName);
+            _isUseItemBtn = Input.GetButtonDown(_useItemBtnName);
+        }
+    }
+
+    private void CutOffInput()
+    {
+        _gameEnded = true;
+    }
+
+    private void OnEnable()
+    {
+        RoundManager.OnGameEnd += CutOffInput;
+    }
+
+    private void OnDisable()
+    {
+        RoundManager.OnGameEnd -= CutOffInput;
     }
 }
