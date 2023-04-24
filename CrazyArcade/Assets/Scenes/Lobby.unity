@@ -970,7 +970,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedStage: {fileID: 0}
-  winner: 0
 --- !u!4 &365434630
 Transform:
   m_ObjectHideFlags: 0
@@ -2146,10 +2145,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 4ff6d5acaace9f149b9a7887e0939837, type: 3}
-    m_FontSize: 12
+    m_FontSize: 11
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 3
     m_AlignByGeometry: 0

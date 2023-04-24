@@ -21,6 +21,7 @@ public class PlayableCharacter : Character
         public static readonly int IS_DYING_LAST = Animator.StringToHash("isDyingLast");
         public static readonly int REVIVAL = Animator.StringToHash("isRevival");
         public static readonly int IS_DIE = Animator.StringToHash("isDie");
+        public static readonly int IS_WIN = Animator.StringToHash("isWin");
 
         // StateInfo
         public static readonly int ON_IS_DYING_START = Animator.StringToHash("Base Layer.Dying.Dying_Start");
@@ -74,6 +75,13 @@ public class PlayableCharacter : Character
     private void Update()
     {
         deltaTime = Time.deltaTime;
+        
+        if(_input._gameEnded == true)
+        {
+            _animator.SetTrigger(PlayerAnimID.IS_WIN);
+            return;
+        }
+
         if (_input._isPutBubbleBtn)
         {
             Attack();
