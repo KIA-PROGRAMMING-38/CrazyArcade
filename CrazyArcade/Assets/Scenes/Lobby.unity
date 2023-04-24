@@ -970,6 +970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedStage: {fileID: 0}
+  winner: 0
 --- !u!4 &365434630
 Transform:
   m_ObjectHideFlags: 0

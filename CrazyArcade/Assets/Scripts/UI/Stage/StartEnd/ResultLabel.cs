@@ -6,11 +6,14 @@ public class ResultLabel : MonoBehaviour
     public Sprite[] LabelSprites;
     private Image _label;
     private GAME_MODE _currentGameMode;
+    private Vector2 _logoSize;
 
     private void Awake()
     {
         _label = GetComponent<Image>();
         _currentGameMode = GameManager.Instance.SelectedStage.GameMode;
+
+        _logoSize = new Vector2(200, 56);
     }
 
     private void OnEnable()
@@ -38,12 +41,15 @@ public class ResultLabel : MonoBehaviour
                 }
                 else if(PlayersInfo.Player1Info.result == RESULT.Draw)
                 {
+                    _label.rectTransform.sizeDelta = _logoSize;
                     _label.sprite = LabelSprites[3];
                 }
                 break;
 
             case GAME_MODE.Monster:
-                if(PlayersInfo.Player1Info.result == RESULT.Win)
+                _label.rectTransform.sizeDelta = _logoSize;
+
+                if (PlayersInfo.Player1Info.result == RESULT.Win)
                 {
                     _label.sprite = LabelSprites[2];
                 }
