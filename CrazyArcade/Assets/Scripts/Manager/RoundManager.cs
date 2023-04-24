@@ -26,11 +26,6 @@ public class RoundManager : MonoBehaviour
         _currentGameMode = GameManager.Instance.SelectedStage.GameMode;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     private void OnEnable()
     {
         PlayableCharacter.OnDie += CheckRoundEnded;

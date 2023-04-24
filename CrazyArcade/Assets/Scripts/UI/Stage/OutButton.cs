@@ -19,6 +19,8 @@ public class OutButton : MonoBehaviour
 
     public void LoadLobby()
     {
+        GameObject go = GameManager.Instance.transform.GetChild(0).gameObject;
+        Destroy(go);
         SceneManager.LoadScene(LOBBY_SCENE_NUMBER);
     }
 }
