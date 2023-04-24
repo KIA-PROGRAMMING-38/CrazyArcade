@@ -30,7 +30,7 @@ public class PlayableCharacterDying : StateMachineBehaviour
         _color.a = _startAlpha;
         _spriteRenderer.material.color = _color;
 
-        animator.gameObject.layer = LayerMask.NameToLayer("Default");
+        animator.gameObject.layer = LayerMask.NameToLayer("DyingPlayer");
         animator.GetComponent<PlayableCharacter>().IsAlive = false;
     }
 

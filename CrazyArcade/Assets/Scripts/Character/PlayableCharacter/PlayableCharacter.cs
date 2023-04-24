@@ -148,7 +148,7 @@ public class PlayableCharacter : Character
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Bubble"))
+        if (collision.gameObject.layer == Layers.BUBBLE)
         {
             collision.isTrigger = false;
         }
@@ -165,7 +165,7 @@ public class PlayableCharacter : Character
             }
         }
 
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if(collision.gameObject.layer == Layers.PLAYER)
         {
             _animator.SetTrigger(PlayerAnimID.IS_DIE);
         }

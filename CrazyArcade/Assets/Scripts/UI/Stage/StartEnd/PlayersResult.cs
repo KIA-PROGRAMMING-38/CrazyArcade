@@ -50,15 +50,12 @@ public class PlayersResult : MonoBehaviour
         {
             case RESULT.Win:
                 return ResultSprites[0];
-                break;
 
             case RESULT.Draw:
                 return ResultSprites[1];
-                break;
 
             case RESULT.Lose:
                 return ResultSprites[2];
-                break;
 
             default:
                 return null;

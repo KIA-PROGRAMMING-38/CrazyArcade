@@ -91,5 +91,14 @@ public class RoundManager : MonoBehaviour
 
         ResultCanvas.enabled = true;
         OnGameEnd?.Invoke();
+        Invoke("StageEnd", 2f);
+    }
+
+    private const int LOBBY_SCENE_NUMBER = 0;
+    private void StageEnd()
+    {
+        GameObject roundManager = GameManager.Instance.transform.GetChild(0).gameObject;
+        Destroy(roundManager);
+        SceneManager.LoadScene(LOBBY_SCENE_NUMBER);
     }
 }

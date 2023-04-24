@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : SingletoneBehaviour<GameManager>
 {
     public MapData SelectedStage;
-    public int winner;
 
     protected override void Awake()
     {
