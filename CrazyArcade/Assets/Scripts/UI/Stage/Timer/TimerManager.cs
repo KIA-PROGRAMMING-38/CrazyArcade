@@ -25,9 +25,6 @@ public class TimerManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 1초가 지났을 때 호출
-    /// </summary>
     private void CountTime()
     {
         _currentSecond += 1;
@@ -57,7 +54,6 @@ public class TimerManager : MonoBehaviour
 
     private void TimeOver()
     {
-        // TODO: 승패 판정 메소드 호출
         OnTimeOver?.Invoke();
         this.enabled = false;
     }
