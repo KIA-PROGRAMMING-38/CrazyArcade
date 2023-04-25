@@ -29,11 +29,13 @@ public class RoundManager : MonoBehaviour
     private void OnEnable()
     {
         PlayableCharacter.OnDie += CheckRoundEnded;
+        TimerManager.OnTimeOver += JudgeWinner;
     }
 
     private void OnDisable()
     {
         PlayableCharacter.OnDie -= CheckRoundEnded;
+        TimerManager.OnTimeOver -= JudgeWinner;
     }
 
 
@@ -88,7 +90,7 @@ public class RoundManager : MonoBehaviour
 
         ResultCanvas.enabled = true;
         OnGameEnd?.Invoke();
-        Invoke("StageEnd", 2f);
+        Invoke("StageEnd", 4f);
     }
 
     private const int LOBBY_SCENE_NUMBER = 0;

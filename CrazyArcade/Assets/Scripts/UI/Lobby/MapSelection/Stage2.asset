@@ -16,4 +16,4 @@ MonoBehaviour:
   StageName: "\uD3EC\uB808\uC2A4\uD2B8 02"
   MaxPersonnel: 10
   PreviewImg: {fileID: 21300000, guid: 28ad3986b038fc14c962018f7ff1afe1, type: 3}
-  GameMode: 0
+  GameMode: 1
