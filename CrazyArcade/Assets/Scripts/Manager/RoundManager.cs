@@ -88,7 +88,7 @@ public class RoundManager : MonoBehaviour
 
         ResultCanvas.enabled = true;
         OnGameEnd?.Invoke();
-        Invoke("StageEnd", 2f);
+        Invoke("StageEnd", 4f);
     }
 
     private const int LOBBY_SCENE_NUMBER = 0;
