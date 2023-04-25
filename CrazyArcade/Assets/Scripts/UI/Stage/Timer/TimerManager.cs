@@ -7,6 +7,7 @@ public class TimerManager : MonoBehaviour
 {
     public static event Action OnMinuteUpdate;
     public static event Action OnSecondUpdate;
+    public static event Action OnTimeOver;
 
     private int _currentMinute;
     private int _currentSecond;
@@ -57,6 +58,7 @@ public class TimerManager : MonoBehaviour
     private void TimeOver()
     {
         // TODO: 승패 판정 메소드 호출
+        OnTimeOver?.Invoke();
         this.enabled = false;
     }
 }

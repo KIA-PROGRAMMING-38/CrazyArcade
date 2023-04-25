@@ -29,11 +29,13 @@ public class RoundManager : MonoBehaviour
     private void OnEnable()
     {
         PlayableCharacter.OnDie += CheckRoundEnded;
+        TimerManager.OnTimeOver += JudgeWinner;
     }
 
     private void OnDisable()
     {
         PlayableCharacter.OnDie -= CheckRoundEnded;
+        TimerManager.OnTimeOver -= JudgeWinner;
     }
 
 
