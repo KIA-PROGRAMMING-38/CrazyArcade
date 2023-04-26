@@ -6,11 +6,13 @@ public static class PlayersInfo
     {
         public RESULT result;
         public string name;
+        public int selectedCharacterId;
 
-        public PlayerInfo(RESULT _result, string _name)
+        public PlayerInfo(RESULT _result, string _name, int _characterId)
         {
             result = _result;
             name = _name;
+            selectedCharacterId = _characterId;
         }
     }
 
@@ -25,10 +27,11 @@ public static class PlayersInfo
     /// <param name="playerResult"></param>
     /// <param name="playerName"></param>
     /// <param name="player"></param>
-    public static void SavePlayeInfo(RESULT playerResult, string playerName, out PlayerInfo player)
+    public static void SavePlayerInfo(RESULT playerResult, string playerName, int cid, out PlayerInfo player)
     {
         player.result = playerResult;
         player.name = playerName;
+        player.selectedCharacterId = cid;
 
         AllPlayersInfo.Clear();
         AllPlayersInfo.Add(Player1Info);
@@ -59,6 +62,19 @@ public static class PlayersInfo
     {
         Player1Info.name = player1Name;
         Player2Info.name = player2Name;
+
+        AllPlayersInfo.Clear();
+        AllPlayersInfo.Add(Player1Info);
+        AllPlayersInfo.Add(Player2Info);
+    }
+
+    /// <summary>
+    /// 두 플레이어의 캐릭터를 저장
+    /// </summary>
+    public static void SavePlayerCharacter(int player1CID, int player2CID)
+    {
+        Player1Info.selectedCharacterId = player1CID;
+        Player2Info.selectedCharacterId = player2CID;
 
         AllPlayersInfo.Clear();
         AllPlayersInfo.Add(Player1Info);
