@@ -17,9 +17,22 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource bgmPlayer = null;
     [SerializeField] AudioSource[] sfxPlayer = null;
 
-    private void Start()
+    private int _currentIndex;
+    private void Awake()
     {
+        if (Instance != null)
+        {
+            if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+
+            return;
+        }
+
         Instance = this;
+
+        DontDestroyOnLoad(Instance);
     }
 
     public void PlayBGM(string p_bgmName)
@@ -51,16 +64,21 @@ public class AudioManager : MonoBehaviour
                     {
                         sfxPlayer[j].clip = sfx[i].clip;
                         sfxPlayer[j].Play();
+                        _currentIndex = j;
                         return;
                     }
                 }
-
-                Debug.Log("모든 오디오 플레이어가 재생 중입니다.");
+                Debug.Log("모든 오디오 플레이어가 재생중입니다.");
                 return;
             }
         }
 
         Debug.Log(p_sfxName + "이름의 효과음이 없습니다.");
         return;
+    }
+
+    public void Stop()
+    {
+        sfxPlayer[_currentIndex].Stop();
     }
 }

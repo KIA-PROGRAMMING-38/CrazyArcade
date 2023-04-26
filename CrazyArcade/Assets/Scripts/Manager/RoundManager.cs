@@ -26,6 +26,11 @@ public class RoundManager : MonoBehaviour
         _currentGameMode = GameManager.Instance.SelectedStage.GameMode;
     }
 
+    private void Start()
+    {
+        AudioManager.Instance.PlaySFX("game_start");
+    }
+
     private void OnEnable()
     {
         PlayableCharacter.OnDie += CheckRoundEnded;

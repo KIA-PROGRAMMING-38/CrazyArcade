@@ -144,6 +144,7 @@ public class PlayableCharacter : Character
             return;
         }
 
+        AudioManager.Instance.PlaySFX("set_bubble");
         Bubble newBubble = _bubblePool.bubblePool.Get();
         newBubble.SetBubble(bubblePosition, _status.Power);
     }

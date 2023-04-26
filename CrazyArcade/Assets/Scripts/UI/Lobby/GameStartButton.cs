@@ -16,6 +16,7 @@ public class GameStartButton : MonoBehaviour
 
     public void LoadStage()
     {
+        AudioManager.Instance.PlaySFX("click");
         SceneManager.LoadScene(GameManager.Instance.SelectedStage.StageNumber);
     }
 }

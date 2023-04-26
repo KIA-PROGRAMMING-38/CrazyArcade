@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// RoundManager -> 게임이 끝났을 때 -> 결과 정보들을 결과 UI Presenter 로 보내주고
-// 결과 UI에서 그 정보들을 바탕으로 세팅
 public class MapSelectionButton : MonoBehaviour
 {
     public MapData mapData;
@@ -21,6 +19,7 @@ public class MapSelectionButton : MonoBehaviour
 
     public void SetSelectedMapData()
     {
+        AudioManager.Instance.PlaySFX("click");
         _manager._selectedMapNumber = mapData.StageNumber;
         _manager.UpdateSelectedMap();
     }
