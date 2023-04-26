@@ -35,6 +35,11 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(Instance);
     }
 
+    private void Start()
+    {
+        Instance.PlayBGM("lobby_bgm");
+    }
+
     public void PlayBGM(string p_bgmName)
     {
         for(int i = 0; i < bgm.Length; ++i)

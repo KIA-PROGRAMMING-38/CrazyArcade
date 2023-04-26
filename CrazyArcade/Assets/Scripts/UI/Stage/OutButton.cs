@@ -20,6 +20,7 @@ public class OutButton : MonoBehaviour
     public void LoadLobby()
     {
         AudioManager.Instance.PlaySFX("click");
+        AudioManager.Instance.PlayBGM("lobby_bgm");
 
         GameObject roundManager = GameManager.Instance.transform.GetChild(0).gameObject;
         Destroy(roundManager);

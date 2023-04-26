@@ -201,7 +201,11 @@ public class PlayableCharacter : Character
     {
         base.Die();
         transform.root.GetChild(1).gameObject.SetActive(false);
-        //TODO: 승패 판정 관련해서 Die에서 이벤트 발생할지 고민..
         OnDie?.Invoke(this);
+    }
+
+    public void PlayPopSound()
+    {
+        AudioManager.Instance.PlaySFX("bubble_pop");
     }
 }

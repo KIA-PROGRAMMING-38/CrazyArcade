@@ -29,6 +29,7 @@ public class RoundManager : MonoBehaviour
     private void Start()
     {
         AudioManager.Instance.PlaySFX("game_start");
+        AudioManager.Instance.PlayBGM(GameManager.Instance.SelectedStage.name);
     }
 
     private void OnEnable()
@@ -104,5 +105,6 @@ public class RoundManager : MonoBehaviour
         GameObject roundManager = GameManager.Instance.transform.GetChild(0).gameObject;
         Destroy(roundManager);
         SceneManager.LoadScene(LOBBY_SCENE_NUMBER);
+        AudioManager.Instance.PlayBGM("lobby_bgm");
     }
 }

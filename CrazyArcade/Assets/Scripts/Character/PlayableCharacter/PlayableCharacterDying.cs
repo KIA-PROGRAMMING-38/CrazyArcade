@@ -16,6 +16,7 @@ public class PlayableCharacterDying : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        AudioManager.Instance.PlaySFX("dying");
         // 속도 변화
         _status = animator.GetComponent<Status>();
         _status.SpeedDebuff = true;
