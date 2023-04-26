@@ -15,5 +15,6 @@ public class GameManager : SingletoneBehaviour<GameManager>
         ItemActions.SaveActions();
 
         PlayersInfo.SavePlayersName("플레이어 1", "플레이어 2");
+        PlayersInfo.SavePlayerCharacter("0", "0");
     }
 }

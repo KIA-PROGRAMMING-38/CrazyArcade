@@ -29,9 +29,8 @@ public class PlayersInfoUI : MonoBehaviour
         for(int i = 0; i < _playersCount; ++i)
         {
             GameObject player = _playerSlots[i];
-            Sprite[] sprites = Resources.LoadAll<Sprite>("CharacterData/Stand/" + "bazzi");
 
-            player.GetComponentInChildren<Image>().sprite = sprites[5];
+            player.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("CharacterData/Stand/" + PlayersInfo.AllPlayersInfo[i].selectedCharacterId);
             player.GetComponentInChildren<Text>().text = PlayersInfo.AllPlayersInfo[i].name;
         }
     }

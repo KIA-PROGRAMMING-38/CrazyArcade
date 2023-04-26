@@ -6,9 +6,9 @@ public static class PlayersInfo
     {
         public RESULT result;
         public string name;
-        public int selectedCharacterId;
+        public string selectedCharacterId;
 
-        public PlayerInfo(RESULT _result, string _name, int _characterId)
+        public PlayerInfo(RESULT _result, string _name, string _characterId)
         {
             result = _result;
             name = _name;
@@ -27,7 +27,7 @@ public static class PlayersInfo
     /// <param name="playerResult"></param>
     /// <param name="playerName"></param>
     /// <param name="player"></param>
-    public static void SavePlayerInfo(RESULT playerResult, string playerName, int cid, out PlayerInfo player)
+    public static void SavePlayerInfo(RESULT playerResult, string playerName, string cid, out PlayerInfo player)
     {
         player.result = playerResult;
         player.name = playerName;
@@ -71,7 +71,7 @@ public static class PlayersInfo
     /// <summary>
     /// 두 플레이어의 캐릭터를 저장
     /// </summary>
-    public static void SavePlayerCharacter(int player1CID, int player2CID)
+    public static void SavePlayerCharacter(string player1CID, string player2CID)
     {
         Player1Info.selectedCharacterId = player1CID;
         Player2Info.selectedCharacterId = player2CID;
