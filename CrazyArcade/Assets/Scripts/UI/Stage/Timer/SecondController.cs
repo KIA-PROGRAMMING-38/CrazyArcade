@@ -9,7 +9,7 @@ public class SecondController : MonoBehaviour
     private void Awake()
     {
         _secondText = GetComponent<Text>();
-        _second = 00;
+        _second = 0;
     }
 
     private void OnEnable()
