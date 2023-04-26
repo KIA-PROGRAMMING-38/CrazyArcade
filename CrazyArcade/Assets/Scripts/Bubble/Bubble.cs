@@ -60,6 +60,7 @@ public class Bubble : MonoBehaviour
 
     public void Boom()
     {
+        AudioManager.Instance.PlaySFX("boom");
         StartCoroutine(_generateBubbleEffect);
         gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
     }

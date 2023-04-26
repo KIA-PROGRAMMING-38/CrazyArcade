@@ -26,6 +26,12 @@ public class RoundManager : MonoBehaviour
         _currentGameMode = GameManager.Instance.SelectedStage.GameMode;
     }
 
+    private void Start()
+    {
+        AudioManager.Instance.PlaySFX("game_start");
+        AudioManager.Instance.PlayBGM(GameManager.Instance.SelectedStage.name);
+    }
+
     private void OnEnable()
     {
         PlayableCharacter.OnDie += CheckRoundEnded;
@@ -99,5 +105,6 @@ public class RoundManager : MonoBehaviour
         GameObject roundManager = GameManager.Instance.transform.GetChild(0).gameObject;
         Destroy(roundManager);
         SceneManager.LoadScene(LOBBY_SCENE_NUMBER);
+        AudioManager.Instance.PlayBGM("lobby_bgm");
     }
 }

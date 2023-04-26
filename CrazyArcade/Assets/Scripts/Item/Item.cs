@@ -4,7 +4,10 @@ using UnityEngine.Pool;
 public abstract class Item : MonoBehaviour, IPickupable, IRemovable
 {
     public ItemData itemData;
-    public abstract void Pickup(GameObject character);
+    public virtual void Pickup(GameObject character)
+    {
+        AudioManager.Instance.PlaySFX("pickup_item");
+    }
 
     public virtual void Remove()
     {

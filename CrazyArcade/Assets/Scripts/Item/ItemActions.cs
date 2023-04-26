@@ -12,6 +12,7 @@ public static class ItemActions
 
     private static void NiddleAction(Character useCharacter)
     {
+        AudioManager.Instance.PlaySFX("bubble_pop");
         useCharacter.GetComponent<Animator>().SetTrigger(PlayableCharacter.PlayerAnimID.REVIVAL);
     }
 }

@@ -34,15 +34,18 @@ public class ResultLabel : MonoBehaviour
                 if(PlayersInfo.Player1Info.result == RESULT.Win)
                 {
                     _label.sprite = LabelSprites[0];
+                    AudioManager.Instance.PlaySFX("win");
                 }
                 else if(PlayersInfo.Player2Info.result == RESULT.Win)
                 {
                     _label.sprite = LabelSprites[1];
+                    AudioManager.Instance.PlaySFX("win");
                 }
                 else if(PlayersInfo.Player1Info.result == RESULT.Draw)
                 {
                     _label.rectTransform.sizeDelta = _logoSize;
                     _label.sprite = LabelSprites[3];
+                    AudioManager.Instance.PlaySFX("draw");
                 }
                 break;
 
@@ -52,14 +55,17 @@ public class ResultLabel : MonoBehaviour
                 if (PlayersInfo.Player1Info.result == RESULT.Win)
                 {
                     _label.sprite = LabelSprites[2];
+                    AudioManager.Instance.PlaySFX("win");
                 }
                 else if(PlayersInfo.Player1Info.result == RESULT.Draw)
                 {
                     _label.sprite = LabelSprites[3];
+                    AudioManager.Instance.PlaySFX("draw");
                 }
                 else if(PlayersInfo.Player1Info.result == RESULT.Lose)
                 {
                     _label.sprite = LabelSprites[4];
+                    AudioManager.Instance.PlaySFX("lose");
                 }
                 break;
         }
