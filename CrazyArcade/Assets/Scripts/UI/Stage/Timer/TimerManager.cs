@@ -25,6 +25,7 @@ public class TimerManager : MonoBehaviour
         }
     }
 
+    private const int _limitTime = 3;
     private void CountTime()
     {
         _currentSecond += 1;
@@ -42,9 +43,10 @@ public class TimerManager : MonoBehaviour
             _currentSecond = 0;
             _currentMinute += 1;
             
-            if(_currentMinute == 1)
+            if(_currentMinute == _limitTime)
             {
                 TimeOver();
+                return;
             }
 
             OnMinuteUpdate?.Invoke();
