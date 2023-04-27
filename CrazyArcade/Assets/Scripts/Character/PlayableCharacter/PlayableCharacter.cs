@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayableCharacter : Character
 {
-    public static event Action<Character> OnDie;
-
     private RoundManager _roundManager;
 
     private Status _status;
@@ -202,7 +200,6 @@ public class PlayableCharacter : Character
     {
         base.Die();
         transform.root.GetChild(1).gameObject.SetActive(false);
-        OnDie?.Invoke(this);
     }
 
     public void PlayPopSound()

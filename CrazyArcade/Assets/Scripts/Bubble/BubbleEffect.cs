@@ -40,6 +40,9 @@ public class BubbleEffect : MonoBehaviour
         IRemovable removableObj = collision.GetComponent<IRemovable>();
         removableObj?.Remove();
 
+        IDamageable dmgObj = collision.GetComponent<IDamageable>();
+        dmgObj?.Hit();
+
         if(collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayableCharacter>().ReadyDie();

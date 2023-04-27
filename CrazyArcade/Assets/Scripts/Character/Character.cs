@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    public static event Action<Character> OnDie;
     public virtual void Move()
     {
         
@@ -14,6 +16,6 @@ public class Character : MonoBehaviour
 
     public virtual void Die()
     {
-        
+        OnDie?.Invoke(this);
     }
 }
