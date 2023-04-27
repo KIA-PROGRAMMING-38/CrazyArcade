@@ -86,9 +86,20 @@ public class BossMonster : Monster, IDamageable
 
     }
 
-    public override void OnTriggerEnter2D(Collider2D collision)
+    private bool _isDying;
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        base.OnTriggerEnter2D(collision);
+        if (collision.gameObject.layer == Layers.PLAYER)
+        {
+            if (_isDying == false)
+            {
+                collision.GetComponent<PlayableCharacter>().ImmediatelyDie();
+            }
+            else
+            {
+                _animator.SetTrigger(BossAnimID.DIE);
+            }
+        }
 
         if (collision.gameObject.layer == Layers.BUBBLE)
         {
@@ -105,6 +116,7 @@ public class BossMonster : Monster, IDamageable
         {
             Hp = 0;
             _animator.SetTrigger(BossAnimID.LAST_HIT);
+            _isDying = true;
         }
     }
 }
