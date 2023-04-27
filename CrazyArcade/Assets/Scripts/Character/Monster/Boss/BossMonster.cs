@@ -9,6 +9,7 @@ public class BossMonster : Monster
         public static readonly int VERTICAL = Animator.StringToHash("vertical");
         public static readonly int SET_IDLE = Animator.StringToHash("setIdle");
         public static readonly int SET_WALK = Animator.StringToHash("setWalk");
+        public static readonly int DAMAGED = Animator.StringToHash("damaged");
     }
 
     public enum BEHAVIOUR_TYPE
@@ -75,6 +76,16 @@ public class BossMonster : Monster
             yield return _decideInterval;
         }
 
+    }
+
+    public override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+
+        if (collision.CompareTag("BubbleEffect"))
+        {
+            _animator.SetTrigger(BossAnimID.DAMAGED);
+        }
     }
 }
 
