@@ -19,11 +19,16 @@ public class RoundManager : MonoBehaviour
     public Canvas ResultCanvas;
 
     private GAME_MODE _currentGameMode;
+    private int _currentMapNumber;
+    private GameObject _mapPrefab;
 
     private void Awake()
     {
         transform.SetParent(GameManager.Instance.transform);
         _currentGameMode = GameManager.Instance.SelectedStage.GameMode;
+        _currentMapNumber = GameManager.Instance.SelectedStage.StageNumber;
+        _mapPrefab = Resources.Load<GameObject>("Maps/Map" + _currentMapNumber);
+        Instantiate(_mapPrefab);
     }
 
     private void Start()
