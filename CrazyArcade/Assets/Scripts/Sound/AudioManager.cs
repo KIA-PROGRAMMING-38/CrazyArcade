@@ -73,7 +73,6 @@ public class AudioManager : MonoBehaviour
                         return;
                     }
                 }
-                Debug.Log("모든 오디오 플레이어가 재생중입니다.");
                 return;
             }
         }

@@ -82,9 +82,20 @@ public class RoundManager : MonoBehaviour
                 break;
 
             case GAME_MODE.Monster:
-                if(_team1Count > 0)
+                if(_team1Count > 0 && _team2Count == 0)
                 {
                     Debug.Log("Players win");
+                    PlayersInfo.SavePlayersResult(RESULT.Win, RESULT.Win);
+                }
+                else if(_team1Count == 0)
+                {
+                    Debug.Log("Monster Win");
+                    PlayersInfo.SavePlayersResult(RESULT.Lose, RESULT.Lose);
+                }
+                else
+                {
+                    Debug.Log("DRAW");
+                    PlayersInfo.SavePlayersResult(RESULT.Draw, RESULT.Draw);
                 }
 
                 break;
