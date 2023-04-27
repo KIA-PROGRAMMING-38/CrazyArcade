@@ -86,6 +86,11 @@ public class BossMonster : Monster
         {
             _animator.SetTrigger(BossAnimID.DAMAGED);
         }
+
+        if(collision.gameObject.layer == Layers.BUBBLE)
+        {
+            collision.GetComponentInChildren<Bubble>().Boom();
+        }
     }
 }
 
