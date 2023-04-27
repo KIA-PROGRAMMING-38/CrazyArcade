@@ -194,6 +194,7 @@ public class PlayableCharacter : Character
 
     public void ImmediatelyDie()
     {
+        _status.MoveRestrict = true;
         _animator.SetTrigger(PlayerAnimID.IS_DIE);
     }
 
