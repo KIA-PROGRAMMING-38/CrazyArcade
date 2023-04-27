@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class BossMonster : Monster, IDamageable
 {
+    private BossMonsterHPBar _hpBar;
     public static class BossAnimID
     {
         public static readonly int HORIZONTAL = Animator.StringToHash("horizontal");
@@ -22,7 +23,9 @@ public class BossMonster : Monster, IDamageable
         WALK
     }
 
-    public int Hp = 3;
+
+    public int Hp = 13;
+    public int MaxHp = 13;
 
     private IEnumerator _decideNextBehaviour;
     private WaitForSeconds _decideInterval = new WaitForSeconds(3f);
@@ -33,6 +36,9 @@ public class BossMonster : Monster, IDamageable
     private void Awake()
     {
         _numOfBehaviours = System.Enum.GetValues(typeof(BEHAVIOUR_TYPE)).Length;
+        _hpBar = GetComponentInChildren<BossMonsterHPBar>();
+        Hp = MaxHp;
+        _hpBar.UpdateHPBar(Hp / (float)MaxHp);
         _animator = GetComponent<Animator>();
         _decideNextBehaviour = DecideNextBehaviour();
         StartCoroutine(_decideNextBehaviour);
@@ -118,6 +124,8 @@ public class BossMonster : Monster, IDamageable
             _animator.SetTrigger(BossAnimID.LAST_HIT);
             _isDying = true;
         }
+        float ratio = Hp / (float)MaxHp;
+        _hpBar.UpdateHPBar(ratio);
     }
 }
 
