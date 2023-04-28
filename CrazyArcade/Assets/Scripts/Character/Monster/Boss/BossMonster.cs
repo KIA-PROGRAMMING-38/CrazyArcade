@@ -14,6 +14,7 @@ public class BossMonster : Monster, IDamageable
         public static readonly int LAST_HIT = Animator.StringToHash("lastHit");
         public static readonly int DIE = Animator.StringToHash("die");
         public static readonly int ROLL = Animator.StringToHash("roll");
+        public static readonly int SHOOT = Animator.StringToHash("shoot");
     }
 
     public enum BEHAVIOUR_TYPE
@@ -83,6 +84,12 @@ public class BossMonster : Monster, IDamageable
             case (int)BEHAVIOUR_TYPE.ROLL:
                 _animator.ResetTrigger(_currentTrigger);
                 _currentTrigger = BossAnimID.ROLL;
+                _animator.SetTrigger(_currentTrigger);
+                break;
+
+            case (int)BEHAVIOUR_TYPE.SHOOT:
+                _animator.ResetTrigger(_currentTrigger);
+                _currentTrigger = BossAnimID.SHOOT;
                 _animator.SetTrigger(_currentTrigger);
                 break;
         }
