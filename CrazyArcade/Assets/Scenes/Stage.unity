@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _progressbar: {fileID: 926778713}
+  _progressbarRed: {fileID: 21300000, guid: 7b7bca114a1e4d94f90b1e1e7c3bf5ed, type: 3}
   _boss: {fileID: 222111161}
 --- !u!1 &99926513 stripped
 GameObject:
