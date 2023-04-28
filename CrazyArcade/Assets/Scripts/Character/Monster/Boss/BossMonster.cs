@@ -1,14 +1,20 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class BossMonster : Monster
+public class BossMonster : Monster, IDamageable
 {
+    private BossMonsterHPBar _hpBar;
     public static class BossAnimID
     {
         public static readonly int HORIZONTAL = Animator.StringToHash("horizontal");
         public static readonly int VERTICAL = Animator.StringToHash("vertical");
         public static readonly int SET_IDLE = Animator.StringToHash("setIdle");
         public static readonly int SET_WALK = Animator.StringToHash("setWalk");
+        public static readonly int DAMAGED = Animator.StringToHash("damaged");
+        public static readonly int LAST_HIT = Animator.StringToHash("lastHit");
+        public static readonly int DIE = Animator.StringToHash("die");
     }
 
     public enum BEHAVIOUR_TYPE
@@ -17,7 +23,9 @@ public class BossMonster : Monster
         WALK
     }
 
-    public int Hp { get; private set; } = 10;
+
+    public int Hp = 13;
+    public int MaxHp = 13;
 
     private IEnumerator _decideNextBehaviour;
     private WaitForSeconds _decideInterval = new WaitForSeconds(3f);
@@ -28,7 +36,9 @@ public class BossMonster : Monster
     private void Awake()
     {
         _numOfBehaviours = System.Enum.GetValues(typeof(BEHAVIOUR_TYPE)).Length;
-        _currentBehaviourCount = new int[_numOfBehaviours];
+        _hpBar = GetComponentInChildren<BossMonsterHPBar>();
+        Hp = MaxHp;
+        _hpBar.UpdateHPBar(Hp / (float)MaxHp);
         _animator = GetComponent<Animator>();
         _decideNextBehaviour = DecideNextBehaviour();
         StartCoroutine(_decideNextBehaviour);
@@ -46,10 +56,15 @@ public class BossMonster : Monster
 
     }
 
+    public override void Die()
+    {
+        base.Die();
+        gameObject.SetActive(false);
+    }
+
     private int _currentTrigger;
     private int _behaviourType;
     private int _numOfBehaviours;
-    private int[] _currentBehaviourCount;
     private IEnumerator DecideNextBehaviour()
     {
         while (true)
@@ -75,6 +90,42 @@ public class BossMonster : Monster
             yield return _decideInterval;
         }
 
+    }
+
+    private bool _isDying;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == Layers.PLAYER)
+        {
+            if (_isDying == false)
+            {
+                collision.GetComponent<PlayableCharacter>().ImmediatelyDie();
+            }
+            else
+            {
+                _animator.SetTrigger(BossAnimID.DIE);
+            }
+        }
+
+        if (collision.gameObject.layer == Layers.BUBBLE)
+        {
+            collision.GetComponentInChildren<Bubble>().Boom();
+        }
+    }
+
+    public void Hit()
+    {
+        _animator.SetTrigger(BossAnimID.DAMAGED);
+        Hp -= 1;
+
+        if(Hp <= 0)
+        {
+            Hp = 0;
+            _animator.SetTrigger(BossAnimID.LAST_HIT);
+            _isDying = true;
+        }
+        float ratio = Hp / (float)MaxHp;
+        _hpBar.UpdateHPBar(ratio);
     }
 }
 

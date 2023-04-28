@@ -4,6 +4,7 @@ public class BossWalkBehaviour : StateMachineBehaviour
 {
     private enum DIRECTION
     {
+        None,
         Up,
         Down,
         Left,
@@ -33,13 +34,19 @@ public class BossWalkBehaviour : StateMachineBehaviour
 
     private float _speed = 0.8f;
     private Vector2 _direction;
-    private DIRECTION _preDir;
+    private DIRECTION _prehitDir;
     private DIRECTION _curDir;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // 이동 방향 정하기
-        _curDir = (DIRECTION)Random.Range(0, 3);
+        while(true)
+        {
+            _curDir = (DIRECTION)Random.Range(1, 5);
+
+            if (_curDir != _prehitDir)
+                break;
+        }
         _direction = GetDirVec(_curDir);
         animator.SetFloat(BossMonster.BossAnimID.HORIZONTAL, _direction.x);
         animator.SetFloat(BossMonster.BossAnimID.VERTICAL, _direction.y);
@@ -53,12 +60,12 @@ public class BossWalkBehaviour : StateMachineBehaviour
         RaycastHit2D hit = Physics2D.Raycast(animator.transform.position, _direction, 2f, Layers.STAGEOBJ_LAYERMASK);
         if(hit.collider != null)
         {
+            _prehitDir = _curDir;
             animator.SetTrigger(BossMonster.BossAnimID.SET_IDLE);
         }
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _preDir = _curDir;
     }
 }
