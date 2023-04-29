@@ -13,6 +13,7 @@ public class BossDieBehaviour : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        AudioManager.Instance.PlaySFX("bubble_pop");
         _spriteRenderer = animator.gameObject.GetComponent<SpriteRenderer>();
         _lightColor = _spriteRenderer.material.color;
         _darkColor = new Color(0.8f, 0.8f, 0.8f);

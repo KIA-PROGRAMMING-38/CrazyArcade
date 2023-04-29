@@ -52,11 +52,6 @@ public static class MapManager
                         isBlock = true;
                     }
 
-                    //if(x == 0 || y == 0)
-                    //{
-                    //    isEdge = true;
-                    //}
-
                     if (x < 0 || y < 0)
                     {
                         isOut = true;
@@ -92,11 +87,6 @@ public static class MapManager
             {
                 isBlock = true;
             }
-
-            //if (x == 0 || y == 0)
-            //{
-            //    isEdge = true;
-            //}
 
             if (x < 0 || y < 0)
             {

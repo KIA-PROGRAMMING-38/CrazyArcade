@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.028301895, g: 0.006585974, b: 0.006585974, a: 1}
+    m_PressedColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
     m_SelectedColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1.22
@@ -3548,6 +3548,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 3626b469439f5084f8abe4fa04fe88d4, type: 3}
   - name: lose
     clip: {fileID: 8300000, guid: 10241d55a40f39545a5bd3a3b5cb76ae, type: 3}
+  - name: boss_attack
+    clip: {fileID: 8300000, guid: 4b00bb5f8e470cb438493d7247bfb8dc, type: 3}
+  - name: boss_hit
+    clip: {fileID: 8300000, guid: a2109ceeadcc9314090085df01200165, type: 3}
+  - name: boss_idle
+    clip: {fileID: 8300000, guid: 0b6ff3275a3d45048a12d295fd6dd902, type: 3}
   bgm:
   - name: lobby_bgm
     clip: {fileID: 8300000, guid: 6b09d5ea70bac7043b1ee7df5a469112, type: 3}

@@ -8,4 +8,5 @@ public static class Layers
 
     // LayerMask
     public static readonly int STAGEOBJ_LAYERMASK = LayerMask.GetMask("StageObject");
+    public static readonly int BOSS_LAYERMASK = LayerMask.GetMask("Boss");
 }

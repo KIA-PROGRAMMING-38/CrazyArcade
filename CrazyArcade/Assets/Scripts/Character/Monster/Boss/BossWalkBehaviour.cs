@@ -36,6 +36,9 @@ public class BossWalkBehaviour : StateMachineBehaviour
     private Vector2 _direction;
     private DIRECTION _prehitDir;
     private DIRECTION _curDir;
+    private float _elapsedTime;
+    private float _moveTime;
+    private float _deltaTime;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -50,11 +53,22 @@ public class BossWalkBehaviour : StateMachineBehaviour
         _direction = GetDirVec(_curDir);
         animator.SetFloat(BossMonster.BossAnimID.HORIZONTAL, _direction.x);
         animator.SetFloat(BossMonster.BossAnimID.VERTICAL, _direction.y);
+
+        // 이동 시간 정하기
+        _moveTime = Random.Range(3, 6);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.transform.Translate(_direction * (Time.deltaTime * _speed));
+        _deltaTime = Time.deltaTime;
+        _elapsedTime += _deltaTime;
+
+        if(_elapsedTime >= _moveTime)
+        {
+            animator.GetComponent<BossMonster>().DecideNextBehaviour();
+        }
+
+        animator.transform.Translate(_direction * (_deltaTime * _speed));
 
         // 맵의 끝에 도달하는 경우 IDLE로 전이
         RaycastHit2D hit = Physics2D.Raycast(animator.transform.position, _direction, 2f, Layers.STAGEOBJ_LAYERMASK);
@@ -67,5 +81,6 @@ public class BossWalkBehaviour : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _elapsedTime = 0f;
     }
 }
