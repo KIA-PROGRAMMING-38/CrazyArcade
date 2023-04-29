@@ -176,7 +176,7 @@ public class BossMonster : Monster, IDamageable
     {
         while(true)
         {
-            for(int index = 0; index < 8; ++index)
+            for(int index = 0; index < 9; ++index)
             {
                 BossBubble newBossBubble = Instantiate(_bossBubble);
                 newBossBubble.SetDestPosition(index);

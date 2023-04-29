@@ -942,7 +942,7 @@ GameObject:
   - component: {fileID: 6522429859064871981}
   - component: {fileID: 6898778970054361181}
   - component: {fileID: 9106837653575233645}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Boss_Seal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
