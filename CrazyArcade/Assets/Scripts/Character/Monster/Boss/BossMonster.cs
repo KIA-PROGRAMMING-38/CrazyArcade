@@ -15,6 +15,7 @@ public class BossMonster : Monster, IDamageable
     private string _dieScript = "²Ù¾û~";
 
     private bool _introScriptEnd = false;
+    private bool _isGameEnded = false;
 
     [SerializeField] BossBubble _bossBubble;
     private BossMonsterHPBar _hpBar;
@@ -66,6 +67,22 @@ public class BossMonster : Monster, IDamageable
         Invoke("StartPrintIntroScripts", 1.5f);
     }
 
+    private void OnEnable()
+    {
+        RoundManager.OnGameEnd += CheckGameEnd;
+    }
+
+    private void OnDisable()
+    {
+        RoundManager.OnGameEnd -= CheckGameEnd;
+    }
+
+    private void CheckGameEnd()
+    {
+        _animator.SetTrigger(BossAnimID.SET_IDLE);
+        _isGameEnded = true;
+    }
+
     public override void Die()
     {
         base.Die();
@@ -78,7 +95,7 @@ public class BossMonster : Monster, IDamageable
     private int _numOfBehaviours;
     public void DecideNextBehaviour()
     {
-        if (_introScriptEnd == false)
+        if (_introScriptEnd == false || _isGameEnded == true)
             return;
 
         while (_behaviourType == _preBehaviourType)
