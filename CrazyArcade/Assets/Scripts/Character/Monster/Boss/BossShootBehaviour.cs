@@ -11,19 +11,16 @@ public class BossShootBehaviour : StateMachineBehaviour
         if (stateInfo.normalizedTime >= 1.0f)
         {
             ++_loopCount;
-            if(_loopCount % 3  == 0)
+            if(_loopCount == 3)
             {
-                animator.GetComponent<BossMonster>().DecideNextBehaviour();
+                _loopCount = 0;
+                animator.GetComponent<BossMonster>().Shoot();
+                animator.SetTrigger(BossMonster.BossAnimID.SET_IDLE);
             }
             else
             {
                 animator.Play(stateInfo.fullPathHash, layerIndex, 0f);
             }
         }
-    }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
     }
 }

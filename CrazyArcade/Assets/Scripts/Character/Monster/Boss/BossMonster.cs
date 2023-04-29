@@ -1,8 +1,11 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BossMonster : Monster, IDamageable
 {
+    [SerializeField] BossBubble _bossBubble;
     private BossMonsterHPBar _hpBar;
     public static class BossAnimID
     {
@@ -40,12 +43,18 @@ public class BossMonster : Monster, IDamageable
         _hpBar.UpdateHPBar(Hp / (float)MaxHp);
         _animator = GetComponent<Animator>();
         _preBehaviourType = 0;
+        _shoot = ShootCoroutine();
     }
 
     private void Start()
     {
         _roundManager = GameManager.Instance.GetComponentInChildren<RoundManager>();
         _roundManager.SurvivePlayersTeam2.Add(this);
+    }
+
+    private void Update()
+    {
+        _isHit = false;
     }
 
     public override void Die()
@@ -116,9 +125,14 @@ public class BossMonster : Monster, IDamageable
         }
     }
 
+    private bool _isHit;
     public void Hit()
     {
+        if (_isHit == true)
+            return; 
+
         _animator.SetTrigger(BossAnimID.DAMAGED);
+        _isHit = true;
         Hp -= 1;
 
         if (Hp <= 0)
@@ -130,6 +144,31 @@ public class BossMonster : Monster, IDamageable
 
         float ratio = Hp / (float)MaxHp;
         _hpBar.UpdateHPBar(ratio);
+    }
+
+    private IEnumerator _shoot;
+    private WaitForSeconds _shootInterval = new WaitForSeconds(0.3f);
+    private IEnumerator ShootCoroutine()
+    {
+        while(true)
+        {
+            for(int index = 0; index < 8; ++index)
+            {
+                // TODO: BossBubble 프리팹 생성하기
+                BossBubble newBossBubble = Instantiate(_bossBubble);
+                newBossBubble.SetDestPosition(index);
+            
+                yield return _shootInterval;
+            }
+
+            StopCoroutine(_shoot);
+            yield return null;
+        }
+    }
+
+    public void Shoot()
+    {
+        StartCoroutine(_shoot);
     }
 }
 
