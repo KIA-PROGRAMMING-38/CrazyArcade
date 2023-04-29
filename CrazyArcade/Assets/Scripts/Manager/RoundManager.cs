@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -71,11 +72,11 @@ public class RoundManager : MonoBehaviour
         switch(_currentGameMode)
         {
             case GAME_MODE.One_on_one:
-                if(_team1Count > 0 && _team2Count == 0)
+                if(SurvivePlayersTeam1.Count > 0 && SurvivePlayersTeam2.Count == 0)
                 {
                     PlayersInfo.SavePlayersResult(RESULT.Win, RESULT.Lose);
                 }
-                else if(_team2Count > 0 && _team1Count == 0)
+                else if(SurvivePlayersTeam2.Count > 0 && SurvivePlayersTeam1.Count == 0)
                 {
                     PlayersInfo.SavePlayersResult(RESULT.Lose, RESULT.Win);
                 }
@@ -87,12 +88,12 @@ public class RoundManager : MonoBehaviour
                 break;
 
             case GAME_MODE.Monster:
-                if(_team1Count > 0 && _team2Count == 0)
+                if(SurvivePlayersTeam1.Count > 0 && SurvivePlayersTeam2.Count == 0)
                 {
                     Debug.Log("Players win");
                     PlayersInfo.SavePlayersResult(RESULT.Win, RESULT.Win);
                 }
-                else if(_team1Count == 0)
+                else if(SurvivePlayersTeam1.Count == 0)
                 {
                     Debug.Log("Monster Win");
                     PlayersInfo.SavePlayersResult(RESULT.Lose, RESULT.Lose);

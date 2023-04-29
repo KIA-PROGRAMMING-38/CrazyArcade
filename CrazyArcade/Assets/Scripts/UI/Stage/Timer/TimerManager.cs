@@ -25,7 +25,7 @@ public class TimerManager : MonoBehaviour
         }
     }
 
-    private const int _limitTime = 3;
+    private const int _limitTime = 1;
     private void CountTime()
     {
         _currentSecond += 1;

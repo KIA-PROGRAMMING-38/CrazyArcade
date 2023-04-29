@@ -9,7 +9,7 @@ public class MinuteController : MonoBehaviour
     private void Awake()
     {
         _minuteText = GetComponent<Text>();
-        _minute = 3;
+        _minute = 1;
     }
 
     private void OnEnable()

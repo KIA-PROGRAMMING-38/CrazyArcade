@@ -61,7 +61,7 @@ public class BossBubble : MonoBehaviour
     {
         _dest = _shootPositions[positionIndex];
 
-        Collider2D hit = Physics2D.OverlapBox(_dest, new Vector2(1.5f, 1.5f), 0, Layers.BOSS_LAYERMASK);
+        Collider2D hit = Physics2D.OverlapBox(_dest, new Vector2(2.5f, 2.5f), 0, Layers.BOSS_LAYERMASK);
         if(hit != null)
         {
             Destroy(gameObject);
