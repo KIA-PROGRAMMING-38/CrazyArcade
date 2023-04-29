@@ -12,7 +12,7 @@ public class BossMonsterHPBar : MonoBehaviour
         Vector3 pos = _boss.bounds.center;
         pos.y = _boss.bounds.max.y;
 
-        transform.position = pos + Vector3.up;
+        transform.position = pos + Vector3.up * 0.4f;
     }
 
     public void UpdateHPBar(float ratio)

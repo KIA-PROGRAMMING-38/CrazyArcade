@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -9,10 +10,6 @@ class ScriptPrinter : MonoBehaviour
     private TextMeshProUGUI _text;
     private Camera _mainCamera;
     [SerializeField] private BossMonster _boss;
-
-    private string[] _hitScripts;
-    private string[] _attackScripts;
-    private string[] _idleScripts;
 
     private string _currentScript;
 
@@ -39,7 +36,7 @@ class ScriptPrinter : MonoBehaviour
 
     private void Update()
     {
-        Vector3 pos = _boss.transform.position + (Vector3.up * 3.2f);
+        Vector3 pos = _boss.transform.position + (Vector3.up * 2.5f);
         pos = _mainCamera.WorldToScreenPoint(pos);
         transform.position = pos;
         if(_isActive)
@@ -52,23 +49,6 @@ class ScriptPrinter : MonoBehaviour
                 _textObject.SetActive(false);
             }
         }
-    }
-
-    void OnAttack()
-    {
-        // 랜덤 스크립트 재생
-        PrintRandomScripts(_attackScripts);
-    }
-
-    void OnHit()
-    {
-        // 랜덤 스크립트 재생
-        PrintRandomScripts(_hitScripts);
-    }
-
-    void OnIdle()
-    {
-       PrintRandomScripts(_idleScripts);
     }
 
     void PrintRandomScripts(string[] scripts)

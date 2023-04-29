@@ -7,11 +7,14 @@ public class BossMonster : Monster, IDamageable
 {
     public static event Action<string[]> OnSpeak;
     private ScriptPrinter _printer;
+    private string[] _introScript = { "³ª´Â ÂøÇÑ ¹°°³´ë¿ÕÀÌ¾ß", "°í¿î ¸»¸¸ ¾²°í", "²É¿¡ ¹°µµ ÁØ´Ü´Ù"};
     private string[] _rollScripts = { "µù±¼µù±¼µù±¼~", "ÂøÇÑ ¹°°³ ²É¹ç ´ÙÁö±â!", "ÇÊ»ì °ø°Ý!!! Ç®¹ç µß±¸¸£±â!!" };
     private string[] _shootScripts = { "ÂøÇÑ ¹°°³ ²É¹ç ¹°ÁÖ±â!!!", "¹°ÆøÅº¾Æ ½ñ¾ÆÁ®¶ó~!!", "¸À Á» ºÁ¶ó!!" };
     private string[] _normalScripts = { "³­ ´«¶ß°í ÀÚ~", "·ê·ç·ç~", "Á¶½ÉÇÏ´Â °ÍÀÌ ÁÁ¾Æ!", "³­ Á¤¸» ÂøÇØ~" };
     private string[] _hitScripts = { "À¸À¸À¸À¸~~~", "¾Ñ µû°Å~", "¿¡±¸±Ã", "ÂøÇÏ´Ï Âü´Â´Ù~" };
     private string _dieScript = "²Ù¾û~";
+
+    private bool _introScriptEnd = false;
 
     [SerializeField] BossBubble _bossBubble;
     private BossMonsterHPBar _hpBar;
@@ -59,6 +62,8 @@ public class BossMonster : Monster, IDamageable
     {
         _roundManager = GameManager.Instance.GetComponentInChildren<RoundManager>();
         _roundManager.SurvivePlayersTeam2.Add(this);
+
+        Invoke("StartPrintIntroScripts", 1.5f);
     }
 
     public override void Die()
@@ -73,7 +78,10 @@ public class BossMonster : Monster, IDamageable
     private int _numOfBehaviours;
     public void DecideNextBehaviour()
     {
-        while(_behaviourType == _preBehaviourType)
+        if (_introScriptEnd == false)
+            return;
+
+        while (_behaviourType == _preBehaviourType)
         {
             _behaviourType = Random.Range(0, _numOfBehaviours);
         }
@@ -184,6 +192,24 @@ public class BossMonster : Monster, IDamageable
     public void Shoot()
     {
         StartCoroutine(_shoot);
+    }
+
+    private WaitForSeconds _introScriptInterval = new WaitForSeconds(2f);
+    public void StartPrintIntroScripts()
+    {
+        StartCoroutine(PrintScriptsSequence());
+    }
+
+    private IEnumerator PrintScriptsSequence()
+    {
+        for (int i = 0; i < _introScript.Length; ++i)
+        {
+            _printer.PrintScript(_introScript[i]);
+            yield return _introScriptInterval;
+        }
+
+        _animator.SetTrigger(BossAnimID.SHOOT);
+        _introScriptEnd = true;
     }
 }
 
