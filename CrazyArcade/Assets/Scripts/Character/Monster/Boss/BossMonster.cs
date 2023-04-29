@@ -1,10 +1,18 @@
+using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BossMonster : Monster, IDamageable
 {
+    public static event Action<string[]> OnSpeak;
+    private ScriptPrinter _printer;
+    private string[] _rollScripts = { "µù±¼µù±¼µù±¼~", "ÂøÇÑ ¹°°³ ²É¹ç ´ÙÁö±â!", "ÇÊ»ì °ø°Ý!!! Ç®¹ç µß±¸¸£±â!!" };
+    private string[] _shootScripts = { "ÂøÇÑ ¹°°³ ²É¹ç ¹°ÁÖ±â!!!", "¹°ÆøÅº¾Æ ½ñ¾ÆÁ®¶ó~!!", "¸À Á» ºÁ¶ó!!" };
+    private string[] _normalScripts = { "³­ ´«¶ß°í ÀÚ~", "·ê·ç·ç~", "Á¶½ÉÇÏ´Â °ÍÀÌ ÁÁ¾Æ!", "³­ Á¤¸» ÂøÇØ~" };
+    private string[] _hitScripts = { "À¸À¸À¸À¸~~~", "¾Ñ µû°Å~", "¿¡±¸±Ã", "ÂøÇÏ´Ï Âü´Â´Ù~" };
+    private string _dieScript = "²Ù¾û~";
+
     [SerializeField] BossBubble _bossBubble;
     private BossMonsterHPBar _hpBar;
     public static class BossAnimID
@@ -43,6 +51,7 @@ public class BossMonster : Monster, IDamageable
         _hpBar.UpdateHPBar(Hp / (float)MaxHp);
         _animator = GetComponent<Animator>();
         _preBehaviourType = 0;
+        _printer = GetComponentInChildren<ScriptPrinter>();
         _shoot = ShootCoroutine();
     }
 
@@ -50,11 +59,6 @@ public class BossMonster : Monster, IDamageable
     {
         _roundManager = GameManager.Instance.GetComponentInChildren<RoundManager>();
         _roundManager.SurvivePlayersTeam2.Add(this);
-    }
-
-    private void Update()
-    {
-        _isHit = false;
     }
 
     public override void Die()
@@ -82,24 +86,28 @@ public class BossMonster : Monster, IDamageable
                 _animator.ResetTrigger(_currentTrigger);
                 _currentTrigger = BossAnimID.SET_IDLE;
                 _animator.SetTrigger(_currentTrigger);
+                OnSpeak?.Invoke(_normalScripts);
                 break;
 
             case (int)BEHAVIOUR_TYPE.WALK:
                 _animator.ResetTrigger(_currentTrigger);
                 _currentTrigger = BossAnimID.SET_WALK;
                 _animator.SetTrigger(_currentTrigger);
+                OnSpeak?.Invoke(_normalScripts);
                 break;
 
             case (int)BEHAVIOUR_TYPE.ROLL:
                 _animator.ResetTrigger(_currentTrigger);
                 _currentTrigger = BossAnimID.ROLL;
                 _animator.SetTrigger(_currentTrigger);
+                OnSpeak?.Invoke(_rollScripts);
                 break;
 
             case (int)BEHAVIOUR_TYPE.SHOOT:
                 _animator.ResetTrigger(_currentTrigger);
                 _currentTrigger = BossAnimID.SHOOT;
                 _animator.SetTrigger(_currentTrigger);
+                OnSpeak?.Invoke(_shootScripts);
                 break;
         }
     }
@@ -135,15 +143,23 @@ public class BossMonster : Monster, IDamageable
         _isHit = true;
         Hp -= 1;
 
+        OnSpeak?.Invoke(_hitScripts);
+
         if (Hp <= 0)
         {
             Hp = 0;
             _animator.SetTrigger(BossAnimID.LAST_HIT);
             _isDying = true;
+            _printer.PrintScript(_dieScript);
         }
 
         float ratio = Hp / (float)MaxHp;
         _hpBar.UpdateHPBar(ratio);
+    }
+
+    public void ChangeIsHitState()
+    {
+        _isHit = false;
     }
 
     private IEnumerator _shoot;
@@ -154,7 +170,6 @@ public class BossMonster : Monster, IDamageable
         {
             for(int index = 0; index < 8; ++index)
             {
-                // TODO: BossBubble ÇÁ¸®ÆÕ »ý¼ºÇÏ±â
                 BossBubble newBossBubble = Instantiate(_bossBubble);
                 newBossBubble.SetDestPosition(index);
             

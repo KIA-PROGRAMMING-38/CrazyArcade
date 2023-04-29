@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 public class BossBubble : MonoBehaviour
 {
+    // TODO: 모든 위치 다 넣어두고 본인 위치에는 안떨어지도록 수정
     private Vector2[] _shootPositions = new Vector2[8] {
             new Vector2(2, 2), new Vector2(7, 2), new Vector2(12, 2), new Vector2(2, 6), new Vector2(7, 6),
             new Vector2(12, 6), new Vector2(2, 10), new Vector2(12, 10)};

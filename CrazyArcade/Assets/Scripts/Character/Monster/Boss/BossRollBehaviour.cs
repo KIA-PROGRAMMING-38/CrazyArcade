@@ -25,7 +25,7 @@ public class BossRollBehaviour : StateMachineBehaviour
         }
     }
 
-    private float _speed = 10f;
+    private float _speed = 8f;
     private Vector2 _direction;
     private DIRECTION _curDir;
 

@@ -24,7 +24,7 @@ public class ItemPool : MonoBehaviour
     {
         int randomIndex = Random.Range(0, ItemPrefabs.Length + 5);
 
-        if(randomIndex >= ItemPrefabs.Length)
+        if (randomIndex >= ItemPrefabs.Length)
         {
             return null;
         }
