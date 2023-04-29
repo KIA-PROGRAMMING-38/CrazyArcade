@@ -37,9 +37,6 @@ public class BossBubble : MonoBehaviour
 
     private void Boom()
     {
-        Debug.Log("Boss Bubble Boom");
-        // TODO: 9칸 계산해서 물줄기 이펙트 생성
-
         int x = (int)_dest.x;
         int y = (int)_dest.y;
 
