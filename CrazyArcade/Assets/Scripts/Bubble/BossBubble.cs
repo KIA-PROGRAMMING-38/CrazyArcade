@@ -54,6 +54,7 @@ public class BossBubble : MonoBehaviour
             }
         }
 
+        AudioManager.Instance.PlaySFX("boom");
         Destroy(gameObject);
     }
 

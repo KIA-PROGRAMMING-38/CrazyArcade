@@ -6,6 +6,11 @@ public class BossShootBehaviour : StateMachineBehaviour
 {
     private int _loopCount;
 
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        AudioManager.Instance.PlaySFX("boss_attack");
+    }
+
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (stateInfo.normalizedTime >= 1.0f)

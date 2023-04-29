@@ -6,6 +6,11 @@ public class BossIdleBehaviour : StateMachineBehaviour
 {
     float _elapsedTime;
 
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        AudioManager.Instance.PlaySFX("boss_idle");
+    }
+
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _elapsedTime += Time.deltaTime;

@@ -42,6 +42,8 @@ public class BossRollBehaviour : StateMachineBehaviour
         }
 
         animator.SetFloat(BossMonster.BossAnimID.HORIZONTAL, _direction.x);
+
+        AudioManager.Instance.PlaySFX("boss_attack");
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

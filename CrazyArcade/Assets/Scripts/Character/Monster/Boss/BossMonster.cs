@@ -169,11 +169,12 @@ public class BossMonster : Monster, IDamageable
         Hp -= 1;
 
         OnSpeak?.Invoke(_hitScripts);
-
+        AudioManager.Instance.PlaySFX("boss_hit");
         if (Hp <= 0)
         {
             Hp = 0;
             _animator.SetTrigger(BossAnimID.LAST_HIT);
+            AudioManager.Instance.PlaySFX("dying");
             _isDying = true;
             _printer.PrintScript(_dieScript);
         }
