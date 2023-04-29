@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UIElements;
 
 public class BossBubble : MonoBehaviour
@@ -12,9 +13,12 @@ public class BossBubble : MonoBehaviour
 
     private bool _isArrived = false;
 
-    private void Start()
+    private IObjectPool<BubbleEffect> _bubbleEffectPool;
+
+    private void Awake()
     {
         _speed = 25f;
+        _bubbleEffectPool = GetComponent<BubbleEffectPool>().EffectPool;
     }
 
     private void Update()
@@ -35,6 +39,25 @@ public class BossBubble : MonoBehaviour
     {
         Debug.Log("Boss Bubble Boom");
         // TODO: 9칸 계산해서 물줄기 이펙트 생성
+
+        int x = (int)_dest.x;
+        int y = (int)_dest.y;
+
+        for(int i = -1; i <= 1; ++i)
+        {
+            for(int j = -1; j <= 1; ++j)
+            {
+                int newX = x + i;
+                int newY = y + j;
+                Vector2 newPos = new Vector2(newX, newY);
+
+                BubbleEffect newEffect = _bubbleEffectPool.Get();
+                newEffect.transform.position = newPos;
+                newEffect.SetEffectInfo(0, 4);
+            }
+        }
+
+        Destroy(gameObject);
     }
 
     public void SetDestPosition(int positionIndex)
