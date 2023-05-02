@@ -51,6 +51,7 @@ public class BubbleEffect : MonoBehaviour
         if(collision.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
             _spriteRenderer.enabled = false;
+            Disappear();
         }
 
         if(collision.gameObject.layer == LayerMask.NameToLayer("Bubble"))

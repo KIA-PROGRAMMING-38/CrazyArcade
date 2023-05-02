@@ -5,8 +5,8 @@ public class Needle : Item, IEquipable
     public override void Pickup(GameObject character)
     {
         base.Pickup(character);
-        Equip(character);
         Remove();
+        Equip(character);
     }
 
     public void Equip(GameObject character)

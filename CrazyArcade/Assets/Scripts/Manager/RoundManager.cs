@@ -36,6 +36,7 @@ public class RoundManager : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("game_start");
         AudioManager.Instance.PlayBGM(GameManager.Instance.SelectedStage.name);
+        GameManager.Instance.SetResolution();
     }
 
     private void OnEnable()

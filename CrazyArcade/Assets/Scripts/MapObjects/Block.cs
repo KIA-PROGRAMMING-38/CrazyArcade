@@ -66,10 +66,10 @@ public class Block : MonoBehaviour
         _collisionTime = 0f;
     }
 
-    private void Deactive()
-    {
-        gameObject.SetActive(false);
-    }
+    //private void Deactive()
+    //{
+    //    gameObject.SetActive(false);
+    //}
 
     private void GetItem()
     {
