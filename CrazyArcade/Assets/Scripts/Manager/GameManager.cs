@@ -13,6 +13,8 @@ public class GameManager : SingletoneBehaviour<GameManager>
         MapManager.GetTotalMapInfo();
         ItemActions.SaveActions();
 
+        Debug.Log("머지 충돌 해결 제발");
+
         PlayersInfo.SavePlayersName("플레이어 1", "플레이어 2");
         PlayersInfo.SavePlayerCharacter("0", "0");
     }
