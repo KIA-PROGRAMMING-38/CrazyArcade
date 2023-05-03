@@ -84,11 +84,11 @@ public static class PlayersInfo
     {
         PlayerInfo player = Player1Info;
 
-        if(playerName == "player1")
+        if(playerName == "Player1")
         {
             player = Player1Info;
         }
-        else if(playerName == "player2")
+        else if(playerName == "Player2")
         {
             player = Player2Info;
         }
