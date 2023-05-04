@@ -3,7 +3,7 @@ using UnityEngine;
 public class Status : MonoBehaviour
 {
 
-    private int _selectedCharacterId = 0;  // 아직 캐릭터 선택 기능이 없어 정보를 참조할 곳이 명확하지 않으므로 우선 0(배찌)으로 지정
+    private int _selectedCharacterId;
 
     // 선택 캐릭터 기본 status
     private float _speed;
@@ -62,6 +62,7 @@ public class Status : MonoBehaviour
     private void Start()
     {
         // TODO: _selectedCharacterId를 참조해오기
+        _selectedCharacterId = PlayersInfo.GetPlayerCharacterID(transform.root.name);
         GetStatus(_selectedCharacterId);
     }
 

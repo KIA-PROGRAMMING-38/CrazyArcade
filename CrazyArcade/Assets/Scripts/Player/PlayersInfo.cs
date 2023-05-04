@@ -19,7 +19,6 @@ public static class PlayersInfo
     public static PlayerInfo Player1Info = new PlayerInfo();
     public static PlayerInfo Player2Info = new PlayerInfo();
     public static List<PlayerInfo> AllPlayersInfo = new List<PlayerInfo>();
-    // public static PlayerInfo[] AllPlayersInfo = new PlayerInfo[2] { Player1Info, Player2Info };
 
     /// <summary>
     /// 어떤 플레이어의 정보를 수정할 것인지 지정하여 저장
@@ -79,5 +78,21 @@ public static class PlayersInfo
         AllPlayersInfo.Clear();
         AllPlayersInfo.Add(Player1Info);
         AllPlayersInfo.Add(Player2Info);
+    }
+
+    public static int GetPlayerCharacterID(string playerName)
+    {
+        PlayerInfo player = Player1Info;
+
+        if(playerName == "Player1")
+        {
+            player = Player1Info;
+        }
+        else if(playerName == "Player2")
+        {
+            player = Player2Info;
+        }
+
+        return int.Parse(player.selectedCharacterId);
     }
 }
