@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayableCharacter : Character
 {
     private RoundManager _roundManager;
+    private string _charID;
 
 
     private SpriteRenderer _renderer;
@@ -90,6 +91,8 @@ public class PlayableCharacter : Character
                 _roundManager.SurvivePlayersTeam1.Add(this);
                 break;
         }
+
+        SetPlayerCharacter();
     }
 
     private void Update()
@@ -265,5 +268,11 @@ public class PlayableCharacter : Character
     private void GameEnd()
     {
         _animator.SetTrigger(PlayerAnimID.IS_WIN);
+    }
+
+    private void SetPlayerCharacter()
+    {
+        _charID = PlayersInfo.GetPlayerCharacterID(transform.root.name).ToString();
+        _animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("CharacterData/PlayChar/" + _charID);
     }
 }
