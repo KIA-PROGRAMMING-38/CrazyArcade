@@ -9,7 +9,6 @@ public class PlayableCharacter : Character
 
 
     private SpriteRenderer _renderer;
-    private Color _color;
     private const float FADE_INTERVAL = 0.15f;
     private IEnumerator _blinkCoroutine;
 
@@ -29,6 +28,7 @@ public class PlayableCharacter : Character
         public static readonly int REVIVAL = Animator.StringToHash("isRevival");
         public static readonly int IS_DIE = Animator.StringToHash("isDie");
         public static readonly int IS_WIN = Animator.StringToHash("isWin");
+        public static readonly int GAME_START = Animator.StringToHash("gameStart");
 
         // StateInfo
         public static readonly int ON_IS_DYING_START = Animator.StringToHash("Base Layer.Dying.Dying_Start");
@@ -45,6 +45,17 @@ public class PlayableCharacter : Character
 
     private BubblePool _bubblePool;
 
+    private void OnEnable()
+    {
+        StartUI.OnStart += GameStart;
+        RoundManager.OnGameEnd += GameEnd;
+    }
+
+    private void OnDisable()
+    {
+        StartUI.OnStart -= GameStart;
+        RoundManager.OnGameEnd -= GameEnd;
+    }
 
     private void Awake()
     {
@@ -54,7 +65,6 @@ public class PlayableCharacter : Character
         _bubblePool = new BubblePool(this);
         _inventory = transform.root.GetComponentInChildren<Inventory>();
         _renderer = GetComponent<SpriteRenderer>();
-        _color = Color.white;
         _blinkCoroutine = BlinkPlayer();
     }
 
@@ -86,9 +96,8 @@ public class PlayableCharacter : Character
     {
         deltaTime = Time.deltaTime;
         
-        if(_input._gameEnded == true)
-        {
-            _animator.SetTrigger(PlayerAnimID.IS_WIN);
+        if(_input._inputCut == true)
+        {   
             return;
         }
 
@@ -246,5 +255,15 @@ public class PlayableCharacter : Character
             _renderer.color = col;
             yield return null;
         }
+    }
+
+    private void GameStart()
+    {
+        _animator.SetTrigger(PlayerAnimID.GAME_START);
+    }
+
+    private void GameEnd()
+    {
+        _animator.SetTrigger(PlayerAnimID.IS_WIN);
     }
 }
