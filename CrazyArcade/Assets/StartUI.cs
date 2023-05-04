@@ -2,9 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using System;
 
 public class StartUI : MonoBehaviour
 {
+    public static event Action OnStart;
+
     [SerializeField] private const float STANDBY_TIME = 1f;
     [SerializeField] private const float WORD_FADEOUT_TIME = 0.1f;
     [SerializeField] private const float WORD_FADEOUT_INTERVAL = 0.1f;
@@ -49,5 +52,7 @@ public class StartUI : MonoBehaviour
         }
 
         _panel.SetActive(false);
+
+        OnStart?.Invoke();
     }
 }

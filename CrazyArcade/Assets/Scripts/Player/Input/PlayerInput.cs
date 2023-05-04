@@ -12,7 +12,7 @@ public class PlayerInput : MonoBehaviour
     public bool _isPutBubbleBtn { get; set; }
     public bool _isUseItemBtn { get; set; }
 
-    public bool _gameEnded { get; set; } = false;
+    public bool _inputCut { get; set; } = true;
 
     private void Awake()
     {
@@ -24,7 +24,15 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        if (_gameEnded == false)
+        //if (_gameEnded == false)
+        //{
+        //    _horizontal = Input.GetAxisRaw(_horizontalAxisName);
+        //    _vertical = Input.GetAxisRaw(_verticalAxisName);
+        //    _isPutBubbleBtn = Input.GetButtonDown(_putBubbleBtnName);
+        //    _isUseItemBtn = Input.GetButtonDown(_useItemBtnName);
+        //}
+
+        if (_inputCut == false)
         {
             _horizontal = Input.GetAxisRaw(_horizontalAxisName);
             _vertical = Input.GetAxisRaw(_verticalAxisName);
@@ -33,18 +41,20 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void CutOffInput()
+    private void SwitchInputState()
     {
-        _gameEnded = true;
+        _inputCut = _inputCut == true ? false : true;
     }
 
     private void OnEnable()
     {
-        RoundManager.OnGameEnd += CutOffInput;
+        StartUI.OnStart += SwitchInputState;
+        RoundManager.OnGameEnd += SwitchInputState;
     }
 
     private void OnDisable()
     {
-        RoundManager.OnGameEnd -= CutOffInput;
+        StartUI.OnStart -= SwitchInputState;
+        RoundManager.OnGameEnd -= SwitchInputState;
     }
 }
