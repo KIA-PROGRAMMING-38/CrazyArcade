@@ -1,9 +1,18 @@
 using System;
+using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayableCharacter : Character
 {
     private RoundManager _roundManager;
+
+
+    private SpriteRenderer _renderer;
+    private Color _color;
+    private const float FADE_INTERVAL = 0.15f;
+    private IEnumerator _blinkCoroutine;
+
 
     private Status _status;
     private PlayerInput _input;
@@ -42,8 +51,11 @@ public class PlayableCharacter : Character
         _animator = GetComponent<Animator>();
         _input = transform.root.GetComponent<PlayerInput>();
         _status = GetComponent<Status>();
-        _bubblePool = GetComponent<BubblePool>();
+        _bubblePool = new BubblePool(this);
         _inventory = transform.root.GetComponentInChildren<Inventory>();
+        _renderer = GetComponent<SpriteRenderer>();
+        _color = Color.white;
+        _blinkCoroutine = BlinkPlayer();
     }
 
     private void Start()
@@ -205,5 +217,34 @@ public class PlayableCharacter : Character
     public void PlayPopSound()
     {
         AudioManager.Instance.PlaySFX("bubble_pop");
+    }
+
+    public void StartBlinkPlayer()
+    {
+        StartCoroutine(_blinkCoroutine);
+    }
+
+    private IEnumerator BlinkPlayer()
+    {
+        float t = 0;
+        float destAlpha = 0;
+        float startAlpha = 1;
+        Color col = Color.white;
+
+        while (true)
+        {
+            t += Time.deltaTime;
+
+            if (t > FADE_INTERVAL)
+            {
+                t = 0f;
+                destAlpha = destAlpha == 0 ? 1 : 0;
+                startAlpha = startAlpha == 1 ? 0 : 1;
+            }
+
+            col.a = Mathf.Lerp(startAlpha, destAlpha, t / FADE_INTERVAL);
+            _renderer.color = col;
+            yield return null;
+        }
     }
 }

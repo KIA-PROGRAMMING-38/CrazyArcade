@@ -3647,6 +3647,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 651243572}
     m_Modifications:
+    - target: {fileID: 126981986639395840, guid: 8c7f2670ddc719c4a8fd11103706bde6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 126981986639395840, guid: 8c7f2670ddc719c4a8fd11103706bde6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 56
+      objectReference: {fileID: 0}
     - target: {fileID: 2547540130655021627, guid: 8c7f2670ddc719c4a8fd11103706bde6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3734,6 +3742,10 @@ PrefabInstance:
     - target: {fileID: 5681009836989682648, guid: 8c7f2670ddc719c4a8fd11103706bde6, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918711969928198292, guid: 8c7f2670ddc719c4a8fd11103706bde6, type: 3}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c7f2670ddc719c4a8fd11103706bde6, type: 3}

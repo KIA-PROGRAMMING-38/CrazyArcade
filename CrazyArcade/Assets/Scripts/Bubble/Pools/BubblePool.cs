@@ -1,15 +1,17 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BubblePool : MonoBehaviour
+public class BubblePool
 {
     public Bubble bubblePrefab;
-    public GameObject Player;
+    // public GameObject Player;
+    private PlayableCharacter _player;
     public IObjectPool<Bubble> bubblePool;
 
-    private void Awake()
+    public BubblePool(PlayableCharacter player)
     {
-        Player = transform.root.gameObject;
+        SetPlayer(player);
+        bubblePrefab = Resources.Load<Bubble>("Bubble");
         bubblePool = new ObjectPool<Bubble>
             (
                 CreateBubble,
@@ -20,9 +22,12 @@ public class BubblePool : MonoBehaviour
             );
     }
 
+    public void SetPlayer(PlayableCharacter player ) => _player = player;
+
+
     private Bubble CreateBubble()
     {
-        Bubble bubble = Instantiate(bubblePrefab);
+        Bubble bubble = MonoBehaviour.Instantiate(bubblePrefab);
         bubble.SetPool(bubblePool);
         return bubble;
     }
@@ -36,11 +41,11 @@ public class BubblePool : MonoBehaviour
     private void OnRelease(Bubble bubble)
     {
         bubble.gameObject.SetActive(false);
-        gameObject.GetComponent<PlayableCharacter>().DecreaseCurrentCount();
+        _player.DecreaseCurrentCount();
     }
 
     private void ActionOnDestroy(Bubble bubble)
     {
-        Destroy(bubble.gameObject);
+        MonoBehaviour.Destroy(bubble.gameObject);
     }
 }
